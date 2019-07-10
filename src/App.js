@@ -5,6 +5,7 @@ import "./App.css";
 
 import SignUp from "./components/SignUp";
 import Restaurants from "./components/Restaurants";
+import RestaurantDetailsPage from "./components/RestaurantDetailsPage";
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,10 @@ class App extends React.Component {
         <Switch>
           <Route path="/signUp" component={SignUp} />
           <Route path="/restaurants" component={Restaurants} />
+          <Route
+            path="/restaurant/:restaurantId"
+            component={RestaurantDetailsPage}
+          />
         </Switch>
       </div>
     );
