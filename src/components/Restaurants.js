@@ -1,9 +1,12 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, NavLink } from "react-router-dom";
 import axios from "axios";
 
+import "./Restaurants.scss";
+
+import NavBar from "./NavBar";
 import RestaurantCard from "./RestaurantCard";
-import RestaurantDetailsPage from "./RestaurantDetailsPage";
+import Breadcrumb from "./Breadcrumb";
 
 class Restaurants extends React.Component {
   state = {
@@ -34,7 +37,22 @@ class Restaurants extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="restaurants-page-container">
+        <NavBar>
+          <li>
+            <NavLink to="/restaurants">All Restaurants</NavLink>
+          </li>
+          <li>
+            <NavLink to="/active-groups">Active Groups</NavLink>
+          </li>
+          <li>
+            <NavLink to="/account">Account</NavLink>
+          </li>
+        </NavBar>
+        <Breadcrumb>
+          <NavLink to="/">Home</NavLink>
+          <p>Restaurants</p>
+        </Breadcrumb>
         <Switch>
           <Route path="/restaurants">
             {this.state.restaurants.map(restaurant => {
@@ -49,10 +67,6 @@ class Restaurants extends React.Component {
               );
             })}
           </Route>
-          <Route
-            path="/restaurant/:restaurantId"
-            component={RestaurantDetailsPage}
-          />
         </Switch>
       </div>
     );
