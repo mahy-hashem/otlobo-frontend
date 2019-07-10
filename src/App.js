@@ -4,7 +4,7 @@ import logo from "./logo.svg";
 import "./App.css";
 
 import SignUp from "./components/SignUp";
-import Restaurants from "./components/Restaurant";
+import Restaurants from "./components/Restaurants";
 
 class App extends React.Component {
   render() {
