@@ -1,0 +1,41 @@
+@import ".././mixins";
+
+.navbar__container {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: 10% 1fr;
+  grid-template-rows: 1fr;
+  padding: 5px;
+}
+
+.navbar__logo {
+  display: grid;
+  a {
+    text-decoration: none;
+    color: black;
+    justify-self: center;
+    align-self: center;
+    font-size: 30px;
+  }
+}
+
+.navbar__navigation-links {
+  ul {
+    list-style: none;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  li {
+    justify-self: center;
+    a {
+      text-decoration: none;
+      font-size: 14px;
+      @include responsive-max($xs) {
+        font-size: 10px;
+      }
+    }
+  }
+}
