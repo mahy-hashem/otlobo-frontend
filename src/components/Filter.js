@@ -38,6 +38,11 @@ class Filter extends React.Component {
                 className="link-styling"
                 onClick={this.props.sortRestaurants}
               />
+              <GenericButton
+                content="Filter"
+                className="link-styling"
+                onClick={this.props.filterRestaurants}
+              />
             </Card.Body>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
