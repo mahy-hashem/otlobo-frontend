@@ -4,13 +4,26 @@ import axios from "axios";
 
 import "./Restaurants.scss";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
+
 import NavBar from "./NavBar";
 import RestaurantCard from "./RestaurantCard";
 import Breadcrumb from "./Breadcrumb";
+import Filter from "./Filter";
+import createSorter from "../util/sort";
 
 class Restaurants extends React.Component {
   state = {
-    restaurants: []
+    restaurants: [],
+    sorters: [
+      {
+        property: "name",
+        direction: "asc"
+      }
+    ]
   };
 
   componentDidMount() {
@@ -35,39 +48,106 @@ class Restaurants extends React.Component {
       });
   };
 
+  sortRestaurants = () => {
+    let restaurants = this.state.restaurants.sort(
+      createSorter(...this.state.sorters)
+    );
+    this.setState({
+      restaurants
+    });
+  };
+
   render() {
     return (
       <div className="restaurants-page-container">
-        <NavBar>
-          <li>
-            <NavLink to="/restaurants">All Restaurants</NavLink>
-          </li>
-          <li>
-            <NavLink to="/active-groups">Active Groups</NavLink>
-          </li>
-          <li>
-            <NavLink to="/account">Account</NavLink>
-          </li>
-        </NavBar>
-        <Breadcrumb>
-          <NavLink to="/">Home</NavLink>
-          <p>Restaurants</p>
-        </Breadcrumb>
-        <Switch>
-          <Route path="/restaurants">
-            {this.state.restaurants.map(restaurant => {
-              const { id, name, address } = restaurant;
-              return (
-                <RestaurantCard
-                  key={id}
-                  id={id}
-                  name={name}
-                  address={address}
-                />
-              );
-            })}
-          </Route>
-        </Switch>
+        <Container>
+          <Row>
+            <Col>
+              <NavBar>
+                <li>
+                  <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link href="/active-groups">Active Groups</Nav.Link>
+                </li>
+                <li>
+                  <Nav.Link href="/account">Account</Nav.Link>
+                </li>
+              </NavBar>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Breadcrumb>
+                <NavLink to="/">Home</NavLink>
+                <p>Restaurants</p>
+              </Breadcrumb>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <h2>All Restaurants</h2>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Filter
+                sortRestaurants={this.sortRestaurants}
+                sorters={this.state.sorters}
+              />
+            </Col>
+            {/* <Col xs={4}>
+              <Accordion>
+                <Card>
+                  <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                      Cuisines
+                    </Accordion.Toggle>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>Hello! I'm the body</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+            </Col>
+            <Col xs={4}>
+              <Accordion>
+                <Card>
+                  <Card.Header>
+                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                      Search
+                    </Accordion.Toggle>
+                  </Card.Header>
+                  <Accordion.Collapse eventKey="0">
+                    <Card.Body>Hello! I'm the body</Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+            </Col> */}
+          </Row>
+          <div className="restaurants-list-container">
+            <Switch>
+              <Route path="/restaurants">
+                {this.state.restaurants.map(restaurant => {
+                  const { id, name, address } = restaurant;
+                  return (
+                    <Row key={id}>
+                      <Col>
+                        <RestaurantCard
+                          key={id}
+                          id={id}
+                          name={name}
+                          address={address}
+                        />
+                      </Col>
+                    </Row>
+                  );
+                })}
+              </Route>
+            </Switch>
+          </div>
+          <div className="filter-container" />
+        </Container>
       </div>
     );
   }
