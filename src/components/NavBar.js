@@ -2,18 +2,19 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./NavBar.scss";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 class NavBar extends React.Component {
   render() {
     return (
-      <div className="navbar__container">
-        <div className="navbar__logo">
-          <NavLink to="/" className="fas fa-hamburger" />
-        </div>
-        <div className="navbar__navigation-links">
-          <ul>{this.props.children}</ul>
-        </div>
-      </div>
+      <Navbar expand="lg">
+        <Navbar.Brand href="/">Otlobo</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav" className="mx-auto">
+          <Nav className="mx-auto">{this.props.children}</Nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }
