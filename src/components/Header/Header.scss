@@ -1,0 +1,28 @@
+@import "../../mixins.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: $otlobo-yellow;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+  margin-bottom: 50px;
+
+  h1 {
+    display: none;
+  }
+
+  .links {
+    a {
+      margin-left: 50px;
+    }
+  }
+}

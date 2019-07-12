@@ -1,0 +1,20 @@
+$xl: 87.5em; // breakpoint yet to be determined
+$lg: 60em;
+$med: 40em;
+$sm: 28em;
+$xs: 400px;
+
+$otlobo-yellow: #ffd500;
+$otlobo-purple: #632a7b;
+
+@mixin responsive-min($size) {
+  @media (min-width: + $size) {
+    @content;
+  }
+}
+
+@mixin responsive-max($size) {
+  @media (max-width: + $size) {
+    @content;
+  }
+}

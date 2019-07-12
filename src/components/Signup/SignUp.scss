@@ -24,6 +24,7 @@ body {
 
   fieldset {
     border: 0;
+    text-align: center;
   }
 
   div {
@@ -34,28 +35,8 @@ body {
     margin-right: 100px;
   }
 
-  .signup-container__type {
-    label {
-      margin-right: 150px;
-    }
-
-    input {
-      margin-left: 200px;
-    }
-
-    margin-bottom: 50px;
-  }
-}
-
-.signup-container__fields {
-  margin-bottom: 20px;
-
-  input {
-    margin-left: 100px;
-  }
-
-  label {
-    margin: 0;
+  button {
+    margin: 20px 0;
   }
 }
 
