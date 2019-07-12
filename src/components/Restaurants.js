@@ -8,12 +8,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
+import BreadCrumb from "react-bootstrap/Breadcrumb";
 
 import NavBar from "./NavBar";
 import RestaurantCard from "./RestaurantCard";
 import Breadcrumb from "./Breadcrumb";
 import Filter from "./Filter";
 import createSorter from "../util/sort";
+import createFilter from "../util/filter";
 
 class Restaurants extends React.Component {
   state = {
@@ -22,6 +24,12 @@ class Restaurants extends React.Component {
       {
         property: "name",
         direction: "asc"
+      }
+    ],
+    filters: [
+      {
+        property: "name",
+        value: "b"
       }
     ]
   };
@@ -49,11 +57,20 @@ class Restaurants extends React.Component {
   };
 
   sortRestaurants = () => {
-    let restaurants = this.state.restaurants.sort(
+    let sortedRestaurants = this.state.restaurants.sort(
       createSorter(...this.state.sorters)
     );
     this.setState({
-      restaurants
+      restaurants: sortedRestaurants
+    });
+  };
+
+  filterRestaurants = () => {
+    let filteredRestaurants = this.state.restaurants.filter(
+      createFilter(...this.state.filters)
+    );
+    this.setState({
+      restaurants: filteredRestaurants
     });
   };
 
@@ -79,8 +96,10 @@ class Restaurants extends React.Component {
           <Row>
             <Col>
               <Breadcrumb>
-                <NavLink to="/">Home</NavLink>
-                <p>Restaurants</p>
+                <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
+                <BreadCrumb.Item href="/restaurants">
+                  All Restaurants
+                </BreadCrumb.Item>
               </Breadcrumb>
             </Col>
           </Row>
@@ -93,37 +112,11 @@ class Restaurants extends React.Component {
             <Col>
               <Filter
                 sortRestaurants={this.sortRestaurants}
+                filterRestaurants={this.filterRestaurants}
+                filters={this.state.filters}
                 sorters={this.state.sorters}
               />
             </Col>
-            {/* <Col xs={4}>
-              <Accordion>
-                <Card>
-                  <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                      Cuisines
-                    </Accordion.Toggle>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>Hello! I'm the body</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-            </Col>
-            <Col xs={4}>
-              <Accordion>
-                <Card>
-                  <Card.Header>
-                    <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                      Search
-                    </Accordion.Toggle>
-                  </Card.Header>
-                  <Accordion.Collapse eventKey="0">
-                    <Card.Body>Hello! I'm the body</Card.Body>
-                  </Accordion.Collapse>
-                </Card>
-              </Accordion>
-            </Col> */}
           </Row>
           <div className="restaurants-list-container">
             <Switch>
