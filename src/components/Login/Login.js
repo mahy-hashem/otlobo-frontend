@@ -34,7 +34,7 @@ class Login extends React.Component {
   sendRequest = userType => {
     const { email, password } = this.state;
     axios
-      .post(`http://localhost:3003/login?userType=${userType}`, {
+      .post(`http://localhost:8080/login?userType=${userType}`, {
         email,
         password
       })
