@@ -13,11 +13,15 @@ header {
   background: $otlobo-yellow;
   display: flex;
   justify-content: space-between;
-  padding: 30px;
+  padding: 20px;
   margin-bottom: 50px;
 
   h1 {
     display: none;
+  }
+
+  img {
+    height: 40px;
   }
 
   .links {

@@ -9,7 +9,6 @@ class NavBar extends React.Component {
   render() {
     return (
       <Navbar expand="lg">
-        <Navbar.Brand href="/">Otlobo</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-auto">
           <Nav className="mx-auto">{this.props.children}</Nav>
