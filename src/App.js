@@ -3,7 +3,8 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header/Header";
 import SignUp from "./components/Signup/SignUp";
 import Login from "./components/Login/Login";
-//import logo from "./logo.svg";
+import Restaurants from "./components/Restaurants";
+import RestaurantDetailsPage from "./components/RestaurantDetailsPage";
 import "./App.css";
 
 class App extends React.Component {
@@ -14,6 +15,11 @@ class App extends React.Component {
         <Switch>
           <Route path="/signUp" component={SignUp} />
           <Route path="/login" component={Login} />
+          <Route path="/restaurants" component={Restaurants} />
+          <Route
+            path="/restaurant/:restaurantId"
+            component={RestaurantDetailsPage}
+          />
         </Switch>
       </div>
     );
