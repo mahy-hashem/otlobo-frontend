@@ -22,7 +22,7 @@ class UserForm extends React.Component {
   handleForm = event => {
     event.preventDefault();
     axios
-      .post(`http://localhost:3003/signup?userType=user`, this.state)
+      .post(`http://localhost:8080/signup?userType=user`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/");

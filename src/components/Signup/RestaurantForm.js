@@ -22,13 +22,14 @@ class RestaurantForm extends React.Component {
   handleForm = event => {
     event.preventDefault();
     axios
-      .post(`http://localhost:3003/signup?userType=restaurant`, this.state)
+      .post(`http://localhost:8080/signup?userType=restaurant`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/");
       })
       .catch(error => {
         this.props.showErrorMessage("This account already exists");
+        //error.data.msg
       });
     console.log("handle restaurant form");
   };
