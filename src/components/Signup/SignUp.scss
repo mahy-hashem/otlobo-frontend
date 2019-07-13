@@ -1,0 +1,45 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.signup-container {
+  margin: 0 auto;
+  width: 70%;
+  border: 1px solid black;
+  padding: 30px;
+  text-align: center;
+
+  legend {
+    font-weight: 800;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 20px;
+  }
+
+  fieldset {
+    border: 0;
+    text-align: center;
+  }
+
+  div {
+    text-align: left;
+  }
+
+  label {
+    margin-right: 100px;
+  }
+
+  button {
+    margin: 20px 0;
+  }
+}
+
+p {
+  text-align: center;
+}
