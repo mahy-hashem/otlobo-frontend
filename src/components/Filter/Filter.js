@@ -3,7 +3,7 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import GenericButton from "./GenericButton";
+import GenericButton from "../GenericButton/GenericButton";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Nav from "react-bootstrap/Nav";
 

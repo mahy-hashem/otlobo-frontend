@@ -7,13 +7,13 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 
-import NavBar from "./NavBar";
-import Breadcrumb from "./Breadcrumb";
+import NavBar from "../NavBar/NavBar";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import RestaurantInfoHeader from "./RestaurantInfoHeader";
-import Filter from "./Filter";
+import Filter from "../Filter/Filter";
 import MenuItem from "./MenuItem";
 import SideCart from "./SideCart";
-import Footer from "./Footer";
+import Footer from "../Footer/Footer";
 
 class RestaurantDetailsPage extends React.Component {
   state = {
