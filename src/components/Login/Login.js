@@ -33,8 +33,9 @@ class Login extends React.Component {
 
   sendRequest = userType => {
     const { email, password } = this.state;
+    const url = process.env.REACT_APP_URL;
     axios
-      .post(`http://localhost:3003/login?userType=${userType}`, {
+      .post(`${url}/login?userType=${userType}`, {
         email,
         password
       })

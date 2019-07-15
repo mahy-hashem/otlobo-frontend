@@ -21,8 +21,9 @@ class UserForm extends React.Component {
 
   handleForm = event => {
     event.preventDefault();
+    const url = process.env.REACT_APP_URL;
     axios
-      .post(`http://localhost:3003/signup?userType=user`, this.state)
+      .post(`${url}/signup?userType=user`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/");

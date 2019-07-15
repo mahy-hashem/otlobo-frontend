@@ -21,8 +21,10 @@ class RestaurantForm extends React.Component {
 
   handleForm = event => {
     event.preventDefault();
+    const url = process.env.REACT_APP_URL;
+    console.log(url);
     axios
-      .post(`http://localhost:3003/signup?userType=restaurant`, this.state)
+      .post(`${url}/signup?userType=restaurant`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/");
