@@ -17,6 +17,7 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Filter from "../Filter/Filter";
 import createSorter from "../../util/sort";
 import createFilter from "../../util/filter";
+import GenericPagination from "../GenericPagination/GenericPagination";
 
 class Restaurants extends React.Component {
   state = {
@@ -57,22 +58,60 @@ class Restaurants extends React.Component {
       });
   };
 
-  sortRestaurants = () => {
-    let sortedRestaurants = this.state.restaurants.sort(
-      createSorter(...this.state.sorters)
-    );
-    this.setState({
-      restaurants: sortedRestaurants
-    });
+  sortRestaurants = e => {
+    // let sortedRestaurants = this.state.restaurants.sort(
+    //   createSorter(...this.state.sorters)
+    // );
+    // this.setState({
+    //   restaurants: sortedRestaurants
+    // });
+    const queryParamVal = e.target.value;
+    const pageParamVal = this.props.match;
+    console.log(`page number ${this.props.query.page}`);
+    axios
+      .get("http://localhost:8080/restaurants/?sortBy=" + queryParamVal)
+      .then(res => {
+        this.setState({
+          restaurants: res.data.restaurants
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
-  filterRestaurants = () => {
-    let filteredRestaurants = this.state.restaurants.filter(
-      createFilter(...this.state.filters)
-    );
-    this.setState({
-      restaurants: filteredRestaurants
-    });
+  filterRestaurants = e => {
+    // let filteredRestaurants = this.state.restaurants.filter(
+    //   createFilter(...this.state.filters)
+    // );
+    // this.setState({
+    //   restaurants: filteredRestaurants
+    // });
+    const queryParamVal = e.target.value;
+    axios
+      .get("http://localhost:8080/restaurants/?filter=" + queryParamVal)
+      .then(res => {
+        this.setState({
+          restaurants: res.data.restaurants
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  nextPage = e => {
+    const pageParamVal = e.target.value;
+    axios
+      .get("http://localhost:8080/restaurants/?page=" + pageParamVal)
+      .then(res => {
+        this.setState({
+          restaurants: res.data.restaurants
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   render() {
@@ -145,6 +184,7 @@ class Restaurants extends React.Component {
               </Switch>
             </div>
             <div className="filter-container" />
+            {/* <GenericPagination /> */}
           </Container>
         </div>
       </React.Fragment>

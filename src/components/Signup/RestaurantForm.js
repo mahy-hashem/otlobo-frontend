@@ -31,6 +31,7 @@ class RestaurantForm extends React.Component {
       })
       .catch(error => {
         this.props.showErrorMessage("This account already exists");
+        //error.data.msg
       });
     console.log("handle restaurant form");
   };
