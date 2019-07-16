@@ -18,6 +18,8 @@ import Footer from "../Footer/Footer";
 class RestaurantDetailsPage extends React.Component {
   state = {
     restaurant: [],
+    activeGroup: [],
+    order: [],
     isLoaded: false
   };
 
@@ -31,14 +33,40 @@ class RestaurantDetailsPage extends React.Component {
       .get("http://localhost:8080/restaurant/" + restaurantId)
       .then(res => {
         const { data } = res;
+        console.log(res);
         this.setState({
           restaurant: data.restaurant,
+          activeGroup:
+            data.restaurant[0].group === null ? [] : [data.restaurant[0].group],
           isLoaded: true
         });
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  addMenuItem = item => {
+    const restaurantId = this.props.match.params.restaurantId;
+    if (this.state.activeGroup.length > 0 && this.state.order.length === 0) {
+      window.alert(
+        "An active group for this restaurant already exists, your order will be added to the existing group after checkout and payment."
+      );
+    } else {
+      axios
+        .post("http://localhost:8080/restaurant/" + restaurantId)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    console.log(item);
+    const updatedOrder = [...this.state.order, item];
+    this.setState({
+      order: updatedOrder
+    });
   };
 
   render() {
@@ -81,28 +109,38 @@ class RestaurantDetailsPage extends React.Component {
                 />
               </Col>
             </Row>
-            {restaurant[0].menu_items.map(item => {
-              const { name, id, picture, description, price } = item;
-              return (
-                <Row key={id}>
-                  <Col>
-                    <MenuItem
-                      name={name}
-                      key={id}
-                      id={id}
-                      picture={picture}
-                      description={description}
-                      price={price}
-                    />
-                  </Col>
-                </Row>
-              );
-            })}
+            <Row>
+              <Col>
+                <Container>
+                  {restaurant[0].menu_items.map(item => {
+                    const { name, id, picture, description, price } = item;
+                    return (
+                      <Row key={id}>
+                        <Col>
+                          <MenuItem
+                            name={name}
+                            key={id}
+                            id={id}
+                            picture={picture}
+                            description={description}
+                            price={price}
+                            item={item}
+                            addMenuItem={this.addMenuItem}
+                          />
+                        </Col>
+                      </Row>
+                    );
+                  })}
+                </Container>
+              </Col>
+              <Col lg={3}>
+                <SideCart order={this.state.order} />
+              </Col>
+            </Row>
           </Container>
           <div>
             {/* <Filter /> */}
-            {/* <SideCart />
-            <Footer /> */}
+            {/* <Footer /> */}
           </div>
         </div>
       );
