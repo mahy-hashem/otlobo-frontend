@@ -48,21 +48,29 @@ class RestaurantDetailsPage extends React.Component {
 
   addMenuItem = item => {
     const restaurantId = this.props.match.params.restaurantId;
+    const menuItemId = item.id;
+    const userId = localStorage.getItem("userId");
     if (this.state.activeGroup.length > 0 && this.state.order.length === 0) {
       window.alert(
         "An active group for this restaurant already exists, your order will be added to the existing group after checkout and payment."
       );
-    } else {
-      axios
-        .post("http://localhost:8080/restaurant/" + restaurantId)
-        .then(result => {
-          console.log(result);
-        })
-        .catch(err => {
-          console.log(err);
-        });
     }
-    console.log(item);
+    axios({
+      method: "POST",
+      url:
+        "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
+      data: {
+        userId,
+        menuItemId,
+        restaurantId
+      }
+    })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => {
+        console.log(err);
+      });
     const updatedOrder = [...this.state.order, item];
     this.setState({
       order: updatedOrder
