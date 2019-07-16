@@ -9,8 +9,8 @@ class BaseForm extends React.Component {
         <fieldset>
           <legend>Create an account</legend>
           {this.props.children}
-          <Form.Group controlId={`formGroupEmail${this.props.userType}`}>
-            <Form.Label>Email address *</Form.Label>
+          <Form.Group controlId="formGroupEmail">
+            <Form.Label>Email address</Form.Label>
             <Form.Control
               name="email"
               type="email"
@@ -18,8 +18,8 @@ class BaseForm extends React.Component {
               onChange={this.props.inputChangeHandler}
             />
           </Form.Group>
-          <Form.Group controlId={`formGroupPassword${this.props.userType}`}>
-            <Form.Label>Password *</Form.Label>
+          <Form.Group controlId="formGroupPassword">
+            <Form.Label>Password</Form.Label>
             <Form.Control
               name="password"
               type="password"
@@ -27,10 +27,8 @@ class BaseForm extends React.Component {
               onChange={this.props.inputChangeHandler}
             />
           </Form.Group>
-          <Form.Group
-            controlId={`formGroupConfirmPassword${this.props.userType}`}
-          >
-            <Form.Label>Confirm Password *</Form.Label>
+          <Form.Group controlId="formGroupConfirmPassword">
+            <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               name="confirmPassword"
               type="password"

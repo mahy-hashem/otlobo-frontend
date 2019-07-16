@@ -10,8 +10,7 @@ class RestaurantForm extends React.Component {
     name: "",
     address: "",
     email: "",
-    password: "",
-    confirmPassword: ""
+    password: ""
   };
 
   handleInputChange = event => {
@@ -22,31 +21,8 @@ class RestaurantForm extends React.Component {
 
   handleForm = event => {
     event.preventDefault();
-    if (
-      this.state.name === "" ||
-      this.state.address === "" ||
-      this.state.email === "" ||
-      this.state.password === ""
-    ) {
-      this.props.showErrorMessage("Please enter required fields");
-      return;
-    }
-
-    // if (this.state.password !== this.state.confirmPassword) {
-    //   this.props.showErrorMessage(
-    //     "Passwords don't match! Please re-enter your password"
-    //   );
-    //   return;
-    // }
-    const url = process.env.REACT_APP_URL;
-    const { name, address, email, password } = this.state;
     axios
-      .post(`${url}/signup?userType=restaurant`, {
-        name,
-        address,
-        email,
-        password
-      })
+      .post(`http://localhost:8080/signup?userType=restaurant`, this.state)
       .then(response => {
         console.log(response);
         this.props.history.push("/");
@@ -63,10 +39,9 @@ class RestaurantForm extends React.Component {
       <BaseForm
         inputChangeHandler={this.handleInputChange}
         formHandler={this.handleForm}
-        userType="restaurant"
       >
         <Form.Group controlId="formGroupName">
-          <Form.Label>Name *</Form.Label>
+          <Form.Label>Name</Form.Label>
           <Form.Control
             name="name"
             type="text"
@@ -75,7 +50,7 @@ class RestaurantForm extends React.Component {
           />
         </Form.Group>
         <Form.Group controlId="formGroupAddress">
-          <Form.Label>Address *</Form.Label>
+          <Form.Label>Address</Form.Label>
           <Form.Control
             name="address"
             type="text"

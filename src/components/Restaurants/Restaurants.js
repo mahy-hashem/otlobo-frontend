@@ -116,58 +116,78 @@ class Restaurants extends React.Component {
 
   render() {
     return (
-      <div className="restaurants-page-container">
-        <Container>
-          <Row>
-            <Col>
-              <Breadcrumb>
-                <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/restaurants">
-                  All Restaurants
-                </BreadCrumb.Item>
-              </Breadcrumb>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <h2>All Restaurants</h2>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <Filter
-                sortRestaurants={this.sortRestaurants}
-                filterRestaurants={this.filterRestaurants}
-                filters={this.state.filters}
-                sorters={this.state.sorters}
-              />
-            </Col>
-          </Row>
-          <div className="restaurants-list-container">
-            <Switch>
-              <Route path="/restaurants">
-                {this.state.restaurants.map(restaurant => {
-                  const { id, name, address } = restaurant;
-                  return (
-                    <Row key={id}>
-                      <Col>
-                        <RestaurantCard
-                          key={id}
-                          id={id}
-                          name={name}
-                          address={address}
-                        />
-                      </Col>
-                    </Row>
-                  );
-                })}
-              </Route>
-            </Switch>
-          </div>
-          <div className="filter-container" />
-          {/* <GenericPagination /> */}
-        </Container>
-      </div>
+      <React.Fragment>
+        <Header>
+          <li>
+            <Nav.Link href="/signup">Sign Up</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link href="/login">Login</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link href="/active-groups">Active Groups</Nav.Link>
+          </li>
+          <li>
+            <Nav.Link href="/account">Account</Nav.Link>
+          </li>
+        </Header>
+
+        <div className="restaurants-page-container">
+          <Container>
+            <Row>
+              <Col>
+                <Breadcrumb>
+                  <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
+                  <BreadCrumb.Item href="/restaurants">
+                    All Restaurants
+                  </BreadCrumb.Item>
+                </Breadcrumb>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <h2>All Restaurants</h2>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Filter
+                  sortRestaurants={this.sortRestaurants}
+                  filterRestaurants={this.filterRestaurants}
+                  filters={this.state.filters}
+                  sorters={this.state.sorters}
+                />
+              </Col>
+            </Row>
+            <div className="restaurants-list-container">
+              <Switch>
+                <Route path="/restaurants">
+                  {this.state.restaurants.map(restaurant => {
+                    const { id, name, address } = restaurant;
+                    return (
+                      <Row key={id}>
+                        <Col>
+                          <RestaurantCard
+                            key={id}
+                            id={id}
+                            name={name}
+                            address={address}
+                          />
+                        </Col>
+                      </Row>
+                    );
+                  })}
+                </Route>
+              </Switch>
+            </div>
+            <div className="filter-container" />
+            {/* <GenericPagination /> */}
+          </Container>
+        </div>
+      </React.Fragment>
     );
   }
 }
