@@ -39,7 +39,8 @@ class Login extends React.Component {
         password
       })
       .then(response => {
-        console.log(response);
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("userId", response.data.userId);
         this.props.history.push("/");
       })
       .catch(error => {
