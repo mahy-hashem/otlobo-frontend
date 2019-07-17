@@ -2,7 +2,7 @@ $xl: 87.5em;
 $lg: 60em;
 $med: 40em;
 $sm: 28em;
-$xs: 400px;
+$xs: 414px;
 
 $otlobo-yellow: #ffd500;
 $otlobo-purple: #632a7b;
@@ -18,4 +18,11 @@ $otlobo-red: #b8483c;
   @media (max-width: + $size) {
     @content;
   }
+}
+
+@mixin fullScreen {
+  margin: 0;
+  padding: 0;
+  min-height: 100% !important;
+  min-width: 100% !important;
 }

@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./components/Signup/SignUp";
 import Login from "./components/Login/Login";
+import LandingPage from "./components/LandingPage/LandingPage";
 import Restaurants from "./components/Restaurants/Restaurants";
 import RestaurantDetailsPage from "./components/RestaurantDetailsPage/RestaurantDetailsPage";
 import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
@@ -47,6 +48,7 @@ class App extends React.Component {
       <div className="app-container">
         <Header logged={this.state.logged} userType={this.state.userType} />
         <Switch>
+          <Route exact path="/" component={LandingPage} />
           <Route path="/signup" component={SignUp} />
           <Route
             path="/login"
