@@ -4,7 +4,7 @@ import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import GenericButton from "../GenericButton/GenericButton";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ListGroup from "react-bootstrap/ListGroup";
 import Nav from "react-bootstrap/Nav";
 
 class Filter extends React.Component {
@@ -32,18 +32,22 @@ class Filter extends React.Component {
             </Nav>
           </Card.Header>
           <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <GenericButton
-                content="Sort from A to Z"
-                className="link-styling"
+            <ListGroup>
+              <ListGroup.Item
+                action
                 onClick={this.props.sortRestaurants}
-              />
-              <GenericButton
-                content="Filter"
-                className="link-styling"
-                onClick={this.props.filterRestaurants}
-              />
-            </Card.Body>
+                value="name"
+              >
+                Sort from A to Z
+              </ListGroup.Item>
+              <ListGroup.Item
+                action
+                onClick={this.props.sortRestaurants}
+                value="newest"
+              >
+                Sort newest
+              </ListGroup.Item>
+            </ListGroup>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
             <Card.Body>Hello! I'm the bodysss</Card.Body>

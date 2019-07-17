@@ -11,22 +11,28 @@ body {
 
 header {
   background: $otlobo-yellow;
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  margin-bottom: 50px;
+  padding: 10px 10px 10px 30px;
+  margin: 0 0 50px 0;
+  height: 100px;
 
   h1 {
-    display: none;
+    color: $otlobo-red;
+    font-style: italic;
+    font-weight: 800;
+    font-size: 48px;
+    display: inline;
+    margin: 20px 0 0 10px;
+    float: left;
+
+    @include responsive-max($xs) {
+      display: none;
+    }
   }
 
   img {
-    height: 40px;
-  }
-
-  .links {
-    a {
-      margin-left: 50px;
-    }
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    float: left;
   }
 }
