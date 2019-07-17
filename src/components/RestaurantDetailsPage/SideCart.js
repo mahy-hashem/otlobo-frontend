@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import GenericButton from "../GenericButton/GenericButton";
+import axios from "axios";
 
 class SideCart extends React.Component {
   render() {
@@ -19,12 +20,12 @@ class SideCart extends React.Component {
             <h5>Restaurant Name</h5>
           </Col>
         </Row>
-        {this.props.order.map(item => {
-          const { id, name, price } = item;
+        {this.props.itemsInCart.map(item => {
+          const { id, name, price, order_item } = item;
           return (
             <Row>
               <Col>
-                <p>Quantity</p>
+                <p>{order_item.quantity}</p>
               </Col>
               <Col>
                 <p>{name}</p>
