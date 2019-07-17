@@ -5,10 +5,8 @@ import "./Login.scss";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import DivWithErrorHandling from "../../components/ErrorMessage/ErrorMessage";
-
-import Header from "../Header/Header";
-import Nav from "react-bootstrap/Nav";
+import DivWithErrorHandling from "../ErrorMessage/ErrorMessage";
+import { saveToLocalStorage } from "../../util/localStorage";
 
 class Login extends React.Component {
   state = {
@@ -33,14 +31,18 @@ class Login extends React.Component {
 
   sendRequest = userType => {
     const { email, password } = this.state;
+    const url = process.env.REACT_APP_URL;
     axios
-      .post(`http://localhost:8080/login?userType=${userType}`, {
+      .post(`${url}/login?userType=${userType}`, {
         email,
         password
       })
       .then(response => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("userId", response.data.userId);
+        console.log(response);
+        saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("userId", response.data.userId);
+        saveToLocalStorage("userType", userType);
+        this.props.setLoggedUser();
         this.props.history.push("/");
       })
       .catch(error => {
@@ -62,69 +64,55 @@ class Login extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Header>
-          <li>
-            <Nav.Link href="/signup">Sign Up</Nav.Link>
-          </li>
-          <li>
-            <Nav.Link href="/login">Login</Nav.Link>
-          </li>
-          <li>
-            <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
-          </li>
-          <li />
-        </Header>
-        <div className="login-container">
-          <DivWithErrorHandling
-            showError={this.state.showError}
-            errorMessage={this.state.errorMessage}
-          >
-            <Form>
-              <fieldset>
-                <legend>Login</legend>
-                <Form.Group controlId="formGroupEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control
-                    name="email"
-                    type="email"
-                    placeholder="Enter email"
-                    onChange={this.handleInputChange}
-                  />
-                </Form.Group>
-                <Form.Group controlId="formGroupPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    onChange={this.handleInputChange}
-                  />
-                </Form.Group>
-                <Button
-                  variant="primary"
-                  className="center"
-                  type="submit"
-                  onClick={this.userLogin}
-                >
-                  Login as a user
-                </Button>
-                <Button
-                  variant="primary"
-                  className="center"
-                  type="submit"
-                  onClick={this.restaurantLogin}
-                >
-                  Login as a restaurant
-                </Button>
-              </fieldset>
-            </Form>
-            <p>
-              Don't have an account? <Link to="/signup">Create an account</Link>
-            </p>
-          </DivWithErrorHandling>
-        </div>
-      </React.Fragment>
+      <div className="login-container">
+        <DivWithErrorHandling
+          showError={this.state.showError}
+          errorMessage={this.state.errorMessage}
+        >
+          <Form>
+            <fieldset>
+              <legend>Login</legend>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formGroupPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  onChange={this.handleInputChange}
+                />
+              </Form.Group>
+              <Button
+                variant="primary"
+                className="center"
+                type="submit"
+                onClick={this.userLogin}
+              >
+                Login as a user
+              </Button>
+              <Button
+                variant="primary"
+                className="center"
+                type="submit"
+                onClick={this.restaurantLogin}
+              >
+                Login as a restaurant
+              </Button>
+            </fieldset>
+          </Form>
+          <p>
+            Don't have an account? <Link to="/signup">Create an account</Link>
+          </p>
+        </DivWithErrorHandling>
+      </div>
     );
   }
 }
