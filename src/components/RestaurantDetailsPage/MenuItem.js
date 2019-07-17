@@ -37,7 +37,7 @@ class MenuItem extends React.Component {
           <Col>
             <GenericButton
               className="add-order-btn"
-              onClick={this.addMenuItem}
+              onClick={() => this.props.addMenuItem(this.props.item)}
               content="+"
             />
           </Col>
