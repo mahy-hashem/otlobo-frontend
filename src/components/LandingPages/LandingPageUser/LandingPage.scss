@@ -3,9 +3,9 @@ $textColor: white;
 $btnHoverColor: #48c41a;
 $textHoverColor: yellow;
 
-.restlandingPage {
+.userlandingPage {
   @include fullScreen();
-  background: url("../../../images/important.png") no-repeat center center fixed;
+  background: url("../../../images/user.jpg") no-repeat center center fixed;
   background-size: cover;
   position: absolute;
   top: 0;

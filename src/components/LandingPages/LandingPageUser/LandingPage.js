@@ -5,7 +5,7 @@ import "./LandingPage.scss";
 
 function LandingPage() {
   return (
-    <div className="restlandingPage">
+    <div className="userlandingPage">
       <div className="restlandingContainer">
         <div className="restlandingContainer__content">
           <h2 className="restlandingContainer__content__h2">Welcome, User</h2>
