@@ -9,6 +9,7 @@ import Restaurants from "./components/Restaurants/Restaurants";
 import RestaurantDetailsPage from "./components/RestaurantDetailsPage/RestaurantDetailsPage";
 import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
 import MenuItemForm from "./components/MenuItemForm/MenuItemForm";
+import Checkout from "./components/Checkout/Checkout";
 
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
@@ -62,8 +63,13 @@ class App extends React.Component {
             //  onEnter={this.requireAuth}
           />
           <Route
+            exact
             path="/restaurant/:restaurantId"
             component={RestaurantDetailsPage}
+          />
+          <Route
+            path="/restaurant/:restaurantId/checkout"
+            component={Checkout}
           />
           <Route path="/menu-item-form" component={MenuItemForm} />
         </Switch>
