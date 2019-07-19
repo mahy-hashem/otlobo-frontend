@@ -13,12 +13,14 @@ import CheckoutForm from "./CheckoutForm";
 import axios from "axios";
 import NavLink from "react-bootstrap/NavLink";
 import OrderSummary from "./OrderSummary";
+import StripeBtn from "./StripeBtn";
 
 class Checkout extends React.Component {
   state = {
     order: [],
     group: [],
     restaurant: [],
+    totalPrice: 0.0,
     isLoading: true
   };
 
@@ -41,6 +43,7 @@ class Checkout extends React.Component {
           order: [result.data.order],
           group: [result.data.group],
           restaurant: [result.data.group.restaurant],
+          totalPrice: result.data.totalPrice,
           isLoading: false
         });
       })
@@ -99,14 +102,21 @@ class Checkout extends React.Component {
                 <OrderSummary menu_items={this.state.order[0].menu_items} />
                 <Row>
                   <Col>
-                    <StripeProvider apiKey="pk_test_nKM3abPgU0LJR15gcvwt0Ctq00iuMGYppT">
+                    {/* <StripeProvider apiKey="pk_test_nKM3abPgU0LJR15gcvwt0Ctq00iuMGYppT">
                       <div className="example">
                         <h1>React Stripe Elements Example</h1>
                         <Elements>
-                          <CheckoutForm />
+                          <CheckoutForm
+                            restaurantId={this.props.match.params.restaurantId}
+                          />
                         </Elements>
                       </div>
-                    </StripeProvider>
+                    </StripeProvider> */}
+                    <StripeBtn
+                      restaurantId={this.props.match.params.restaurantId}
+                      menu_items={this.state.order[0].menu_items}
+                      totalPrice={this.state.totalPrice * 100}
+                    />
                   </Col>
                 </Row>
               </Container>
