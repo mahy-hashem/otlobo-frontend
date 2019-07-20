@@ -188,7 +188,7 @@ class RestaurantDetailsPage extends React.Component {
                   <SideCart
                     itemsInCart={this.state.itemsInCart}
                     restaurant={this.state.restaurant}
-                    totalPrice={this.state.totalPrice * 100}
+                    totalPrice={this.state.totalPrice}
                   />
                 </Col>
               )}

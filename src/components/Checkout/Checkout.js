@@ -99,19 +99,12 @@ class Checkout extends React.Component {
                     <p>Opening Hours</p>
                   </Col>
                 </Row>
-                <OrderSummary menu_items={this.state.order[0].menu_items} />
+                <OrderSummary
+                  menu_items={this.state.order[0].menu_items}
+                  totalPrice={this.state.totalPrice}
+                />
                 <Row>
                   <Col>
-                    {/* <StripeProvider apiKey="pk_test_nKM3abPgU0LJR15gcvwt0Ctq00iuMGYppT">
-                      <div className="example">
-                        <h1>React Stripe Elements Example</h1>
-                        <Elements>
-                          <CheckoutForm
-                            restaurantId={this.props.match.params.restaurantId}
-                          />
-                        </Elements>
-                      </div>
-                    </StripeProvider> */}
                     <StripeBtn
                       restaurantId={this.props.match.params.restaurantId}
                       menu_items={this.state.order[0].menu_items}
