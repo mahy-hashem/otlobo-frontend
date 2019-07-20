@@ -39,9 +39,13 @@ class Login extends React.Component {
       })
       .then(response => {
         console.log(response);
+        localStorage.clear();
         saveToLocalStorage("token", response.data.token);
         saveToLocalStorage("userId", response.data.userId);
         saveToLocalStorage("userType", userType);
+        userType === "user"
+          ? saveToLocalStorage("user", response.data.user)
+          : saveToLocalStorage("restaurant", response.data.restaurant);
         this.props.setLoggedUser();
         this.props.history.push("/");
       })

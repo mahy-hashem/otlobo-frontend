@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import "./LandingPage.scss";
 
 function LandingPage() {
+  const restaurant = JSON.parse(localStorage.getItem("restaurant"));
+  const userName = restaurant ? restaurant.name : "Restaurant";
   return (
     <div className="restlandingPage">
       <div className="restlandingContainer">
         <div className="restlandingContainer__content">
           <h2 className="restlandingContainer__content__h2">
-            Welcome, Restaurant
+            Welcome, {userName}
           </h2>
           <div className="restlandingContainer__content__div">
             <p className="restlandingContainer__content__p">
