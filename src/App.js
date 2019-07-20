@@ -4,11 +4,14 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./components/Signup/SignUp";
 import Login from "./components/Login/Login";
-import LandingPage from "./components/LandingPage/LandingPage";
+import LandingPage from "./components/LandingPages/MainLandingPage/LandingPage";
+import UserLandingPage from "./components/LandingPages/LandingPageUser/LandingPage";
+import RestLandingPage from "./components/LandingPages/LandingPageRestaurant/LandingPage";
 import Restaurants from "./components/Restaurants/Restaurants";
 import RestaurantDetailsPage from "./components/RestaurantDetailsPage/RestaurantDetailsPage";
 import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
 import MenuItemForm from "./components/MenuItemForm/MenuItemForm";
+import Checkout from "./components/Checkout/Checkout";
 
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
@@ -49,6 +52,8 @@ class App extends React.Component {
         <Header logged={this.state.logged} userType={this.state.userType} />
         <Switch>
           <Route exact path="/" component={LandingPage} />
+          <Route path="/userIndex" component={UserLandingPage} />
+          <Route path="/restaurantIndex" component={RestLandingPage} />
           <Route path="/signup" component={SignUp} />
           <Route
             path="/login"
@@ -62,8 +67,13 @@ class App extends React.Component {
             //  onEnter={this.requireAuth}
           />
           <Route
+            exact
             path="/restaurant/:restaurantId"
             component={RestaurantDetailsPage}
+          />
+          <Route
+            path="/restaurant/:restaurantId/checkout"
+            component={Checkout}
           />
           <Route path="/menu-item-form" component={MenuItemForm} />
         </Switch>
