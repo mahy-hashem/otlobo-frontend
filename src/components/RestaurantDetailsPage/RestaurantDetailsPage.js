@@ -22,6 +22,7 @@ class RestaurantDetailsPage extends React.Component {
     activeGroup: [],
     order: [],
     itemsInCart: [],
+    totalPrice: null,
     isLoaded: false
   };
 
@@ -93,14 +94,16 @@ class RestaurantDetailsPage extends React.Component {
         {
           params: {
             groupId,
-            userId
+            userId,
+            restaurantId
           }
         }
       )
       .then(result => {
         console.log(result);
         this.setState({
-          itemsInCart: result.data.order.menu_items
+          itemsInCart: result.data.order.menu_items,
+          totalPrice: result.data.totalPrice
         });
       });
   };
@@ -181,7 +184,11 @@ class RestaurantDetailsPage extends React.Component {
                 </Container>
               </Col>
               <Col lg={3}>
-                <SideCart itemsInCart={this.state.itemsInCart} />
+                <SideCart
+                  itemsInCart={this.state.itemsInCart}
+                  restaurant={this.state.restaurant}
+                  totalPrice={this.state.totalPrice * 100}
+                />
               </Col>
             </Row>
           </Container>

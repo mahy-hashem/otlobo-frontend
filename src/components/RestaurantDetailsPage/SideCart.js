@@ -3,6 +3,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { NavLink } from "react-router-dom";
 import GenericButton from "../GenericButton/GenericButton";
 import axios from "axios";
 
@@ -38,7 +39,7 @@ class SideCart extends React.Component {
         })}
         <Row>
           <Col>
-            <p>Subtotal: Price</p>
+            <p>Subtotal: {this.props.totalPrice}</p>
           </Col>
         </Row>
         <Row>
@@ -53,7 +54,9 @@ class SideCart extends React.Component {
         </Row>
         <Row>
           <Col>
-            <GenericButton content="Proceed to Checkout" />
+            <NavLink to={`/restaurant/${this.props.restaurant[0].id}/checkout`}>
+              Proceed to Checkout
+            </NavLink>
           </Col>
         </Row>
       </Container>
