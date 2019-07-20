@@ -1,0 +1,65 @@
+@import "../../../mixins.scss";
+$textColor: white;
+$btnHoverColor: #48c41a;
+$textHoverColor: yellow;
+
+.userlandingPage {
+  @include fullScreen();
+  background: url("../../../images/user.jpg") no-repeat center center fixed;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  .restlandingContainer {
+    @include fullScreen();
+    background-color: rgba(46, 49, 49, 0.7);
+    .restlandingContainer__content {
+      @include fullScreen();
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: baseline;
+      text-align: center;
+      .restlandingContainer__content__h2 {
+        flex-basis: 100%;
+        color: $textColor;
+        text-shadow: 0px 0px 300px #000;
+        font-size: 300%;
+        padding-top: 100px;
+        @include responsive-max($xs) {
+          font-size: 150%;
+        }
+      }
+      .restlandingContainer__content__div {
+        flex-basis: 40%;
+        height: 300px;
+        .restlandingContainer__content__p {
+          font-size: 200%;
+          margin-bottom: 50px;
+          color: $textColor;
+          @include responsive-max($xs) {
+            font-size: 180%;
+          }
+        }
+        .restlandingContainer__content__link {
+          border-radius: 9px;
+          font-size: 100%;
+          color: $textColor;
+          padding: 10px;
+          border: solid $textColor 3px;
+          text-decoration: none;
+          text-transform: uppercase;
+          @include responsive-max($xs) {
+            font-size: 110%;
+            padding: 10px 15px;
+          }
+        }
+        .restlandingContainer__content--btn {
+          &:hover {
+            color: $textHoverColor;
+            border: solid $btnHoverColor 3px;
+          }
+        }
+      }
+    }
+  }
+}

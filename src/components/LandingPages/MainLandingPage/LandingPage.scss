@@ -1,17 +1,19 @@
-@import "../../mixins.scss";
-$textColor: #f9f3f4;
+@import "../../../mixins.scss";
+$textColor: white;
 $btnHoverColor: #48c41a;
 $textHoverColor: yellow;
 
-.container {
-  background: url("../../images/important.png") no-repeat center center fixed;
-  background-size: cover;
-  position: absolute;
+.landingPage {
+  @include fullScreen();
   width: 100% !important;
   height: 100% !important;
+  background: url("../../../images/important.png") no-repeat center center fixed;
+  background-size: cover;
+  position: absolute;
   display: table;
   top: 0;
   .landingContainer {
+    background-color: rgba(46, 49, 49, 0.7);
     display: table-cell !important;
     vertical-align: middle;
     width: 100%;

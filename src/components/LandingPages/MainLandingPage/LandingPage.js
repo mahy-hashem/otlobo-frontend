@@ -5,7 +5,7 @@ import "./LandingPage.scss";
 
 function LandingPage() {
   return (
-    <div className="container">
+    <div className="landingPage">
       <div className="landingContainer">
         <div className="landingContainer__content">
           <h2 className="landingContainer__content__h2">otlobo</h2>
