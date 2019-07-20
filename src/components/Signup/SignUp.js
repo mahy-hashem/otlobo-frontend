@@ -30,7 +30,7 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="signup-container">
+      <div className="form-container">
         <DivWithErrorHandling
           showError={this.state.showError}
           errorMessage={this.state.errorMessage}

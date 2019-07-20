@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Container from "react-bootstrap/Container";
@@ -109,6 +110,9 @@ class RestaurantDetailsPage extends React.Component {
   };
 
   render() {
+    const userType = JSON.parse(localStorage.getItem("userType"));
+    const userId = JSON.parse(localStorage.getItem("userId"));
+
     if (!this.state.isLoaded) {
       return (
         <div>
@@ -120,22 +124,6 @@ class RestaurantDetailsPage extends React.Component {
       return (
         <div>
           <Container>
-            <Row>
-              <Col>
-                <Header>
-                  <li>
-                    <Nav.Link href="/signup">Sign Up</Nav.Link>
-                  </li>
-                  <li>
-                    <Nav.Link href="/login">Login</Nav.Link>
-                  </li>
-                  <li>
-                    <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
-                  </li>
-                  <li />
-                </Header>
-              </Col>
-            </Row>
             <Row>
               <Col>
                 <Breadcrumb>
@@ -159,6 +147,18 @@ class RestaurantDetailsPage extends React.Component {
                 />
               </Col>
             </Row>
+            {userType === "restaurant" && (
+              <Row>
+                <Col>
+                  <Link
+                    to={`/restaurant/${userId}/menu-item-form`}
+                    className="restlandingContainer__content__link restlandingContainer__content--btn"
+                  >
+                    Add a new menu item
+                  </Link>
+                </Col>
+              </Row>
+            )}
             <Row>
               <Col>
                 <Container>
@@ -183,13 +183,15 @@ class RestaurantDetailsPage extends React.Component {
                   })}
                 </Container>
               </Col>
-              <Col lg={3}>
-                <SideCart
-                  itemsInCart={this.state.itemsInCart}
-                  restaurant={this.state.restaurant}
-                  totalPrice={this.state.totalPrice * 100}
-                />
-              </Col>
+              {userType === "user" && (
+                <Col lg={3}>
+                  <SideCart
+                    itemsInCart={this.state.itemsInCart}
+                    restaurant={this.state.restaurant}
+                    totalPrice={this.state.totalPrice * 100}
+                  />
+                </Col>
+              )}
             </Row>
           </Container>
           <div>
