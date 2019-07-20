@@ -37,6 +37,11 @@ class OrderSummary extends React.Component {
                 </Row>
               );
             })}
+            <Row>
+              <Col>
+                <p>Total: ${this.props.totalPrice}</p>
+              </Col>
+            </Row>
           </Container>
         </Col>
       </Row>
