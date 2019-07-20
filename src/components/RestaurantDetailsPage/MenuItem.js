@@ -7,6 +7,17 @@ import Col from "react-bootstrap/Col";
 import GenericButton from "../GenericButton/GenericButton";
 
 class MenuItem extends React.Component {
+  state = {
+    userType: ""
+  };
+
+  componentDidMount() {
+    const userType = JSON.parse(localStorage.getItem("userType"));
+    this.setState({
+      userType
+    });
+  }
+
   render() {
     return (
       <Container>
@@ -31,16 +42,29 @@ class MenuItem extends React.Component {
               </Row>
             </Container>
           </Col>
-          <Col>
-            <p>Rating</p>
-          </Col>
-          <Col>
-            <GenericButton
-              className="add-order-btn"
-              onClick={() => this.props.addMenuItem(this.props.item)}
-              content="+"
-            />
-          </Col>
+          {this.state.userType === "user" && (
+            <React.Fragment>
+              <Col>
+                <p>Rating</p>
+              </Col>
+              <Col>
+                <GenericButton
+                  className="add-order-btn"
+                  onClick={() => this.props.addMenuItem(this.props.item)}
+                  content="+"
+                />
+              </Col>
+            </React.Fragment>
+          )}
+          {this.state.userType === "restaurant" && (
+            <Col>
+              <GenericButton
+                className="add-order-btn"
+                //onClick={() => this.props.addMenuItem(this.props.item)}
+                content="Edit"
+              />
+            </Col>
+          )}
         </Row>
       </Container>
     );

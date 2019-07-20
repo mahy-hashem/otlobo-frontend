@@ -72,10 +72,13 @@ class App extends React.Component {
             component={RestaurantDetailsPage}
           />
           <Route
+            path="/restaurant/:userId/menu-item-form"
+            component={MenuItemForm}
+          />
+          <Route
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
           />
-          <Route path="/menu-item-form" component={MenuItemForm} />
         </Switch>
         <Footer />
       </div>

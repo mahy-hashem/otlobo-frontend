@@ -11,25 +11,44 @@ class MenuItemForm extends React.Component {
     price: 0
   };
 
-  handleInputChange = event => {
+  componentDidMount() {
+    const restaurantId = JSON.parse(localStorage.getItem("userId"));
     this.setState({
-      [event.target.name]: event.target.value
+      restaurantId
     });
+  }
+
+  handleInputChange = event => {
+    this.setState(
+      {
+        [event.target.name]: event.target.value
+      },
+      console.log(this.state.name)
+    );
   };
 
   handleForm = event => {
     event.preventDefault();
     const url = process.env.REACT_APP_URL;
-    // axios
-    //   .post(`${url}/restaurants/:id/menu-items`, this.state)
-    //   .then(response => {
-    //     console.log(response);
-    //     this.props.history.push("/restaurants/:id");
-    //   })
-    //   .catch(error => {
-    //     //this.props.showErrorMessage(error.message);
-    //     this.props.showErrorMessage("An error occured while adding your item. Please try again...");
-    //   });
+    const { name, description, price, image } = this.state;
+    axios
+      .post(`${url}/menuItems/${this.state.restaurantId}/add`, {
+        name,
+        description,
+        price,
+        image
+      })
+      .then(response => {
+        console.log(response);
+        this.props.history.push(`/restaurant/${this.state.restaurantId}`);
+      })
+      .catch(error => {
+        //this.props.showErrorMessage(error.message);
+        // this.props.showErrorMessage(
+        //   "An error occured while adding your item. Please try again..."
+        // );
+        console.log(error);
+      });
     console.log("handle menu item form");
   };
 
@@ -45,7 +64,7 @@ class MenuItemForm extends React.Component {
                 name="name"
                 type="text"
                 placeholder="Enter name of new menu item"
-                onChange={this.inputChangeHandler}
+                onChange={this.handleInputChange}
               />
             </Form.Group>
             <Form.Group controlId="formGroupDescription">
@@ -54,12 +73,16 @@ class MenuItemForm extends React.Component {
                 name="description"
                 type="text"
                 placeholder="Describe your menu item..."
-                onChange={this.inputChangeHandler}
+                onChange={this.handleInputChange}
               />
             </Form.Group>
             <Form.Group controlId="formGroupPicture">
               <Form.Label>Image</Form.Label>
-              <Form.Control name="image" type="file" />
+              <Form.Control
+                name="image"
+                type="text"
+                onChange={this.handleInputChange}
+              />
             </Form.Group>
             <Form.Group controlId="formGroupPrice">
               <Form.Label>Price</Form.Label>
@@ -67,9 +90,10 @@ class MenuItemForm extends React.Component {
                 name="price"
                 type="text"
                 placeholder="Price of your menu item"
+                onChange={this.handleInputChange}
               />
             </Form.Group>
-            <Button variant="primary" onClick={this.formHandler} type="submit">
+            <Button variant="primary" onClick={this.handleForm} type="submit">
               Create item
             </Button>
           </fieldset>

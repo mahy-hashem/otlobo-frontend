@@ -47,9 +47,9 @@ class Login extends React.Component {
           : saveToLocalStorage("restaurant", response.data.restaurant);
         this.props.setLoggedUser();
         if (userType === "user") {
-          this.props.history.push("/restaurants");
+          this.props.history.push("/userIndex");
         } else {
-          this.props.history.push(`/restaurant/:${response.data.userId}`);
+          this.props.history.push(`/restaurantIndex`);
         }
       })
       .catch(error => {
