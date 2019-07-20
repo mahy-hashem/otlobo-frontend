@@ -7,7 +7,7 @@ class MenuItemForm extends React.Component {
   state = {
     name: "",
     description: "",
-    picture: "",
+    image: "",
     price: 0
   };
 
@@ -35,48 +35,46 @@ class MenuItemForm extends React.Component {
 
   render() {
     return (
-      <Form>
-        <fieldset>
-          <legend>Add an item to your Menu!</legend>
-          <Form.Group controlId="formGroupName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
-              name="name"
-              type="text"
-              placeholder="Enter name of new menu item"
-              onChange={this.inputChangeHandler}
-            />
-          </Form.Group>
-          <Form.Group controlId="formGroupDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              name="description"
-              type="text"
-              placeholder="Describe your menu item..."
-              onChange={this.inputChangeHandler}
-            />
-          </Form.Group>
-          <Form.Group controlId="formGroupPicture">
-            <Form.Label>Picture</Form.Label>
-            <Form.Control
-              name="picture"
-              type="text"
-              placeholder="Upload an image of your menu item"
-            />
-          </Form.Group>
-          <Form.Group controlId="formGroupPrice">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              name="price"
-              type="text"
-              placeholder="Price of your menu item"
-            />
-          </Form.Group>
-          <Button variant="primary" onClick={this.formHandler} type="submit">
-            Create item
-          </Button>
-        </fieldset>
-      </Form>
+      <div className="form-container">
+        <Form>
+          <fieldset>
+            <legend>Add an item to your Menu!</legend>
+            <Form.Group controlId="formGroupName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                name="name"
+                type="text"
+                placeholder="Enter name of new menu item"
+                onChange={this.inputChangeHandler}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupDescription">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                name="description"
+                type="text"
+                placeholder="Describe your menu item..."
+                onChange={this.inputChangeHandler}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPicture">
+              <Form.Label>Image</Form.Label>
+              <Form.Control name="image" type="file" />
+            </Form.Group>
+            <Form.Group controlId="formGroupPrice">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                name="price"
+                type="text"
+                placeholder="Price of your menu item"
+              />
+            </Form.Group>
+            <Button variant="primary" onClick={this.formHandler} type="submit">
+              Create item
+            </Button>
+          </fieldset>
+        </Form>
+      </div>
     );
   }
 }

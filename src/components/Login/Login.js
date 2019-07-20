@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import axios from "axios";
-import "./Login.scss";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -43,7 +42,11 @@ class Login extends React.Component {
         saveToLocalStorage("userId", response.data.userId);
         saveToLocalStorage("userType", userType);
         this.props.setLoggedUser();
-        this.props.history.push("/");
+        if (userType === "user") {
+          this.props.history.push("/restaurants");
+        } else {
+          this.props.history.push(`/restaurant/:${response.data.userId}`);
+        }
       })
       .catch(error => {
         this.showErrorMessage("Email or password is incorrect");
@@ -64,7 +67,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login-container">
+      <div className="form-container">
         <DivWithErrorHandling
           showError={this.state.showError}
           errorMessage={this.state.errorMessage}
