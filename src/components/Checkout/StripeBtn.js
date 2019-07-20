@@ -5,7 +5,8 @@ import { Redirect } from "react-router-dom";
 
 class StripeBtn extends React.Component {
   state = {
-    redirect: false
+    redirect: false,
+    paymentVerified: null
   };
   onToken = token => {
     const restaurantId = this.props.restaurantId;
@@ -21,14 +22,23 @@ class StripeBtn extends React.Component {
         "http://localhost:8080/restaurant/" + restaurantId + "/checkout/charge",
         body
       )
-      .then(response => {
-        console.log(response);
-        this.setState({
-          redirect: true
-        });
+      .then(result => {
+        console.log(result);
+        if (result.data.completed === true) {
+          this.setState({
+            redirect: true,
+            paymentVerified: true
+          });
+        }
       })
       .catch(error => {
-        console.log("Payment Error: ", error);
+        console.log("Payment Error: ", error.response);
+        if (error.response.data.completed === false) {
+          this.setState({
+            redirect: false,
+            paymentVerified: false
+          });
+        }
       });
   };
   render() {
