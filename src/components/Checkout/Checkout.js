@@ -1,19 +1,17 @@
 import React from "react";
+import axios from "axios";
+import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
-import { Elements, StripeProvider } from "react-stripe-elements";
+import NavLink from "react-bootstrap/NavLink";
 
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-
-import Header from "../Header/Header";
-import CheckoutForm from "./CheckoutForm";
-import axios from "axios";
-import NavLink from "react-bootstrap/NavLink";
 import OrderSummary from "./OrderSummary";
 import StripeBtn from "./StripeBtn";
+import OrderTimeframe from "./OrderTimeframe";
+import OrderStatus from "./OrderStatus";
 
 class Checkout extends React.Component {
   state = {
@@ -21,7 +19,9 @@ class Checkout extends React.Component {
     group: [],
     restaurant: [],
     totalPrice: 0.0,
-    isLoading: true
+    timeframe: null,
+    isLoading: true,
+    paymentCompleted: false
   };
 
   componentDidMount() {
@@ -44,12 +44,19 @@ class Checkout extends React.Component {
           group: [result.data.group],
           restaurant: [result.data.group.restaurant],
           totalPrice: result.data.totalPrice,
-          isLoading: false
+          isLoading: false,
+          paymentCompleted: result.data.group.paid === false ? false : true
         });
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  setTimer = value => {
+    this.setState({
+      timeframe: value
+    });
   };
   render() {
     if (this.state.isLoading) {
@@ -76,6 +83,7 @@ class Checkout extends React.Component {
               </Breadcrumb>
             </Col>
           </Row>
+          <OrderTimeframe onChange={this.setTimer} />
           <Row>
             <Col>
               <Container>
@@ -102,16 +110,14 @@ class Checkout extends React.Component {
                 <OrderSummary
                   menu_items={this.state.order[0].menu_items}
                   totalPrice={this.state.totalPrice}
+                  control="one"
                 />
-                <Row>
-                  <Col>
-                    <StripeBtn
-                      restaurantId={this.props.match.params.restaurantId}
-                      menu_items={this.state.order[0].menu_items}
-                      totalPrice={this.state.totalPrice * 100}
-                    />
-                  </Col>
-                </Row>
+                <StripeBtn
+                  restaurantId={this.props.match.params.restaurantId}
+                  menu_items={this.state.order[0].menu_items}
+                  totalPrice={this.state.totalPrice * 100}
+                  timeframe={this.state.timeframe}
+                />
               </Container>
             </Col>
           </Row>
