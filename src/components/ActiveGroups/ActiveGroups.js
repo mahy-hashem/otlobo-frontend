@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -64,7 +65,9 @@ class ActiveGroups extends React.Component {
                   <li>
                     <Row>
                       <Col>
-                        <h3>{restaurant.name}</h3>
+                        <Link to={`/active-groups/${id}`}>
+                          <h3>{restaurant.name}</h3>
+                        </Link>
                       </Col>
                     </Row>
                     <Row>

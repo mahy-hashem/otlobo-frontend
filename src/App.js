@@ -12,6 +12,7 @@ import RestaurantDetailsPage from "./components/RestaurantDetailsPage/Restaurant
 import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
 import MenuItemForm from "./components/MenuItemForm/MenuItemForm";
 import Checkout from "./components/Checkout/Checkout";
+import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
 
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
@@ -55,6 +56,7 @@ class App extends React.Component {
           <Route path="/userIndex" component={UserLandingPage} />
           <Route path="/restaurantIndex" component={RestLandingPage} />
           <Route path="/signup" component={SignUp} />
+          <Route path="/active-groups" component={ActiveGroups} />
           <Route
             path="/login"
             render={props => (
