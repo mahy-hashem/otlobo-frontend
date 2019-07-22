@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
+import timer from "../../util/countdownTimer";
 import "./ActiveGroups.scss";
 
 class ActiveGroups extends React.Component {
@@ -35,7 +36,6 @@ class ActiveGroups extends React.Component {
         console.log(err);
       });
   };
-
   render() {
     return (
       <div>
@@ -61,14 +61,14 @@ class ActiveGroups extends React.Component {
             {this.state.groups.map(group => {
               const { id, restaurant, orders } = group;
               return (
-                <Container key={id}>
-                  <li>
+                  <li key={id}>
                     <Row>
                       <Col>
                         <Link to={`/active-groups/${id}`}>
                           <h3>{restaurant.name}</h3>
                         </Link>
                       </Col>
+                      
                     </Row>
                     <Row>
                       <ul>
@@ -77,7 +77,7 @@ class ActiveGroups extends React.Component {
                             <Col key={id}>
                               <li>
                                 <img
-                                  src={order.user.firstName}
+                                  src={order.user.image}
                                   alt={order.user.firstName}
                                 />
                                 <p>{order.user.firstName}</p>
@@ -86,9 +86,12 @@ class ActiveGroups extends React.Component {
                           );
                         })}
                       </ul>
+                      <Col>
+                        <p id={group.id}>{"15 minutes".substr(0,2)} {timer("15 minutes",group.id)}</p>
+                        <p>minutes</p>
+                      </Col>
                     </Row>
                   </li>
-                </Container>
               );
             })}
           </ul>
