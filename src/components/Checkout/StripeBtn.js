@@ -12,8 +12,7 @@ class StripeBtn extends React.Component {
     const restaurantId = this.props.restaurantId;
     const userId = localStorage.getItem("userId");
     const timeframe = this.props.timeframe;
-    const orderItems = this.props.menu_items;
-
+    const orderItems = this.props.orderItems;
     const body = {
       amount: this.props.orderTotal,
       token: token,
@@ -38,7 +37,10 @@ class StripeBtn extends React.Component {
       })
       .catch(error => {
         console.log("Payment Error: ", error.response);
-        if (error.response.data.completed === false) {
+        if (
+          error.response.data.completed === false ||
+          !error.response.data.completed
+        ) {
           this.setState({
             redirect: false,
             paymentVerified: false

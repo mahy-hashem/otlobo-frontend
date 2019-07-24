@@ -37,7 +37,7 @@ class MenuItem extends React.Component {
               </Row>
               <Row>
                 <Col>
-                  <p>Price: {this.props.price}</p>
+                  <p>Price: $ {this.props.price}</p>
                 </Col>
               </Row>
             </Container>

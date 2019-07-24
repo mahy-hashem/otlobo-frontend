@@ -32,19 +32,23 @@ class SideCart extends React.Component {
                 <p>{name}</p>
               </Col>
               <Col>
-                <p>{price}</p>
+                <p>$ {price}</p>
               </Col>
             </Row>
           );
         })}
         <Row>
           <Col>
-            <p>Total: ${this.props.orderTotal}</p>
+            <p>
+              Total: ${" "}
+              {this.props.orderTotal === "00.00" ? 0 : this.props.orderTotal}
+              .00
+            </p>
           </Col>
         </Row>
         <Row>
           <Col>
-            <NavLink to={`/restaurant/${this.props.restaurant[0].id}/checkout`}>
+            <NavLink to={`/restaurant/${this.props.restaurant.id}/checkout`}>
               Proceed to Checkout
             </NavLink>
           </Col>

@@ -19,11 +19,11 @@ import Footer from "../Footer/Footer";
 
 class RestaurantDetailsPage extends React.Component {
   state = {
-    restaurant: [],
+    restaurant: null,
     activeGroup: [],
     order: [],
-    orderTotal: 0,
-    itemsInCart: [],
+    buttonClicks: 0,
+    orderTotal: "00.00",
     totalPrice: null,
     isLoaded: false
   };
@@ -40,7 +40,7 @@ class RestaurantDetailsPage extends React.Component {
         const { data } = res;
         console.log(res);
         this.setState({
-          restaurant: data.restaurant,
+          restaurant: data.restaurant[0],
           activeGroup:
             data.restaurant[0].group === null ? [] : [data.restaurant[0].group],
           isLoaded: true
@@ -52,21 +52,35 @@ class RestaurantDetailsPage extends React.Component {
   };
 
   addMenuItem = item => {
-    // const restaurantId = this.props.match.params.restaurantId;
-    // const menuItemId = item.id;
-    // const userId = localStorage.getItem("userId");
     let updatedOrder;
-    const orderTotal = this.state.orderTotal + item.price;
 
-    if (this.state.activeGroup.length > 0) {
+    // adding price of each item to the total
+    const orderTotal =
+      parseFloat(this.state.orderTotal) + parseFloat(item.price);
+
+    // record button clicks for alert to only show up on first click
+    const buttonClicks = () => {
+      this.setState(
+        {
+          buttonClicks: this.state.buttonClicks + 1
+        },
+        () => {
+          buttonClicks();
+        }
+      );
+    };
+
+    // alert user on first button click if there's an active group, then user can continue to add items normally
+    if (this.state.activeGroup.length > 0 && this.state.buttonClicks === 1) {
       window.alert(
         "An active group for this restaurant already exists, your order will be added to the existing group after checkout and payment."
       );
     }
+    // check to see if current item's id exists in the order
     const increaseQuantity = this.state.order.find(
       orderItem => orderItem.id === item.id
     );
-    console.log(increaseQuantity);
+    // if it doesn't exist, the quantity is one and the order is updated and stored in local storage, else if the item's id does exist in the order, increase its quantity by one and update state
     if (!increaseQuantity) {
       item.quantity = 1;
       updatedOrder = [...this.state.order, item];
@@ -102,73 +116,6 @@ class RestaurantDetailsPage extends React.Component {
         }
       );
     }
-    // else {
-    //   axios({
-    //     method: "POST",
-    //     url: "http://localhost:8080/restaurant/" + restaurantId,
-    //     data: {
-    //       restaurantId
-    //     }
-    //   })
-    //     .then(result => {
-    //       console.log(result);
-    //       this.setState({
-    //         activeGroup: [result.data.group]
-    //       });
-    //     })
-    //     .catch(err => {
-    //       console.log(err);
-    //     });
-    // }
-    // axios({
-    //   method: "POST",
-    //   url:
-    //     "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
-    //   data: {
-    //     userId,
-    //     menuItemId,
-    //     restaurantId,
-    //     groupFound
-    //   }
-    // })
-    //   .then(result => {
-    //     console.log(result);
-    //     this.setState({
-    //       order: result.data.order,
-    //       activeGroup: [result.data.group]
-    //     });
-    //   })
-    //   .then(result => {
-    //     this.fetchCart(item);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  };
-
-  fetchCart = item => {
-    const restaurantId = this.props.match.params.restaurantId;
-    const groupId = this.state.activeGroup[0].id;
-    const menuItemId = item.id;
-    const userId = localStorage.getItem("userId");
-    // axios
-    //   .get(
-    //     "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
-    //     {
-    //       params: {
-    //         groupId,
-    //         userId,
-    //         restaurantId
-    //       }
-    //     }
-    //   )
-    //   .then(result => {
-    //     console.log(result);
-    //     this.setState({
-    //       itemsInCart: result.data.order.menu_items,
-    //       totalPrice: result.data.totalPrice
-    //     });
-    //   });
   };
 
   render() {
@@ -196,7 +143,7 @@ class RestaurantDetailsPage extends React.Component {
                   <BreadCrumb.Item
                     href={`/restaurant/${this.props.match.params.restaurantId}`}
                   >
-                    {restaurant[0].name}
+                    {restaurant.name}
                   </BreadCrumb.Item>
                 </Breadcrumb>
               </Col>
@@ -204,8 +151,8 @@ class RestaurantDetailsPage extends React.Component {
             <Row>
               <Col>
                 <RestaurantInfoHeader
-                  name={restaurant[0].name}
-                  address={restaurant[0].address}
+                  name={restaurant.name}
+                  address={restaurant.address}
                 />
               </Col>
             </Row>
@@ -224,7 +171,7 @@ class RestaurantDetailsPage extends React.Component {
             <Row>
               <Col>
                 <Container>
-                  {restaurant[0].menu_items.map(item => {
+                  {restaurant.menu_items.map(item => {
                     const { name, id, picture, description, price } = item;
                     return (
                       <Row key={id}>
@@ -248,7 +195,6 @@ class RestaurantDetailsPage extends React.Component {
               {userType === "user" && (
                 <Col lg={3}>
                   <SideCart
-                    itemsInCart={this.state.itemsInCart}
                     restaurant={this.state.restaurant}
                     orderTotal={this.state.orderTotal}
                     order={this.state.order}
