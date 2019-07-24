@@ -7,7 +7,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import SideCart from "../RestaurantDetailsPage/SideCart";
 
 import countdownTimer from "../../util/countdownTimer";
 import "./ActiveGroups.scss";

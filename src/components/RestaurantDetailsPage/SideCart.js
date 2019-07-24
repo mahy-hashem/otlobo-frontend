@@ -39,17 +39,7 @@ class SideCart extends React.Component {
         })}
         <Row>
           <Col>
-            <p>Subtotal: {this.props.totalPrice}</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <p>Delivery fee: Price</p>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <p>Total price: Price</p>
+            <p>Total: ${this.props.totalPrice}</p>
           </Col>
         </Row>
         <Row>

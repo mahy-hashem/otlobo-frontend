@@ -13,6 +13,7 @@ import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
 import MenuItemForm from "./components/MenuItemForm/MenuItemForm";
 import Checkout from "./components/Checkout/Checkout";
 import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
+import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary";
 
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
@@ -78,8 +79,14 @@ class App extends React.Component {
             component={MenuItemForm}
           />
           <Route
+            exact
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
+          />
+          <Route
+            exact
+            path="/restaurant/:restaurantId/checkout/success"
+            component={GroupOrderSummary}
           />
         </Switch>
         <Footer />

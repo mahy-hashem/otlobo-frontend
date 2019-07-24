@@ -1,27 +1,22 @@
 import React from "react";
 import axios from "axios";
-import { Route, Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import BreadCrumb from "react-bootstrap/Breadcrumb";
 import NavLink from "react-bootstrap/NavLink";
+import BreadCrumb from "react-bootstrap/Breadcrumb";
 
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import OrderSummary from "./OrderSummary";
-import StripeBtn from "./StripeBtn";
-import OrderTimeframe from "./OrderTimeframe";
-import OrderStatus from "./OrderStatus";
+import OrderStatus from "../Checkout/OrderStatus";
+import OrderSummary from "../Checkout/OrderSummary";
 
-class Checkout extends React.Component {
+class GroupOrderSummary extends React.Component {
   state = {
-    order: [],
+    orders: null,
     group: [],
     restaurant: [],
     totalPrice: 0.0,
-    timeframe: null,
-    isLoading: true,
-    paymentCompleted: false
+    isLoading: true
   };
 
   componentDidMount() {
@@ -32,32 +27,31 @@ class Checkout extends React.Component {
     const userId = localStorage.getItem("userId");
     const restaurantId = this.props.match.params.restaurantId;
     axios
-      .get("http://localhost:8080/restaurant/" + restaurantId + "/checkout", {
-        params: {
-          userId,
-          restaurantId
+      .get(
+        "http://localhost:8080/restaurant/" +
+          restaurantId +
+          "/checkout/success",
+        {
+          params: {
+            userId,
+            restaurantId
+          }
         }
-      })
+      )
       .then(result => {
         this.setState({
-          order: [result.data.order],
+          orders: result.data.group.orders,
           group: [result.data.group],
           restaurant: [result.data.group.restaurant],
-          totalPrice: result.data.totalPrice,
-          isLoading: false,
-          paymentCompleted: result.data.group.paid === false ? false : true
+          isLoading: false
         });
+        console.log(result);
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  setTimer = value => {
-    this.setState({
-      timeframe: value
-    });
-  };
   render() {
     if (this.state.isLoading) {
       return (
@@ -83,20 +77,13 @@ class Checkout extends React.Component {
               </Breadcrumb>
             </Col>
           </Row>
-          <OrderTimeframe onChange={this.setTimer} />
+          <OrderStatus />
           <Row>
             <Col>
               <Container>
                 <Row>
                   <Col>
                     <p>Order Summary</p>
-                  </Col>
-                  <Col>
-                    <NavLink
-                      to={`/restaurant/${this.props.match.params.restaurantId}`}
-                    >
-                      Edit Order
-                    </NavLink>
                   </Col>
                 </Row>
                 <Row>
@@ -107,16 +94,16 @@ class Checkout extends React.Component {
                     <p>Opening Hours</p>
                   </Col>
                 </Row>
+                <Row>
+                  <Col>
+                    <h2>Group #{this.state.group[0].id}</h2>
+                  </Col>
+                </Row>
                 <OrderSummary
-                  menu_items={this.state.order[0].menu_items}
+                  menu_items={this.state.orders[0].menu_items}
                   totalPrice={this.state.totalPrice}
-                  control="one"
-                />
-                <StripeBtn
-                  restaurantId={this.props.match.params.restaurantId}
-                  menu_items={this.state.order[0].menu_items}
-                  totalPrice={this.state.totalPrice * 100}
-                  timeframe={this.state.timeframe}
+                  orders={this.state.orders}
+                  control="group"
                 />
               </Container>
             </Col>
@@ -127,4 +114,4 @@ class Checkout extends React.Component {
   }
 }
 
-export default Checkout;
+export default GroupOrderSummary;

@@ -14,8 +14,7 @@ class StripeBtn extends React.Component {
     const body = {
       amount: this.props.totalPrice,
       token: token,
-      restaurantId,
-      userId
+      restaurantId
     };
     axios
       .post(
@@ -43,7 +42,11 @@ class StripeBtn extends React.Component {
   };
   render() {
     if (this.state.redirect === true) {
-      return <Redirect to="/order-success" />;
+      return (
+        <Redirect
+          to={`/restaurant/${this.props.restaurantId}/checkout/success`}
+        />
+      );
     }
     return (
       <StripeCheckout
