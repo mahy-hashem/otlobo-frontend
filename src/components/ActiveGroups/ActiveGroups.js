@@ -7,8 +7,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import SideCart from "../RestaurantDetailsPage/SideCart";
 
-import timer from "../../util/countdownTimer";
+import countdownTimer from "../../util/countdownTimer";
 import "./ActiveGroups.scss";
 
 class ActiveGroups extends React.Component {
@@ -61,37 +62,46 @@ class ActiveGroups extends React.Component {
             {this.state.groups.map(group => {
               const { id, restaurant, orders } = group;
               return (
-                  <li key={id}>
-                    <Row>
-                      <Col>
-                        <Link to={`/active-groups/${id}`}>
-                          <h3>{restaurant.name}</h3>
-                        </Link>
-                      </Col>
-                      
-                    </Row>
-                    <Row>
-                      <ul>
-                        {orders.map(order => {
-                          return (
-                            <Col key={id}>
-                              <li>
-                                <img
-                                  src={order.user.image}
-                                  alt={order.user.firstName}
-                                />
-                                <p>{order.user.firstName}</p>
-                              </li>
-                            </Col>
-                          );
-                        })}
-                      </ul>
-                      <Col>
-                        <p id={group.id}>{"15 minutes".substr(0,2)} {timer("15 minutes",group.id)}</p>
-                        <p>minutes</p>
-                      </Col>
-                    </Row>
-                  </li>
+                <li key={id}>
+                  <Row>
+                    <Col>
+                      <Link to={`/active-groups/${id}`}>
+                        <h3>{restaurant.name}</h3>
+                      </Link>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <ul>
+                      {orders.slice(0, 5).map(order => {
+                        return (
+                          <Col key={id}>
+                            <li>
+                              <img
+                                src={order.user.image}
+                                alt={order.user.firstName}
+                              />
+                              <p>{order.user.firstName}</p>
+                            </li>
+                          </Col>
+                        );
+                      })}
+                    </ul>
+                    <Col>
+                      <p id={group.id}>
+                        {countdownTimer.duration(
+                          group.createdAt,
+                          group.timeframe
+                        )}
+                        {countdownTimer.timer(
+                          group.createdAt,
+                          group.timeframe,
+                          group.id
+                        )}
+                      </p>
+                      <p>minutes</p>
+                    </Col>
+                  </Row>
+                </li>
               );
             })}
           </ul>
