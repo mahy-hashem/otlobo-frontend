@@ -24,7 +24,7 @@ class OrderSummary extends React.Component {
                   </Col>
                 </Row>
                 {this.props.menu_items.map(item => {
-                  const { name, price, order_item } = item;
+                  const { name, price, quantity } = item;
                   return (
                     <Row>
                       <Col>
@@ -34,14 +34,14 @@ class OrderSummary extends React.Component {
                         <p>{price}</p>
                       </Col>
                       <Col>
-                        <p>{order_item.quantity}</p>
+                        <p>{quantity}</p>
                       </Col>
                     </Row>
                   );
                 })}
                 <Row>
                   <Col>
-                    <p>Total: ${this.props.totalPrice}</p>
+                    <p>Total: ${this.props.orderTotal}</p>
                   </Col>
                 </Row>
               </Container>
@@ -73,7 +73,7 @@ class OrderSummary extends React.Component {
                         </Col>
                       </Row>
                       {menu_items.map(item => {
-                        const { name, price, order_item } = item;
+                        const { name, price, quantity } = item;
                         return (
                           <Row>
                             <Col>
@@ -83,7 +83,7 @@ class OrderSummary extends React.Component {
                               <p>{price}</p>
                             </Col>
                             <Col>
-                              <p>{order_item.quantity}</p>
+                              <p>{quantity}</p>
                             </Col>
                           </Row>
                         );

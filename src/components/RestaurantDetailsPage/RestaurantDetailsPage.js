@@ -22,6 +22,7 @@ class RestaurantDetailsPage extends React.Component {
     restaurant: [],
     activeGroup: [],
     order: [],
+    orderTotal: 0,
     itemsInCart: [],
     totalPrice: null,
     isLoaded: false
@@ -51,37 +52,98 @@ class RestaurantDetailsPage extends React.Component {
   };
 
   addMenuItem = item => {
-    const restaurantId = this.props.match.params.restaurantId;
-    const menuItemId = item.id;
-    const userId = localStorage.getItem("userId");
-    if (this.state.activeGroup.length > 0 && this.state.order.length === 0) {
+    // const restaurantId = this.props.match.params.restaurantId;
+    // const menuItemId = item.id;
+    // const userId = localStorage.getItem("userId");
+    let updatedOrder;
+    const orderTotal = this.state.orderTotal + item.price;
+
+    if (this.state.activeGroup.length > 0) {
       window.alert(
         "An active group for this restaurant already exists, your order will be added to the existing group after checkout and payment."
       );
     }
-    axios({
-      method: "POST",
-      url:
-        "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
-      data: {
-        userId,
-        menuItemId,
-        restaurantId
-      }
-    })
-      .then(result => {
-        console.log(result);
-        this.setState({
-          order: result.data.order,
-          activeGroup: [result.data.group]
-        });
-      })
-      .then(result => {
-        this.fetchCart(item);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    const increaseQuantity = this.state.order.find(
+      orderItem => orderItem.id === item.id
+    );
+    console.log(increaseQuantity);
+    if (!increaseQuantity) {
+      item.quantity = 1;
+      updatedOrder = [...this.state.order, item];
+      this.setState(
+        {
+          order: updatedOrder,
+          orderTotal
+        },
+        () => {
+          localStorage.setItem("order", JSON.stringify(this.state.order));
+          localStorage.setItem(
+            "orderTotal",
+            JSON.stringify(this.state.orderTotal)
+          );
+        }
+      );
+    } else {
+      item.quantity = item.quantity + 1;
+      const duplicateItem = [...this.state.order];
+      let index = duplicateItem.indexOf(item);
+      duplicateItem[index] = item;
+      this.setState(
+        {
+          order: duplicateItem,
+          orderTotal
+        },
+        () => {
+          localStorage.setItem("order", JSON.stringify(this.state.order));
+          localStorage.setItem(
+            "orderTotal",
+            JSON.stringify(this.state.orderTotal)
+          );
+        }
+      );
+    }
+    // else {
+    //   axios({
+    //     method: "POST",
+    //     url: "http://localhost:8080/restaurant/" + restaurantId,
+    //     data: {
+    //       restaurantId
+    //     }
+    //   })
+    //     .then(result => {
+    //       console.log(result);
+    //       this.setState({
+    //         activeGroup: [result.data.group]
+    //       });
+    //     })
+    //     .catch(err => {
+    //       console.log(err);
+    //     });
+    // }
+    // axios({
+    //   method: "POST",
+    //   url:
+    //     "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
+    //   data: {
+    //     userId,
+    //     menuItemId,
+    //     restaurantId,
+    //     groupFound
+    //   }
+    // })
+    //   .then(result => {
+    //     console.log(result);
+    //     this.setState({
+    //       order: result.data.order,
+    //       activeGroup: [result.data.group]
+    //     });
+    //   })
+    //   .then(result => {
+    //     this.fetchCart(item);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   fetchCart = item => {
@@ -89,24 +151,24 @@ class RestaurantDetailsPage extends React.Component {
     const groupId = this.state.activeGroup[0].id;
     const menuItemId = item.id;
     const userId = localStorage.getItem("userId");
-    axios
-      .get(
-        "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
-        {
-          params: {
-            groupId,
-            userId,
-            restaurantId
-          }
-        }
-      )
-      .then(result => {
-        console.log(result);
-        this.setState({
-          itemsInCart: result.data.order.menu_items,
-          totalPrice: result.data.totalPrice
-        });
-      });
+    // axios
+    //   .get(
+    //     "http://localhost:8080/restaurant/" + restaurantId + "/" + menuItemId,
+    //     {
+    //       params: {
+    //         groupId,
+    //         userId,
+    //         restaurantId
+    //       }
+    //     }
+    //   )
+    //   .then(result => {
+    //     console.log(result);
+    //     this.setState({
+    //       itemsInCart: result.data.order.menu_items,
+    //       totalPrice: result.data.totalPrice
+    //     });
+    //   });
   };
 
   render() {
@@ -188,7 +250,8 @@ class RestaurantDetailsPage extends React.Component {
                   <SideCart
                     itemsInCart={this.state.itemsInCart}
                     restaurant={this.state.restaurant}
-                    totalPrice={this.state.totalPrice}
+                    orderTotal={this.state.orderTotal}
+                    order={this.state.order}
                   />
                 </Col>
               )}

@@ -18,15 +18,15 @@ class SideCart extends React.Component {
         </Row>
         <Row>
           <Col>
-            <h5>Restaurant Name</h5>
+            <h5>{this.props.restaurant.name}</h5>
           </Col>
         </Row>
-        {this.props.itemsInCart.map(item => {
-          const { id, name, price, order_item } = item;
+        {this.props.order.map(item => {
+          const { id, name, price, order_item, quantity } = item;
           return (
             <Row>
               <Col>
-                <p>{order_item.quantity}</p>
+                <p>{quantity}</p>
               </Col>
               <Col>
                 <p>{name}</p>
@@ -39,7 +39,7 @@ class SideCart extends React.Component {
         })}
         <Row>
           <Col>
-            <p>Total: ${this.props.totalPrice}</p>
+            <p>Total: ${this.props.orderTotal}</p>
           </Col>
         </Row>
         <Row>
