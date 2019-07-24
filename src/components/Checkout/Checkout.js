@@ -16,19 +16,30 @@ import OrderStatus from "./OrderStatus";
 class Checkout extends React.Component {
   state = {
     order: [],
-    group: [],
-    restaurant: [],
+    group: null,
+    restaurant: null,
     orderTotal: null,
     timeframe: null,
-    isLoading: true,
+    isLoaded: false,
     paymentCompleted: false
   };
 
   componentDidMount() {
     this.fetchRestaurant();
-    this.getCart();
   }
 
+  // get order details from local storage and set state
+  getCart = () => {
+    const order = JSON.parse(localStorage.getItem("order"));
+    const orderTotal = `${JSON.parse(localStorage.getItem("orderTotal"))}.00`;
+    this.setState({
+      order,
+      orderTotal,
+      isLoaded: true
+    });
+  };
+
+  // fetch restaurant and active group details, calls getCart()
   fetchRestaurant = () => {
     const restaurantId = this.props.match.params.restaurantId;
     axios
@@ -37,36 +48,28 @@ class Checkout extends React.Component {
         const { data } = res;
         console.log(res);
         this.setState({
-          restaurant: data.restaurant,
+          restaurant: data.restaurant[0],
           group:
-            data.restaurant[0].group === null ? [] : [data.restaurant[0].group]
+            data.restaurant[0].group === null ? null : data.restaurant[0].group
         });
+      })
+      .then(result => {
+        this.getCart();
       })
       .catch(err => {
         console.log(err);
       });
   };
 
-  getCart = () => {
-    const userId = localStorage.getItem("userId");
-    const restaurantId = this.props.match.params.restaurantId;
-
-    const order = JSON.parse(localStorage.getItem("order"));
-    const orderTotal = JSON.parse(localStorage.getItem("orderTotal"));
-    this.setState({
-      order,
-      orderTotal,
-      isLoading: false
-    });
-  };
-
+  // captures timeframe value
   setTimer = value => {
     this.setState({
       timeframe: value
     });
   };
+
   render() {
-    if (this.state.isLoading) {
+    if (!this.state.isLoaded) {
       return (
         <div>
           <p>Loading...</p>
@@ -85,14 +88,12 @@ class Checkout extends React.Component {
                 <BreadCrumb.Item
                   href={`/restaurant/${this.props.match.params.restaurantId}`}
                 >
-                  {/* {this.state.restaurant[0].name} */}
+                  {this.state.restaurant.name}
                 </BreadCrumb.Item>
               </Breadcrumb>
             </Col>
           </Row>
-          {this.state.group.length === 0 && (
-            <OrderTimeframe onChange={this.setTimer} />
-          )}
+          {!this.state.group && <OrderTimeframe onChange={this.setTimer} />}
           <Row>
             <Col>
               <Container>
@@ -109,20 +110,22 @@ class Checkout extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col>{/* <p>{this.state.restaurant[0].name}</p> */}</Col>
+                  <Col>
+                    <p>{this.state.restaurant.name}</p>
+                  </Col>
                   <Col>
                     <p>Opening Hours</p>
                   </Col>
                 </Row>
                 <OrderSummary
-                  menu_items={this.state.order}
+                  orderItems={this.state.order}
                   orderTotal={this.state.orderTotal}
                   control="one"
                 />
                 <StripeBtn
                   restaurantId={this.props.match.params.restaurantId}
-                  menu_items={this.state.order}
-                  orderTotal={this.state.orderTotal * 100}
+                  orderItems={this.state.order}
+                  orderTotal={parseFloat(this.state.orderTotal) * 100}
                   timeframe={this.state.timeframe}
                 />
               </Container>
