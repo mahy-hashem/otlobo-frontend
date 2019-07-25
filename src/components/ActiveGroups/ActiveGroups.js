@@ -64,7 +64,7 @@ class ActiveGroups extends React.Component {
                 <li key={id}>
                   <Row>
                     <Col>
-                      <Link to={`/active-groups/${id}`}>
+                      <Link to={`/active-groups/:id=${id}`}>
                         <h3>{restaurant.name}</h3>
                       </Link>
                     </Col>
