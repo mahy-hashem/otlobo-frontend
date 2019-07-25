@@ -10,7 +10,6 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
 // import countdownTimer from "../../util/countdownTimer";
 import "./SingleGroup.scss";
-import RestaurantDetailsPage from "../RestaurantDetailsPage/RestaurantDetailsPage";
 
 class SingleGroup extends React.Component {
   state = {
@@ -57,7 +56,23 @@ class SingleGroup extends React.Component {
           </Row>
           <Row>
             <Col>
-              <h2>{this.state.group.restaurant.name} Active Group</h2>
+              <Link to={`/restaurant/${this.state.group.restaursntId}`}>
+                <h2>{this.state.group.restaurant.name} Active Group</h2>
+              </Link>
+            </Col>
+            <Col>
+              <p id={this.state.group.id}>
+                {countdownTimer.duration(
+                  this.state.group.createdAt,
+                  this.state.group.timeframe
+                )}
+                {countdownTimer.timer(
+                  this.state.group.createdAt,
+                  this.state.group.timeframe,
+                  this.state.group.id
+                )}
+              </p>
+              <p>minutes</p>
             </Col>
           </Row>
         </Container>
