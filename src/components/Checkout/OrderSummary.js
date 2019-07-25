@@ -24,9 +24,9 @@ class OrderSummary extends React.Component {
                   </Col>
                 </Row>
                 {this.props.orderItems.map(item => {
-                  const { name, price, quantity } = item;
+                  const { id, name, price, quantity } = item;
                   return (
-                    <Row>
+                    <Row key={id}>
                       <Col>
                         <p>{name}</p>
                       </Col>

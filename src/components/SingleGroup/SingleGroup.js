@@ -65,9 +65,32 @@ class SingleGroup extends React.Component {
           {this.state.group.orders.map(order => {
             const { id, user, menu_items } = order;
             return (
-              <li>
+              <li key={id}>
                 <Row>
-                  <Col />
+                  <Col>
+                    <img src={user.image} alt={user.firstName} />
+                    <h3>{user.firstName}</h3>
+                  </Col>
+                </Row>
+                <Row>
+                  <ul>
+                    {menu_items.map(menu_item => {
+                      return (
+                        <li key={id}>
+                          <Col>
+                            <img src={menu_item.image} alt={menu_item.name} />
+                            <p>{menu_item.name}</p>
+                            <p>{menu_item.description}</p>
+                          </Col>
+                          <Col>
+                            <p>
+                              {menu_item.price} x {menu_item.quantity}
+                            </p>
+                          </Col>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </Row>
               </li>
             );
