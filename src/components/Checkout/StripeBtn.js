@@ -11,10 +11,15 @@ class StripeBtn extends React.Component {
   onToken = token => {
     const restaurantId = this.props.restaurantId;
     const userId = localStorage.getItem("userId");
+    const timeframe = this.props.timeframe;
+    const orderItems = this.props.orderItems;
     const body = {
-      amount: this.props.totalPrice,
+      amount: this.props.orderTotal,
       token: token,
-      restaurantId
+      restaurantId,
+      userId,
+      timeframe,
+      orderItems
     };
     axios
       .post(
@@ -32,7 +37,10 @@ class StripeBtn extends React.Component {
       })
       .catch(error => {
         console.log("Payment Error: ", error.response);
-        if (error.response.data.completed === false) {
+        if (
+          error.response.data.completed === false ||
+          !error.response.data.completed
+        ) {
           this.setState({
             redirect: false,
             paymentVerified: false
@@ -54,7 +62,7 @@ class StripeBtn extends React.Component {
         name="Otlobo" //Modal Header
         description="Order food today."
         panelLabel="Complete payment" //Submit button in modal
-        amount={this.props.totalPrice} //Amount in cents $9.99
+        amount={this.props.orderTotal} //Amount in cents $9.99
         token={this.onToken}
         stripeKey={"pk_test_nKM3abPgU0LJR15gcvwt0Ctq00iuMGYppT"}
         image="" //Pop-in header image

@@ -13,8 +13,8 @@ import OrderSummary from "../Checkout/OrderSummary";
 class GroupOrderSummary extends React.Component {
   state = {
     orders: null,
-    group: [],
-    restaurant: [],
+    group: null,
+    restaurant: null,
     totalPrice: 0.0,
     isLoading: true
   };
@@ -42,7 +42,7 @@ class GroupOrderSummary extends React.Component {
         this.setState({
           orders: result.data.group.orders,
           group: [result.data.group],
-          restaurant: [result.data.group.restaurant],
+          restaurant: result.data.group.restaurant,
           isLoading: false
         });
         console.log(result);
@@ -72,7 +72,7 @@ class GroupOrderSummary extends React.Component {
                 <BreadCrumb.Item
                   href={`/restaurant/${this.props.match.params.restaurantId}`}
                 >
-                  {this.state.restaurant[0].name}
+                  {this.state.restaurant.name}
                 </BreadCrumb.Item>
               </Breadcrumb>
             </Col>
@@ -88,7 +88,7 @@ class GroupOrderSummary extends React.Component {
                 </Row>
                 <Row>
                   <Col>
-                    <p>{this.state.restaurant[0].name}</p>
+                    <p>{this.state.restaurant.name}</p>
                   </Col>
                   <Col>
                     <p>Opening Hours</p>
