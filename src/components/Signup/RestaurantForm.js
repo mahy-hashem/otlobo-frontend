@@ -5,6 +5,8 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import BaseForm from "./BaseForm";
 
+import { saveToLocalStorage } from "../../util/localStorage";
+
 class RestaurantForm extends React.Component {
   state = {
     name: "",
@@ -49,7 +51,13 @@ class RestaurantForm extends React.Component {
       })
       .then(response => {
         console.log(response);
-        this.props.history.push("/login");
+        localStorage.clear();
+        saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("userId", response.data.userId);
+        saveToLocalStorage("userType", "restaurant");
+        saveToLocalStorage("restaurant", response.data.restaurant);
+        this.props.setLoggedUser();
+        this.props.history.push("/restaurantIndex");
       })
       .catch(error => {
         this.props.showErrorMessage("This account already exists");

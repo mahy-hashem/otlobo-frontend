@@ -38,7 +38,7 @@ class BaseForm extends React.Component {
             />
           </Form.Group>
           <Button
-            variant="primary"
+            className="customColor"
             onClick={this.props.formHandler}
             type="submit"
           >

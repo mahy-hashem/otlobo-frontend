@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SignUp from "./components/Signup/SignUp";
@@ -12,81 +12,144 @@ import RestaurantDetailsPage from "./components/RestaurantDetailsPage/Restaurant
 import MenuItem from "./components/RestaurantDetailsPage/MenuItem";
 import MenuItemForm from "./components/MenuItemForm/MenuItemForm";
 import Checkout from "./components/Checkout/Checkout";
+import RestaurantProfile from "./components/RestaurantProfile/RestaurantProfile";
+import EditRestaurantProfile from "./components/RestaurantProfile/EditRestaurantProfile";
+import EditRestaurantCredentials from "./components/RestaurantProfile/EditRestaurantCredentials";
 import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
 import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary";
-
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
+
 class App extends React.Component {
   state = {
     logged: false,
-    userType: ""
+    userType: "",
+    userId: ""
   };
+  componentDidMount() {
+    console.log("did mount");
+    this.setLoggedUser();
+  }
 
   setLoggedUser = () => {
     const authorizedUser = getLocalStorageItem("token");
     if (authorizedUser) {
+      console.log("setting");
       const userType = getLocalStorageItem("userType");
+      const userId = getLocalStorageItem("userId");
       this.setState({
         logged: true,
-        userType
+        userType,
+        userId
+      });
+    } else {
+      console.log("resetting");
+      this.setState({
+        logged: false,
+        userType: "",
+        userId: ""
       });
     }
   };
 
-  // requireAuth = (nextState, replace, next) => {
-  //   if (!this.state.logged) {
-  //     replace({
-  //       pathname: "/login",
-  //       state: { nextPathname: nextState.location.pathname }
-  //     });
-  //   }
-  //   next();
-  // };
-
-  componentDidMount() {
-    this.setLoggedUser();
-  }
-
   render() {
     return (
       <div className="app-container">
-        <Header logged={this.state.logged} userType={this.state.userType} />
+        <Header
+          logged={this.state.logged}
+          userType={this.state.userType}
+          setLoggedUser={this.setLoggedUser}
+          userId={this.state.userId}
+        />
         <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route path="/userIndex" component={UserLandingPage} />
-          <Route path="/restaurantIndex" component={RestLandingPage} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/active-groups" component={ActiveGroups} />
-          <Route
-            path="/login"
-            render={props => (
-              <Login {...props} setLoggedUser={this.setLoggedUser} />
-            )}
-          />
-          <Route
-            path="/restaurants"
-            component={Restaurants}
-            //  onEnter={this.requireAuth}
-          />
           <Route
             exact
-            path="/restaurant/:restaurantId"
-            component={RestaurantDetailsPage}
-          />
-          <Route
-            path="/restaurant/:userId/menu-item-form"
-            component={MenuItemForm}
+            path="/restaurant/:restaurantId/checkout/success"
+            component={GroupOrderSummary}
           />
           <Route
             exact
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
           />
+          <Route path="/active-groups" component={ActiveGroups} />
+
+          <PrivateRoute
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="user"
+            path="/userIndex"
+            component={UserLandingPage}
+          />
+          <PrivateRoute
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/restaurantIndex"
+            component={RestLandingPage}
+          />
           <Route
-            exact
-            path="/restaurant/:restaurantId/checkout/success"
-            component={GroupOrderSummary}
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/profile"
+            component={RestaurantProfile}
+          />
+          <Route
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/edit-profile"
+            component={EditRestaurantProfile}
+          />
+          <Route
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/edit-credentials"
+            component={EditRestaurantCredentials}
+          />
+          <PrivateRoute
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="user"
+            path="/restaurants"
+            component={Restaurants}
+          />
+          <PrivateRoute
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="user"
+            path="/restaurant/:restaurantId"
+            component={RestaurantDetailsPage}
+          />
+          <Route
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/menu/:restaurantId"
+            component={RestaurantDetailsPage}
+          />
+          <Route
+            authed={this.state.logged}
+            userType={this.state.userType}
+            pageType="restaurant"
+            path="/menu-item-form"
+            component={MenuItemForm}
+          />
+
+          <Route exact path="/" component={LandingPage} />
+          <Route
+            path="/signup"
+            render={props => (
+              <SignUp {...props} setLoggedUser={this.setLoggedUser} />
+            )}
+          />
+          <Route
+            path="/login"
+            render={props => (
+              <Login {...props} setLoggedUser={this.setLoggedUser} />
+            )}
           />
         </Switch>
         <Footer />
@@ -94,5 +157,28 @@ class App extends React.Component {
     );
   }
 }
+
+const PrivateRoute = ({
+  component: Component,
+  authed,
+  userType,
+  pageType,
+  ...rest
+}) => {
+  console.log(authed, userType, pageType);
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        authed === true && userType === pageType ? (
+          <Component {...props} />
+        ) : (
+          // <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          <Component {...props} />
+        )
+      }
+    />
+  );
+};
 
 export default App;

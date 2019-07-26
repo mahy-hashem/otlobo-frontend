@@ -50,3 +50,13 @@
 //     }
 //   }
 // }
+
+@import "../../mixins.scss";
+
+.custom-link {
+  color: white !important;
+}
+
+.logOut {
+  padding-top: 10px;
+}

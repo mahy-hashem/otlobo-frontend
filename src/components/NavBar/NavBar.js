@@ -1,11 +1,24 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 //import { NavLink } from "react-router-dom";
 
 import "./NavBar.scss";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+//import Button from "react-bootstrap/Button";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 class NavBar extends React.Component {
+  logout = () => {
+    console.log("cleaaar");
+
+    localStorage.clear();
+    this.props.setLoggedUser();
+    this.props.history.push("/");
+  };
+
   render() {
     return (
       <Navbar expand="lg">
@@ -18,44 +31,73 @@ class NavBar extends React.Component {
             {this.props.logged && this.props.userType === "user" && (
               <React.Fragment>
                 <li>
-                  <Nav.Link href="/restaurants">All Restaurants</Nav.Link>
+                  <Nav.Link className="custom-link" to="/restaurants">
+                    All Restaurants
+                  </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="/active-groups">Active Groups</Nav.Link>
+                  <Nav.Link className="custom-link" to="/active-groups">
+                    Active Groups
+                  </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="/users/:id">My Account</Nav.Link>
+                  <Nav.Link
+                    className="custom-link"
+                    to={`/users/${this.props.userId}`}
+                  >
+                    My Account
+                  </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="/logout/:id">Logout</Nav.Link>
+                  <FontAwesomeIcon onClick={this.logout} icon={faSignOutAlt}>
+                    Logout
+                  </FontAwesomeIcon>
                 </li>
               </React.Fragment>
             )}
             {this.props.logged && this.props.userType === "restaurant" && (
               <React.Fragment>
                 <li>
-                  <Nav.Link href="/restaurants/:id/menu-items">
+                  <Nav.Link
+                    className="custom-link"
+                    href={`/menu/${this.props.userId}`}
+                  >
                     My Menu
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="/orders/:id">My Orders</Nav.Link>
+                  <Nav.Link className="custom-link" href="/orders/:id">
+                    My Orders
+                  </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="/restaurants/:id">Settings</Nav.Link>
+                  <Nav.Link className="custom-link" href="/profile">
+                    My Profile
+                  </Nav.Link>
                 </li>
-                <li>
-                  <Nav.Link href="/logout/:id">Logout</Nav.Link>
+                <li className="logOut">
+                  <FontAwesomeIcon
+                    onClick={this.logout}
+                    icon={faSignOutAlt}
+                    color="grey"
+                    size="lg"
+                  >
+                    Logout
+                  </FontAwesomeIcon>
                 </li>
               </React.Fragment>
             )}
             {this.props.logged === false && (
               <React.Fragment>
                 <li>
-                  <Nav.Link href="signup">Sign Up</Nav.Link>
+                  <Nav.Link className="custom-link" href="signup">
+                    Sign Up
+                  </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link href="login">Login</Nav.Link>
+                  <Nav.Link className="custom-link" href="login">
+                    Login
+                  </Nav.Link>
                 </li>
               </React.Fragment>
             )}
@@ -66,4 +108,4 @@ class NavBar extends React.Component {
   }
 }
 
-export default NavBar;
+export default withRouter(NavBar);

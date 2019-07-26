@@ -1,0 +1,32 @@
+@import "../../mixins.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.restaurant-header {
+  border: 2px solid grey;
+  padding: 20px;
+
+  h1 {
+    text-transform: uppercase;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
+.newItem {
+  float: right;
+  border: 1px solid $primary;
+  padding: 10px;
+  color: $primary;
+  border-radius: 4px;
+  margin-top: 20px !important;
+}
