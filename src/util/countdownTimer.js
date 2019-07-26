@@ -1,4 +1,4 @@
-const duration = (createdAt, stringMinutes) => {
+const duration = (createdAt, stringMinutes = "15 minutes") => {
   let durationInMinutes = +stringMinutes.substr(0, 2);
   createdAt = new Date(createdAt);
 
@@ -11,11 +11,20 @@ const duration = (createdAt, stringMinutes) => {
   return time;
 };
 const timer = (createdAt, stringMinutes, id) => {
-  let time = duration(createdAt, stringMinutes);
+  let min = duration(createdAt, stringMinutes);
+  let sec = 59;
   let countdown = setInterval(function() {
-    document.getElementById(id).innerHTML = time;
-    time--;
-    if (time === -1) {
+    if (document.getElementById(id)) {
+      document.getElementById(id).innerHTML = `${min} : ${sec}`;
+      if (min >= 0 && sec > 0) {
+        sec--;
+      } else if (min > 0 && sec === 0) {
+        min--;
+        sec = 59;
+      } else if (sec === 0 && min === 0) {
+        clearInterval(countdown);
+      }
+    } else {
       clearInterval(countdown);
     }
   }, 1000);

@@ -62,6 +62,16 @@ class App extends React.Component {
           userId={this.state.userId}
         />
         <Switch>
+          <Route
+            exact
+            path="/restaurant/:restaurantId/checkout/success"
+            component={GroupOrderSummary}
+          />
+          <Route
+            exact
+            path="/restaurant/:restaurantId/checkout"
+            component={Checkout}
+          />
           <Route path="/active-groups" component={ActiveGroups} />
 
           <PrivateRoute
@@ -127,13 +137,6 @@ class App extends React.Component {
             path="/menu-item-form"
             component={MenuItemForm}
           />
-          <PrivateRoute
-            authed={this.state.logged}
-            userType={this.state.userType}
-            pageType="user"
-            path="/restaurant/:restaurantId/checkout"
-            component={Checkout}
-          />
 
           <Route exact path="/" component={LandingPage} />
           <Route
@@ -147,16 +150,6 @@ class App extends React.Component {
             render={props => (
               <Login {...props} setLoggedUser={this.setLoggedUser} />
             )}
-          />
-          <Route
-            exact
-            path="/restaurant/:restaurantId/checkout"
-            component={Checkout}
-          />
-          <Route
-            exact
-            path="/restaurant/:restaurantId/checkout/success"
-            component={GroupOrderSummary}
           />
         </Switch>
         <Footer />
@@ -180,7 +173,8 @@ const PrivateRoute = ({
         authed === true && userType === pageType ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          // <Redirect to={{ pathname: "/", state: { from: props.location } }} />
+          <Component {...props} />
         )
       }
     />
