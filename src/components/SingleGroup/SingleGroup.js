@@ -13,23 +13,26 @@ import "./SingleGroup.scss";
 
 class SingleGroup extends React.Component {
   state = {
-    group: []
+    group: {}
   };
   componentDidMount() {
-    this.fetchGroups();
+    console.log("in single group");
+    this.fetchGroup();
   }
 
-  fetchGroups = () => {
-    const groupId = this.props.match.params.id;
+  fetchGroup = () => {
+    const groupId = this.props.match.params.groupId;
+    console.log(groupId);
     axios
-      .get("http://localhost:8080/activeGroups/" + groupId)
+      .get(`http://localhost:8080/activeGroups/${groupId}`)
       .then(res => {
+        //console.log(res.data.group.restaurant);
         this.setState(
           {
             group: res.data.group
           },
           () => {
-            console.log(this.state);
+            console.log(this.state.group.restaurant);
           }
         );
       })
@@ -57,7 +60,12 @@ class SingleGroup extends React.Component {
           <Row>
             <Col>
               <Link to={`/restaurant/${this.state.group.restaursntId}`}>
-                <h2>{this.state.group.restaurant.name} Active Group</h2>
+                <h2>
+                  {" "}
+                  {this.state.group &&
+                    this.state.group.restaurant &&
+                    `${this.state.group.restaurant.name} Active Group`}
+                </h2>
               </Link>
             </Col>
             <Col>
@@ -72,46 +80,59 @@ class SingleGroup extends React.Component {
                   this.state.group.id
                 )}
               </p>
+
               <p>minutes</p>
             </Col>
           </Row>
+          <Container>
+            <ul>
+              {this.state.group &&
+                this.state.group.orders &&
+                this.state.group.orders.map(order => {
+                  const { id, user, menu_items } = order;
+                  return (
+                    <li key={id}>
+                      <Row>
+                        <Col>
+                          <img
+                            src={`http://localhost:8080/${user.image}`}
+                            alt={user.firstName}
+                          />
+                          <h3>{user.firstName}</h3>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <ul>
+                          {menu_items.map(menu_item => {
+                            return (
+                              <li key={id}>
+                                <Col>
+                                  <img
+                                    src={`http://localhost:8080/${
+                                      menu_item.picture
+                                    }`}
+                                    alt={menu_item.name}
+                                  />
+                                  <p>{menu_item.name}</p>
+                                  <p>{menu_item.description}</p>
+                                </Col>
+                                <Col>
+                                  <p>
+                                    {menu_item.price} x{" "}
+                                    {menu_item.order_item.quantity}
+                                  </p>
+                                </Col>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </Row>
+                    </li>
+                  );
+                })}
+            </ul>
+          </Container>
         </Container>
-        <ul>
-          {this.state.group.orders.map(order => {
-            const { id, user, menu_items } = order;
-            return (
-              <li key={id}>
-                <Row>
-                  <Col>
-                    <img src={user.image} alt={user.firstName} />
-                    <h3>{user.firstName}</h3>
-                  </Col>
-                </Row>
-                <Row>
-                  <ul>
-                    {menu_items.map(menu_item => {
-                      return (
-                        <li key={id}>
-                          <Col>
-                            <img src={menu_item.image} alt={menu_item.name} />
-                            <p>{menu_item.name}</p>
-                            <p>{menu_item.description}</p>
-                          </Col>
-                          <Col>
-                            <p>
-                              {menu_item.price} x {menu_item.quantity}
-                            </p>
-                          </Col>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </Row>
-              </li>
-            );
-          })}
-        </ul>
-        <Container />
       </div>
     );
   }

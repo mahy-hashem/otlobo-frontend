@@ -28,10 +28,10 @@ class OrderTimeframe extends React.Component {
                 onChange={e => this.props.onChange(e.target.value)}
               >
                 <option value="">Please select a timeframe:</option>
-                <option value="02 minutes">2 minutes</option>
-                <option value="15 minutes" selected>
-                  15 minutes
+                <option value="02 minutes" defaultValue>
+                  2 minutes
                 </option>
+                <option value="15 minutes">15 minutes</option>
                 <option value="30 minutes">30 minutes</option>
                 <option value="45 minutes">45 minutes</option>
                 <option value="60 minutes">1 hour</option>

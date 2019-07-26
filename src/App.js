@@ -74,7 +74,8 @@ class App extends React.Component {
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
           />
-          <Route path="/active-groups" component={ActiveGroups} />
+          <Route exact path="/active-groups/:groupId" component={SingleGroup} />
+          <Route exact path="/active-groups" component={ActiveGroups} />
 
           <PrivateRoute
             authed={this.state.logged}
