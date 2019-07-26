@@ -15,9 +15,11 @@ import Checkout from "./components/Checkout/Checkout";
 import RestaurantProfile from "./components/RestaurantProfile/RestaurantProfile";
 import EditRestaurantProfile from "./components/RestaurantProfile/EditRestaurantProfile";
 import EditRestaurantCredentials from "./components/RestaurantProfile/EditRestaurantCredentials";
-
+import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
+import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary";
 import { getLocalStorageItem } from "./util/localStorage";
 import "./App.css";
+
 class App extends React.Component {
   state = {
     logged: false,
@@ -60,6 +62,8 @@ class App extends React.Component {
           userId={this.state.userId}
         />
         <Switch>
+          <Route path="/active-groups" component={ActiveGroups} />
+
           <PrivateRoute
             authed={this.state.logged}
             userType={this.state.userType}
@@ -143,6 +147,16 @@ class App extends React.Component {
             render={props => (
               <Login {...props} setLoggedUser={this.setLoggedUser} />
             )}
+          />
+          <Route
+            exact
+            path="/restaurant/:restaurantId/checkout"
+            component={Checkout}
+          />
+          <Route
+            exact
+            path="/restaurant/:restaurantId/checkout/success"
+            component={GroupOrderSummary}
           />
         </Switch>
         <Footer />
