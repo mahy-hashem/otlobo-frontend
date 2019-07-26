@@ -10,13 +10,13 @@ body {
 }
 
 .footer-container {
-  background: $otlobo-yellow;
+  background: $primary;
   margin-top: 50px;
   height: 70px;
   text-align: center;
   padding-top: 20px;
 
   span {
-    color: $otlobo-red;
+    color: $text-on-bg;
   }
 }

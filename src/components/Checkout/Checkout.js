@@ -101,13 +101,13 @@ class Checkout extends React.Component {
                   <Col>
                     <p>Order Summary</p>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <NavLink
                       to={`/restaurant/${this.props.match.params.restaurantId}`}
                     >
                       Edit Order
                     </NavLink>
-                  </Col>
+                  </Col> */}
                 </Row>
                 <Row>
                   <Col>

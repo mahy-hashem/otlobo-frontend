@@ -7,6 +7,8 @@ $xs: 414px;
 $otlobo-yellow: #ffd500;
 $otlobo-purple: #632a7b;
 $otlobo-red: #b8483c;
+$primary: #00ccbc;
+$text-on-bg: white;
 
 @mixin responsive-min($size) {
   @media (min-width: + $size) {

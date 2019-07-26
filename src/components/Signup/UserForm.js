@@ -5,6 +5,8 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import BaseForm from "./BaseForm";
 
+import { saveToLocalStorage } from "../../util/localStorage";
+
 class UserForm extends React.Component {
   state = {
     firstName: "",
@@ -49,7 +51,13 @@ class UserForm extends React.Component {
       })
       .then(response => {
         console.log(response);
-        this.props.history.push("/login");
+        localStorage.clear();
+        saveToLocalStorage("token", response.data.token);
+        saveToLocalStorage("userId", response.data.userId);
+        saveToLocalStorage("userType", "user");
+        saveToLocalStorage("user", response.data.user);
+        this.props.setLoggedUser();
+        this.props.history.push("/userIndex");
       })
       .catch(error => {
         //this.props.showErrorMessage(error.message);
