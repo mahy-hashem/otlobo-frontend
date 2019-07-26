@@ -3,20 +3,22 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
 
-class MenuItemForm extends React.Component {
+class EditRestaurantProfile extends React.Component {
   state = {
-    name: "",
-    description: "",
+    address: "",
+    mobile: "",
     image: null,
-    price: 0,
+    restaurant: {},
     restaurantId: "",
     token: ""
   };
 
   componentDidMount() {
-    const restaurantId = JSON.parse(localStorage.getItem("userId"));
-    const token = localStorage.getItem("token");
+    const restaurant = JSON.parse(localStorage.getItem("restaurant"));
+    const restaurantId = restaurant.id;
+    const token = JSON.parse(localStorage.getItem("token"));
     this.setState({
+      restaurant,
       restaurantId,
       token
     });
@@ -34,16 +36,14 @@ class MenuItemForm extends React.Component {
   handleForm = event => {
     event.preventDefault();
     const url = process.env.REACT_APP_URL;
-    const { name, description, price, image } = this.state;
+    const { address, mobile, image } = this.state;
     let data = new FormData();
-    data.append("name", name);
-    data.append("description", description);
+    data.append("address", address);
+    data.append("mobile", mobile);
     data.append("file", image[0]);
-    console.log(image);
-    data.append("price", price);
 
     axios
-      .post(`${url}/menuItems/${this.state.restaurantId}/add`, data, {
+      .post(`${url}/restaurant/${this.state.restaurantId}/profile`, data, {
         headers: {
           accept: "application/json",
           "Accept-Language": "en-US,en;q=0.8",
@@ -52,8 +52,8 @@ class MenuItemForm extends React.Component {
         }
       })
       .then(response => {
-        console.log(response);
-        this.props.history.push(`/menu/${this.state.restaurantId}`);
+        //console.log(response);
+        this.props.history.push(`/profile`);
       })
       .catch(error => {
         //this.props.showErrorMessage(error.message);
@@ -62,7 +62,6 @@ class MenuItemForm extends React.Component {
         // );
         console.log(error);
       });
-    console.log("handle menu item form");
   };
 
   handleImage = (input, value, files) => {
@@ -75,31 +74,35 @@ class MenuItemForm extends React.Component {
     );
   };
 
+  handleClose = () => {
+    this.props.history.push(`/profile`);
+  };
+
   render() {
     return (
       <div className="form-container">
         <Form>
           <fieldset>
-            <legend>Add an item to your Menu!</legend>
-            <Form.Group controlId="formGroupName">
-              <Form.Label>Name</Form.Label>
+            <legend>Edit your profile!</legend>
+            <Form.Group controlId="restaurantAddress">
+              <Form.Label>Address</Form.Label>
               <Form.Control
-                name="name"
+                name="address"
                 type="text"
-                placeholder="Enter name of new menu item"
+                value={this.state.restaurant.address}
                 onChange={this.handleInputChange}
               />
             </Form.Group>
-            <Form.Group controlId="formGroupDescription">
-              <Form.Label>Description</Form.Label>
+            <Form.Group controlId="restaurantMobile">
+              <Form.Label>Mobile</Form.Label>
               <Form.Control
-                name="description"
+                name="mobile"
                 type="text"
-                placeholder="Describe your menu item..."
+                value={this.state.restaurant.mobile}
                 onChange={this.handleInputChange}
               />
             </Form.Group>
-            <Form.Group controlId="formGroupPicture">
+            <Form.Group controlId="restaurantPicture">
               <Form.Label>Image</Form.Label>
               <Form.Control
                 name="file"
@@ -108,21 +111,15 @@ class MenuItemForm extends React.Component {
                 onChange={e => this.handleImage(e.target.value, e.target.files)}
               />
             </Form.Group>
-            <Form.Group controlId="formGroupPrice">
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                name="price"
-                type="text"
-                placeholder="Price of your menu item"
-                onChange={this.handleInputChange}
-              />
-            </Form.Group>
             <Button
               className="customColor"
               onClick={this.handleForm}
               type="submit"
             >
-              Create item
+              Save
+            </Button>
+            <Button className="customColor" onClick={this.handleClose}>
+              Cancel
             </Button>
           </fieldset>
         </Form>
@@ -131,4 +128,4 @@ class MenuItemForm extends React.Component {
   }
 }
 
-export default MenuItemForm;
+export default EditRestaurantProfile;

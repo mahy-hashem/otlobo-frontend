@@ -98,16 +98,14 @@ class Login extends React.Component {
                 />
               </Form.Group>
               <Button
-                variant="primary"
-                className="center"
+                className="customColor center"
                 type="submit"
                 onClick={this.userLogin}
               >
                 Login as a user
               </Button>
               <Button
-                variant="primary"
-                className="center"
+                className="customColor center"
                 type="submit"
                 onClick={this.restaurantLogin}
               >

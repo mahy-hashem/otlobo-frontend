@@ -1,3 +1,5 @@
+@import "../../mixins.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -43,4 +45,9 @@ body {
 
 p {
   text-align: center;
+}
+
+.customColor {
+  background: $primary !important;
+  border: 0 !important;
 }

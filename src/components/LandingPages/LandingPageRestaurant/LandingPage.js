@@ -32,7 +32,7 @@ class LandingPage extends React.Component {
                 would you like to add something new to your menu today?
               </p>
               <Link
-                to={`/restaurant/${this.state.restaurantId}`}
+                to={`/menu/${this.state.restaurantId}`}
                 className="restlandingContainer__content__link restlandingContainer__content--btn"
               >
                 take me to my menu
@@ -44,7 +44,7 @@ class LandingPage extends React.Component {
                 would you like to update your profile information?
               </p>
               <Link
-                to="/signup"
+                to="/profile"
                 className="restlandingContainer__content__link restlandingContainer__content--btn"
               >
                 take me to my profile

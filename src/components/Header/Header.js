@@ -10,10 +10,15 @@ class Header extends React.Component {
       <header className="page-header">
         <div>
           <img src={logo} alt="Logo" />
-          <h1>Otlobo</h1>
+          <h1>tlobo</h1>
         </div>
         <div>
-          <NavBar logged={this.props.logged} userType={this.props.userType}>
+          <NavBar
+            logged={this.props.logged}
+            userType={this.props.userType}
+            userId={this.props.userId}
+            setLoggedUser={this.props.setLoggedUser}
+          >
             {this.props.children}
           </NavBar>
         </div>

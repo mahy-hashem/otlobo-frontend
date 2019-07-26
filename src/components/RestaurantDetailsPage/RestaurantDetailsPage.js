@@ -17,6 +17,8 @@ import MenuItem from "./MenuItem";
 import SideCart from "./SideCart";
 import Footer from "../Footer/Footer";
 
+import "./RestaurantDetailsPage.scss";
+
 class RestaurantDetailsPage extends React.Component {
   state = {
     restaurant: [],
@@ -33,6 +35,7 @@ class RestaurantDetailsPage extends React.Component {
 
   fetchRestaurant = () => {
     const restaurantId = this.props.match.params.restaurantId;
+    console.log(restaurantId);
     axios
       .get("http://localhost:8080/restaurant/" + restaurantId)
       .then(res => {
@@ -124,21 +127,25 @@ class RestaurantDetailsPage extends React.Component {
       return (
         <div>
           <Container>
-            <Row>
-              <Col>
-                <Breadcrumb>
-                  <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                  <BreadCrumb.Item href="/restaurants">
-                    All Restaurants
-                  </BreadCrumb.Item>
-                  <BreadCrumb.Item
-                    href={`/restaurant/${this.props.match.params.restaurantId}`}
-                  >
-                    {restaurant[0].name}
-                  </BreadCrumb.Item>
-                </Breadcrumb>
-              </Col>
-            </Row>
+            {userType === "user" && (
+              <Row>
+                <Col>
+                  <Breadcrumb>
+                    <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
+                    <BreadCrumb.Item href="/restaurants">
+                      All Restaurants
+                    </BreadCrumb.Item>
+                    <BreadCrumb.Item
+                      href={`/restaurant/${
+                        this.props.match.params.restaurantId
+                      }`}
+                    >
+                      {restaurant[0].name}
+                    </BreadCrumb.Item>
+                  </Breadcrumb>
+                </Col>
+              </Row>
+            )}
             <Row>
               <Col>
                 <RestaurantInfoHeader
@@ -150,10 +157,7 @@ class RestaurantDetailsPage extends React.Component {
             {userType === "restaurant" && (
               <Row>
                 <Col>
-                  <Link
-                    to={`/restaurant/${userId}/menu-item-form`}
-                    className="restlandingContainer__content__link restlandingContainer__content--btn"
-                  >
+                  <Link to={`/menu-item-form`} className="newItem">
                     Add a new menu item
                   </Link>
                 </Col>
@@ -171,7 +175,7 @@ class RestaurantDetailsPage extends React.Component {
                             name={name}
                             key={id}
                             id={id}
-                            picture={picture}
+                            picture={`http://localhost:8080/${picture}`}
                             description={description}
                             price={price}
                             item={item}
