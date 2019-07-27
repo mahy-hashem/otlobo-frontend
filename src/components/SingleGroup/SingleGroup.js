@@ -70,6 +70,10 @@ class SingleGroup extends React.Component {
             </Col>
             <Col>
               <p id={this.state.group.id}>
+                {countdownTimer.duration(
+                  this.state.group.createdAt,
+                  this.state.group.timeframe
+                )}
                 {countdownTimer.timer(
                   this.state.group.createdAt,
                   this.state.group.timeframe,

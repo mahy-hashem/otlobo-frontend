@@ -160,6 +160,7 @@ class App extends React.Component {
               <Login {...props} setLoggedUser={this.setLoggedUser} />
             )}
           />
+          <Route exact path="/active-groups/:groupId" component={SingleGroup} />
         </Switch>
         <Footer />
       </div>
