@@ -87,10 +87,6 @@ class ActiveGroups extends React.Component {
                     </ul>
                     <Col>
                       <p id={group.id}>
-                        {countdownTimer.duration(
-                          group.createdAt,
-                          group.timeframe
-                        )}
                         {countdownTimer.timer(
                           group.createdAt,
                           group.timeframe,
