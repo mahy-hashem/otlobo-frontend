@@ -11,6 +11,8 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import countdownTimer from "../../util/countdownTimer";
 import "./SingleGroup.scss";
 
+import { getLocalStorageItem } from "../../util/localStorage";
+
 class SingleGroup extends React.Component {
   state = {
     group: {}
@@ -23,8 +25,13 @@ class SingleGroup extends React.Component {
   fetchGroup = () => {
     const groupId = this.props.match.params.groupId;
     console.log(groupId);
+    const token = getLocalStorageItem("token");
     axios
-      .get(`http://localhost:8080/activeGroups/${groupId}`)
+      .get(`http://localhost:8080/activeGroups/${groupId}`, {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
       .then(res => {
         //console.log(res.data.group.restaurant);
         this.setState(
@@ -48,10 +55,14 @@ class SingleGroup extends React.Component {
             <Col>
               <Breadcrumb>
                 <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/active-groups">
+                <BreadCrumb.Item href="/userApp/active-groups">
                   All Active Groups
                 </BreadCrumb.Item>
-                <BreadCrumb.Item href="/active-groups/:groupId">
+                <BreadCrumb.Item
+                  href={`/userApp/active-groups/${
+                    this.props.match.params.groupId
+                  }`}
+                >
                   Group
                 </BreadCrumb.Item>
               </Breadcrumb>
@@ -59,7 +70,7 @@ class SingleGroup extends React.Component {
           </Row>
           <Row>
             <Col>
-              <Link to={`/restaurant/${this.state.group.restaursntId}`}>
+              <Link to={`/userApp/restaurant/${this.state.group.restaurantId}`}>
                 <h2>
                   {" "}
                   {this.state.group &&

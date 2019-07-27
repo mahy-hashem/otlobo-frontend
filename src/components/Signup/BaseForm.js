@@ -35,6 +35,7 @@ class BaseForm extends React.Component {
               name="confirmPassword"
               type="password"
               placeholder="Confirm Password"
+              onChange={this.props.inputChangeHandler}
             />
           </Form.Group>
           <Button

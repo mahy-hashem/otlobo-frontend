@@ -45,11 +45,14 @@ class Login extends React.Component {
         userType === "user"
           ? saveToLocalStorage("user", response.data.user)
           : saveToLocalStorage("restaurant", response.data.restaurant);
-        this.props.setLoggedUser();
+
+        const userId = response.data.userId;
         if (userType === "user") {
-          this.props.history.push("/userIndex");
+          this.props.setLoggedUser({ userId, userType: "user" });
+          this.props.history.push(`/userApp/userIndex`);
         } else {
-          this.props.history.push(`/restaurantIndex`);
+          this.props.setLoggedUser({ userId, userType: "restaurant" });
+          this.props.history.push(`/app/restaurantIndex`);
         }
       })
       .catch(error => {
@@ -59,12 +62,24 @@ class Login extends React.Component {
 
   userLogin = event => {
     event.preventDefault();
+
+    if (this.state.email === "" || this.state.password === "") {
+      this.showErrorMessage("Please enter required fields");
+      return;
+    }
+
     this.sendRequest("user");
     console.log("logging as a user");
   };
 
   restaurantLogin = event => {
     event.preventDefault();
+
+    if (this.state.email === "" || this.state.password === "") {
+      this.showErrorMessage("Please enter required fields");
+      return;
+    }
+
     this.sendRequest("restaurant");
     console.log("logging as a restaurant");
   };

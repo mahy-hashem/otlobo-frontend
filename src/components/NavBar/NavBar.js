@@ -11,13 +11,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 class NavBar extends React.Component {
-  logout = () => {
-    console.log("cleaaar");
+  // logout = () => {
+  //   console.log("cleaaar");
 
-    localStorage.clear();
-    this.props.setLoggedUser();
-    this.props.history.push("/");
-  };
+  //   localStorage.clear();
+  //   this.props.setLoggedUser();
+  //   this.props.history.push("/");
+  // };
 
   render() {
     return (
@@ -28,45 +28,56 @@ class NavBar extends React.Component {
           className="justify-content-end"
         >
           <Nav className="justify-content-end">
-            {this.props.logged && this.props.userType === "user" && (
+            {this.props.user && this.props.user.userType === "user" && (
               <React.Fragment>
                 <li>
-                  <Nav.Link className="custom-link" to="/restaurants">
+                  <Nav.Link className="custom-link" href="/userApp/restaurants">
                     All Restaurants
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link className="custom-link" to="/active-groups">
+                  <Nav.Link
+                    className="custom-link"
+                    href="/userApp/active-groups"
+                  >
                     Active Groups
                   </Nav.Link>
                 </li>
                 <li>
                   <Nav.Link
                     className="custom-link"
-                    to={`/users/${this.props.userId}`}
+                    href={`/users/${this.props.userId}`}
                   >
                     My Account
                   </Nav.Link>
                 </li>
-                <li>
-                  <FontAwesomeIcon onClick={this.logout} icon={faSignOutAlt}>
+                <li className="logOut">
+                  <FontAwesomeIcon
+                    onClick={this.props.logout}
+                    icon={faSignOutAlt}
+                    color="grey"
+                    size="lg"
+                  >
                     Logout
                   </FontAwesomeIcon>
                 </li>
               </React.Fragment>
             )}
-            {this.props.logged && this.props.userType === "restaurant" && (
+            {this.props.user && this.props.user.userType === "restaurant" && (
               <React.Fragment>
                 <li>
                   <Nav.Link
                     className="custom-link"
-                    href={`/menu/${this.props.userId}`}
+                    href={`/app/menu/${this.props.user.userId}`}
                   >
                     My Menu
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link className="custom-link" href="/orders/:id">
+                  <Nav.Link
+                    className="custom-link"
+                    href={`/app/restaurant-orders/${this.props.user.userId}`}
+                  >
                     My Orders
                   </Nav.Link>
                 </li>
@@ -77,7 +88,7 @@ class NavBar extends React.Component {
                 </li>
                 <li className="logOut">
                   <FontAwesomeIcon
-                    onClick={this.logout}
+                    onClick={this.props.logout}
                     icon={faSignOutAlt}
                     color="grey"
                     size="lg"
@@ -87,7 +98,7 @@ class NavBar extends React.Component {
                 </li>
               </React.Fragment>
             )}
-            {this.props.logged === false && (
+            {!this.props.user && (
               <React.Fragment>
                 <li>
                   <Nav.Link className="custom-link" href="signup">

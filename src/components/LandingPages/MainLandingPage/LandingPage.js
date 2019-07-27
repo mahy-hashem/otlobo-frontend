@@ -8,9 +8,9 @@ function LandingPage() {
     <div className="landingPage">
       <div className="landingContainer">
         <div className="landingContainer__content">
-          <h2 className="landingContainer__content__h2">otlobo</h2>
+          <h2 className="landingContainer__content__h2">Otlobo</h2>
           <p className="landingContainer__content__p">
-            order your food with your group
+            Order your food with your group
           </p>
           <Link
             to="/signup"

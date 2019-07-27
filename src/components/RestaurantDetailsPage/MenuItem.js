@@ -9,7 +9,11 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencilAlt, faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPencilAlt,
+  faTimes,
+  faPlus
+} from "@fortawesome/free-solid-svg-icons";
 
 import "./MenuItem.scss";
 class MenuItem extends React.Component {
@@ -31,7 +35,11 @@ class MenuItem extends React.Component {
           <Card style={{ width: "70%", marginTop: "20px" }}>
             <Row>
               <Col>
-                <Card.Img variant="top" src={this.props.picture} />
+                <Card.Img
+                  variant="top"
+                  src={this.props.picture}
+                  className="menuItemImg"
+                />
               </Col>
               <Col>
                 <Card.Body>
@@ -43,17 +51,29 @@ class MenuItem extends React.Component {
                 </Card.Body>
               </Col>
               <Col className="actions">
-                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="grey" />
-                <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
+                {this.state.userType === "user" ? (
+                  <FontAwesomeIcon
+                    icon={faPlus}
+                    size="2x"
+                    color="grey"
+                    onClick={() => this.props.addMenuItem(this.props.item)}
+                  />
+                ) : (
+                  <React.Fragment>
+                    <FontAwesomeIcon
+                      icon={faPencilAlt}
+                      size="lg"
+                      color="grey"
+                    />
+                    <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
+                  </React.Fragment>
+                )}
               </Col>
             </Row>
           </Card>
         </Container>
-        {this.state.userType === "user" && (
+        {/*this.state.userType === "user" && (
           <React.Fragment>
-            <Col>
-              <p>Rating</p>
-            </Col>
             <Col>
               <GenericButton
                 className="add-order-btn"
@@ -62,7 +82,7 @@ class MenuItem extends React.Component {
               />
             </Col>
           </React.Fragment>
-        )}
+        )*/}
       </React.Fragment>
     );
   }

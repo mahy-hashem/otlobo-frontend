@@ -11,6 +11,8 @@ import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import countdownTimer from "../../util/countdownTimer";
 import "./ActiveGroups.scss";
 
+import { getLocalStorageItem } from "../../util/localStorage";
+
 class ActiveGroups extends React.Component {
   state = {
     groups: []
@@ -20,8 +22,13 @@ class ActiveGroups extends React.Component {
   }
 
   fetchGroups = () => {
+    const token = getLocalStorageItem("token");
     axios
-      .get("http://localhost:8080/activeGroups")
+      .get("http://localhost:8080/activeGroups", {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
       .then(res => {
         this.setState(
           {
@@ -44,7 +51,7 @@ class ActiveGroups extends React.Component {
             <Col>
               <Breadcrumb>
                 <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/active-groups">
+                <BreadCrumb.Item href="/userApp/active-groups">
                   All Active Groups
                 </BreadCrumb.Item>
               </Breadcrumb>
@@ -64,7 +71,7 @@ class ActiveGroups extends React.Component {
                 <li key={id}>
                   <Row>
                     <Col>
-                      <Link to={`/active-groups/${id}`}>
+                      <Link to={`/userApp/active-groups/${id}`}>
                         <h3>{restaurant.name}</h3>
                       </Link>
                     </Col>
