@@ -18,6 +18,7 @@ import EditRestaurantCredentials from "./components/RestaurantProfile/EditRestau
 import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
 import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary";
 import { getLocalStorageItem } from "./util/localStorage";
+import RestaurantOrders from "./components/RestaurantOrders/RestaurantOrders";
 import "./App.css";
 
 class App extends React.Component {
@@ -73,6 +74,11 @@ class App extends React.Component {
             component={Checkout}
           />
           <Route path="/active-groups" component={ActiveGroups} />
+
+          <Route
+            path="/restaurant-orders/:resturantId"
+            component={RestaurantOrders}
+          />
 
           <PrivateRoute
             authed={this.state.logged}
