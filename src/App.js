@@ -20,6 +20,7 @@ import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary"
 import SingleGroup from "./components/SingleGroup/SingleGroup";
 
 import { getLocalStorageItem } from "./util/localStorage";
+import RestaurantOrders from "./components/RestaurantOrders/RestaurantOrders";
 import "./App.css";
 
 class App extends React.Component {
@@ -76,6 +77,11 @@ class App extends React.Component {
           />
           <Route exact path="/active-groups/:groupId" component={SingleGroup} />
           <Route exact path="/active-groups" component={ActiveGroups} />
+
+          <Route
+            path="/restaurant-orders/:resturantId"
+            component={RestaurantOrders}
+          />
 
           <PrivateRoute
             authed={this.state.logged}
