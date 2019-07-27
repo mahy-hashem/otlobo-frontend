@@ -13,6 +13,8 @@ import StripeBtn from "./StripeBtn";
 import OrderTimeframe from "./OrderTimeframe";
 import OrderStatus from "./OrderStatus";
 
+import { getLocalStorageItem } from "../../util/localStorage";
+
 import "./Checkout.scss";
 class Checkout extends React.Component {
   state = {
@@ -26,6 +28,7 @@ class Checkout extends React.Component {
   };
 
   componentDidMount() {
+    console.log("in checkout");
     this.fetchRestaurant();
   }
 
@@ -43,8 +46,13 @@ class Checkout extends React.Component {
   // fetch restaurant and active group details, calls getCart()
   fetchRestaurant = () => {
     const restaurantId = this.props.match.params.restaurantId;
+    const token = getLocalStorageItem("token");
     axios
-      .get("http://localhost:8080/restaurant/" + restaurantId)
+      .get("http://localhost:8080/restaurant/" + restaurantId, {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
       .then(res => {
         const { data } = res;
         console.log(res);
@@ -83,11 +91,13 @@ class Checkout extends React.Component {
             <Col>
               <Breadcrumb>
                 <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/restaurants">
+                <BreadCrumb.Item href="/userApp/restaurants">
                   All Restaurants
                 </BreadCrumb.Item>
                 <BreadCrumb.Item
-                  href={`/restaurant/${this.props.match.params.restaurantId}`}
+                  href={`/userApp/restaurant/${
+                    this.props.match.params.restaurantId
+                  }`}
                 >
                   {this.state.restaurant.name}
                 </BreadCrumb.Item>

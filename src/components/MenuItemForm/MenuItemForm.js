@@ -15,7 +15,7 @@ class MenuItemForm extends React.Component {
 
   componentDidMount() {
     const restaurantId = JSON.parse(localStorage.getItem("userId"));
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem("token"));
     this.setState({
       restaurantId,
       token
@@ -48,7 +48,7 @@ class MenuItemForm extends React.Component {
           accept: "application/json",
           "Accept-Language": "en-US,en;q=0.8",
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
-          Authorization: this.state.token
+          Authorization: `bearer ${this.state.token}`
         }
       })
       .then(response => {

@@ -20,6 +20,7 @@ class GroupOrderSummary extends React.Component {
   };
 
   componentDidMount() {
+    console.log("in summary");
     this.getCart();
   }
 
@@ -66,11 +67,13 @@ class GroupOrderSummary extends React.Component {
             <Col>
               <Breadcrumb>
                 <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/restaurants">
+                <BreadCrumb.Item href="/userApp/restaurants">
                   All Restaurants
                 </BreadCrumb.Item>
                 <BreadCrumb.Item
-                  href={`/restaurant/${this.props.match.params.restaurantId}`}
+                  href={`/userApp/restaurant/${
+                    this.props.match.params.restaurantId
+                  }`}
                 >
                   {this.state.restaurant.name}
                 </BreadCrumb.Item>

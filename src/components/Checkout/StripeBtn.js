@@ -21,6 +21,7 @@ class StripeBtn extends React.Component {
       timeframe,
       orderItems
     };
+
     axios
       .post(
         "http://localhost:8080/restaurant/" + restaurantId + "/checkout/charge",
@@ -52,7 +53,7 @@ class StripeBtn extends React.Component {
     if (this.state.redirect === true) {
       return (
         <Redirect
-          to={`/restaurant/${this.props.restaurantId}/checkout/success`}
+          to={`/userApp/restaurant/${this.props.restaurantId}/checkout/success`}
         />
       );
     }

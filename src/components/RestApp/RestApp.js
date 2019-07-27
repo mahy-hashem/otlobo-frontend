@@ -6,6 +6,7 @@ import Footer from "../Footer/Footer";
 import RestLandingPage from "../LandingPages/LandingPageRestaurant/LandingPage";
 import RestaurantDetailsPage from "../RestaurantDetailsPage/RestaurantDetailsPage";
 
+import RestaurantOrders from "../RestaurantOrders/RestaurantOrders";
 import MenuItemForm from "../MenuItemForm/MenuItemForm";
 
 class RestApp extends React.Component {
@@ -17,6 +18,10 @@ class RestApp extends React.Component {
           <Route
             path={`${this.props.match.url}/menu/:restaurantId`}
             component={RestaurantDetailsPage}
+          />
+          <Route
+            path={`${this.props.match.url}/restaurant-orders/:restaurantId`}
+            component={RestaurantOrders}
           />
           <Route
             path={`${this.props.match.url}/restaurantIndex`}

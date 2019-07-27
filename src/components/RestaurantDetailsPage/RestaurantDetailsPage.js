@@ -177,11 +177,11 @@ class RestaurantDetailsPage extends React.Component {
                 <Col>
                   <Breadcrumb>
                     <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                    <BreadCrumb.Item href="/restaurants">
+                    <BreadCrumb.Item href="/userApp/restaurants">
                       All Restaurants
                     </BreadCrumb.Item>
                     <BreadCrumb.Item
-                      href={`/restaurant/${
+                      href={`/userApp/restaurant/${
                         this.props.match.params.restaurantId
                       }`}
                     >

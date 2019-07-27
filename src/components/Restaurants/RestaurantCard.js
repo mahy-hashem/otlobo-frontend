@@ -6,7 +6,7 @@ class RestaurantCard extends React.Component {
   render() {
     return (
       <div className="cardContainer">
-        <NavLink to={`/restaurant/${this.props.id}`}>
+        <NavLink to={`/userApp/restaurant/${this.props.id}`}>
           <h1>{this.props.name}</h1>
         </NavLink>
         <p>{this.props.address}</p>

@@ -36,7 +36,10 @@ class NavBar extends React.Component {
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link className="custom-link" href="/active-groups">
+                  <Nav.Link
+                    className="custom-link"
+                    href="/userApp/active-groups"
+                  >
                     Active Groups
                   </Nav.Link>
                 </li>
@@ -71,7 +74,10 @@ class NavBar extends React.Component {
                   </Nav.Link>
                 </li>
                 <li>
-                  <Nav.Link className="custom-link" href="/orders/:id">
+                  <Nav.Link
+                    className="custom-link"
+                    href={`/app/restaurant-orders/${this.props.user.userId}`}
+                  >
                     My Orders
                   </Nav.Link>
                 </li>

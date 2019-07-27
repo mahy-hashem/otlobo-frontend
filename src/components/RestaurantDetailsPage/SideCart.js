@@ -49,7 +49,9 @@ class SideCart extends React.Component {
         </Row>
         <Row>
           <Col>
-            <NavLink to={`/restaurant/${this.props.restaurant.id}/checkout`}>
+            <NavLink
+              to={`/userApp/restaurant/${this.props.restaurant.id}/checkout`}
+            >
               Proceed to Checkout
             </NavLink>
           </Col>
