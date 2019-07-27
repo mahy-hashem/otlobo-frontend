@@ -17,6 +17,8 @@ import EditRestaurantProfile from "./components/RestaurantProfile/EditRestaurant
 import EditRestaurantCredentials from "./components/RestaurantProfile/EditRestaurantCredentials";
 import ActiveGroups from "./components/ActiveGroups/ActiveGroups";
 import GroupOrderSummary from "./components/GroupOrderSummary/GroupOrderSummary";
+import SingleGroup from "./components/SingleGroup/SingleGroup";
+
 import { getLocalStorageItem } from "./util/localStorage";
 import RestaurantOrders from "./components/RestaurantOrders/RestaurantOrders";
 import "./App.css";
@@ -73,7 +75,8 @@ class App extends React.Component {
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
           />
-          <Route path="/active-groups" component={ActiveGroups} />
+          <Route exact path="/active-groups/:groupId" component={SingleGroup} />
+          <Route exact path="/active-groups" component={ActiveGroups} />
 
           <Route
             path="/restaurant-orders/:resturantId"

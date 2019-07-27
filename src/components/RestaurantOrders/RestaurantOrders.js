@@ -124,15 +124,37 @@ class RestaurantOrders extends React.Component {
                     <ul>
                       {group.orders.map(order => {
                         return (
-                          <Row key={order.id}>
-                            <li>
+                          <li key={order.id}>
+                            <Row>
                               <img
                                 src={order.user.image}
                                 alt={order.user.firstName}
                               />
                               <p>{order.user.firstName}</p>
-                            </li>
-                          </Row>
+                            </Row>
+                            <Row>
+                              <ul>
+                                {order.menu_items.map(menu_item => {
+                                  return (
+                                    <li key={menu_item.id}>
+                                      <Col>
+                                        <img
+                                          src={`http://localhost:8080/${
+                                            menu_item.picture
+                                          }`}
+                                          alt={menu_item.name}
+                                        />
+                                        <p>
+                                          {menu_item.name} x{" "}
+                                          {menu_item.order_item.quantity}
+                                        </p>
+                                      </Col>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </Row>
+                          </li>
                         );
                       })}
                     </ul>
