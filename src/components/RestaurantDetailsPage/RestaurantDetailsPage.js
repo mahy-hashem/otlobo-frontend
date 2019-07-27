@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import qs from "qs";
 
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Container from "react-bootstrap/Container";
@@ -19,6 +20,8 @@ import Footer from "../Footer/Footer";
 
 import "./RestaurantDetailsPage.scss";
 
+import { getLocalStorageItem } from "../../util/localStorage";
+
 class RestaurantDetailsPage extends React.Component {
   state = {
     restaurant: null,
@@ -31,27 +34,60 @@ class RestaurantDetailsPage extends React.Component {
   };
 
   componentDidMount() {
+    console.log("in details page");
     this.fetchRestaurant();
   }
 
   fetchRestaurant = () => {
     const restaurantId = this.props.match.params.restaurantId;
-    console.log(restaurantId);
-    axios
-      .get("http://localhost:8080/restaurant/" + restaurantId)
-      .then(res => {
-        const { data } = res;
-        console.log(res);
-        this.setState({
-          restaurant: data.restaurant[0],
-          activeGroup:
-            data.restaurant[0].group === null ? [] : [data.restaurant[0].group],
-          isLoaded: true
+    const token = getLocalStorageItem("token");
+    const userType = getLocalStorageItem("userType");
+
+    if (userType === "user") {
+      axios
+        .get("http://localhost:8080/restaurant/" + restaurantId, {
+          headers: {
+            Authorization: `bearer ${token}`
+          }
+        })
+        .then(res => {
+          const { data } = res;
+          console.log(res);
+          this.setState({
+            restaurant: data.restaurant[0],
+            activeGroup:
+              data.restaurant[0].group === null
+                ? []
+                : [data.restaurant[0].group],
+            isLoaded: true
+          });
+        })
+        .catch(err => {
+          console.log(err);
         });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    } else if (userType === "restaurant") {
+      axios
+        .get("http://localhost:8080/menu/", {
+          headers: {
+            Authorization: `bearer ${token}`
+          }
+        })
+        .then(res => {
+          const { data } = res;
+          console.log(res);
+          this.setState({
+            restaurant: data.restaurant[0],
+            activeGroup:
+              data.restaurant[0].group === null
+                ? []
+                : [data.restaurant[0].group],
+            isLoaded: true
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   addMenuItem = item => {
@@ -166,7 +202,7 @@ class RestaurantDetailsPage extends React.Component {
             {userType === "restaurant" && (
               <Row>
                 <Col>
-                  <Link to={`/menu-item-form`} className="newItem">
+                  <Link to={`/app/menu-item-form`} className="newItem">
                     Add a new menu item
                   </Link>
                 </Col>

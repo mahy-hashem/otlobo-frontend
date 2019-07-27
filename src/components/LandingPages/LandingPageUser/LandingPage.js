@@ -1,15 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
 import "./LandingPage.scss";
 
-function LandingPage() {
+function LandingPage(props) {
   const user = JSON.parse(localStorage.getItem("user"));
   const userName = user ? user.firstName : "User";
   return (
     <div className="userlandingPage">
       <div className="restlandingContainer">
         <div className="restlandingContainer__content">
+          <div className="logoutIcon">
+            <FontAwesomeIcon
+              onClick={props.logout}
+              icon={faSignOutAlt}
+              color="white"
+              size="3x"
+            />
+          </div>
           <h2 className="restlandingContainer__content__h2">
             Welcome, {userName}
           </h2>
@@ -18,10 +29,10 @@ function LandingPage() {
               what would you like to eat today with your group?
             </p>
             <Link
-              to="/restaurants"
+              to="/userApp/restaurants"
               className="restlandingContainer__content__link restlandingContainer__content--btn"
             >
-              take me to all restaurants
+              Take me to all restaurants
             </Link>
           </div>
 

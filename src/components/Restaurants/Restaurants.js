@@ -19,6 +19,7 @@ import createSorter from "../../util/sort";
 import createFilter from "../../util/filter";
 import GenericPagination from "../GenericPagination/GenericPagination";
 
+import { getLocalStorageItem } from "../../util/localStorage";
 class Restaurants extends React.Component {
   state = {
     restaurants: [],
@@ -41,8 +42,13 @@ class Restaurants extends React.Component {
   }
 
   fetchRestaurants = () => {
+    const token = getLocalStorageItem("token");
     axios
-      .get("http://localhost:8080/restaurants")
+      .get("http://localhost:8080/restaurants", {
+        headers: {
+          Authorization: `bearer ${token}`
+        }
+      })
       .then(res => {
         this.setState(
           {
@@ -67,7 +73,7 @@ class Restaurants extends React.Component {
     // });
     const queryParamVal = e.target.value;
     const pageParamVal = this.props.match;
-    console.log(`page number ${this.props.query.page}`);
+    //console.log(`page number ${this.props.query.page}`);
     axios
       .get("http://localhost:8080/restaurants/?sortBy=" + queryParamVal)
       .then(res => {
@@ -122,7 +128,7 @@ class Restaurants extends React.Component {
             <Col>
               <Breadcrumb>
                 <BreadCrumb.Item href="/">Home</BreadCrumb.Item>
-                <BreadCrumb.Item href="/restaurants">
+                <BreadCrumb.Item href="/userApp/restaurants">
                   All Restaurants
                 </BreadCrumb.Item>
               </Breadcrumb>
@@ -145,7 +151,7 @@ class Restaurants extends React.Component {
           </Row>
           <div className="restaurants-list-container">
             <Switch>
-              <Route path="/restaurants">
+              <Route path="/userApp/restaurants">
                 {this.state.restaurants.map(restaurant => {
                   const { id, name, address } = restaurant;
                   return (

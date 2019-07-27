@@ -1,10 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import "./RestaurantCard.scss";
 
 class RestaurantCard extends React.Component {
   render() {
     return (
-      <div>
+      <div className="cardContainer">
         <NavLink to={`/restaurant/${this.props.id}`}>
           <h1>{this.props.name}</h1>
         </NavLink>

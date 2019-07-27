@@ -17,7 +17,7 @@ class OrderTimeframe extends React.Component {
             <p>
               Choose from the dropdown menu for how long other hungry people can
               add their own orders to your group. If you forget to pick a
-              timeframe, it defaults to 15 minutes:
+              timeframe, it defaults to 15 minutes
             </p>
           </Col>
           <Col>

@@ -19,6 +19,14 @@ $textHoverColor: yellow;
       justify-content: space-around;
       align-items: baseline;
       text-align: center;
+
+      .logoutIcon {
+        width: 100%;
+        text-align: right;
+        padding-right: 20px;
+        padding-top: 20px;
+      }
+
       .restlandingContainer__content__h2 {
         flex-basis: 100%;
         color: $textColor;

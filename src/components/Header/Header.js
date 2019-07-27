@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import logo from "./logo.jpg";
+import logo from "../../images/logo.jpg";
 import "./Header.scss";
 
 class Header extends React.Component {
@@ -9,16 +9,14 @@ class Header extends React.Component {
     return (
       <header className="page-header">
         <div>
-          <img src={logo} alt="Logo" />
-          <h1>tlobo</h1>
+          <a href="/">
+            <img src={logo} alt="Logo" />
+
+            <h1>tlobo</h1>
+          </a>
         </div>
         <div>
-          <NavBar
-            logged={this.props.logged}
-            userType={this.props.userType}
-            userId={this.props.userId}
-            setLoggedUser={this.props.setLoggedUser}
-          >
+          <NavBar user={this.props.user} logout={this.props.logout}>
             {this.props.children}
           </NavBar>
         </div>

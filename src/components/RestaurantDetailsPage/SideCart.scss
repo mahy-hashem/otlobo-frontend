@@ -1,0 +1,29 @@
+@import "../../mixins.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sideCartContainer {
+  border: 2px solid grey;
+  margin-top: 30px;
+  padding: 20px;
+
+  a {
+    border: 1px solid $primary;
+    background: $primary;
+    color: white;
+    border-radius: 4px;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}

@@ -6,11 +6,12 @@ import Col from "react-bootstrap/Col";
 import { NavLink } from "react-router-dom";
 import GenericButton from "../GenericButton/GenericButton";
 import axios from "axios";
+import "./SideCart.scss";
 
 class SideCart extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="sideCartContainer">
         <Row>
           <Col>
             <h4>Your Cart</h4>

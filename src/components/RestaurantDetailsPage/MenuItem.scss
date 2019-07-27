@@ -15,13 +15,18 @@ body {
   }
 }
 
+.menuItemImg {
+  height: 150px;
+  border-radius: 0;
+}
+
 .actions {
   margin-top: 20px;
 
   svg {
     display: block;
-    height: 20px;
-    width: 20px;
+    //height: 20px;
+    //width: 20px;
     margin: 10px;
   }
 }

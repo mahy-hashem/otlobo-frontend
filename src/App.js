@@ -26,15 +26,14 @@ class App extends React.Component {
     userType: "",
     userId: ""
   };
+
   componentDidMount() {
-    console.log("did mount");
     this.setLoggedUser();
   }
 
   setLoggedUser = () => {
     const authorizedUser = getLocalStorageItem("token");
     if (authorizedUser) {
-      console.log("setting");
       const userType = getLocalStorageItem("userType");
       const userId = getLocalStorageItem("userId");
       this.setState({
@@ -43,7 +42,6 @@ class App extends React.Component {
         userId
       });
     } else {
-      console.log("resetting");
       this.setState({
         logged: false,
         userType: "",
@@ -62,6 +60,8 @@ class App extends React.Component {
           userId={this.state.userId}
         />
         <Switch>
+          <Route exact path="/active-groups" component={ActiveGroups} />
+
           <Route
             exact
             path="/restaurant/:restaurantId/checkout/success"
@@ -72,7 +72,6 @@ class App extends React.Component {
             path="/restaurant/:restaurantId/checkout"
             component={Checkout}
           />
-          <Route path="/active-groups" component={ActiveGroups} />
 
           <PrivateRoute
             authed={this.state.logged}
@@ -109,14 +108,14 @@ class App extends React.Component {
             path="/edit-credentials"
             component={EditRestaurantCredentials}
           />
-          <PrivateRoute
+          <Route
             authed={this.state.logged}
             userType={this.state.userType}
             pageType="user"
             path="/restaurants"
             component={Restaurants}
           />
-          <PrivateRoute
+          <Route
             authed={this.state.logged}
             userType={this.state.userType}
             pageType="user"

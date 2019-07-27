@@ -13,6 +13,7 @@ import StripeBtn from "./StripeBtn";
 import OrderTimeframe from "./OrderTimeframe";
 import OrderStatus from "./OrderStatus";
 
+import "./Checkout.scss";
 class Checkout extends React.Component {
   state = {
     order: [],
@@ -96,10 +97,10 @@ class Checkout extends React.Component {
           {!this.state.group && <OrderTimeframe onChange={this.setTimer} />}
           <Row>
             <Col>
-              <Container>
+              <Container className="orderContainer">
                 <Row>
                   <Col>
-                    <p>Order Summary</p>
+                    <h2>Order Summary</h2>
                   </Col>
                   {/* <Col>
                     <NavLink
@@ -111,11 +112,11 @@ class Checkout extends React.Component {
                 </Row>
                 <Row>
                   <Col>
-                    <p>{this.state.restaurant.name}</p>
+                    <h3>{this.state.restaurant.name}</h3>
                   </Col>
-                  <Col>
+                  {/* <Col>
                     <p>Opening Hours</p>
-                  </Col>
+                  </Col> */}
                 </Row>
                 <OrderSummary
                   orderItems={this.state.order}

@@ -14,13 +14,13 @@ class OrderSummary extends React.Component {
               <Container>
                 <Row>
                   <Col>
-                    <p>Item(s)</p>
+                    <h4>Item(s)</h4>
                   </Col>
                   <Col>
-                    <p>Price</p>
+                    <h4>Price</h4>
                   </Col>
                   <Col>
-                    <p>Qty</p>
+                    <h4>Qty</h4>
                   </Col>
                 </Row>
                 {this.props.orderItems.map(item => {
@@ -41,7 +41,7 @@ class OrderSummary extends React.Component {
                 })}
                 <Row>
                   <Col>
-                    <p>Total: $ {this.props.orderTotal}</p>
+                    <h3>Total: $ {this.props.orderTotal}</h3>
                   </Col>
                 </Row>
               </Container>

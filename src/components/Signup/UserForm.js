@@ -28,18 +28,20 @@ class UserForm extends React.Component {
       this.state.firstName === "" ||
       this.state.lastName === "" ||
       this.state.email === "" ||
-      this.state.password === ""
+      this.state.password === "" ||
+      this.state.confirmPassword === ""
     ) {
       this.props.showErrorMessage("Please enter required fields");
       return;
     }
 
-    // if (this.state.password !== this.state.confirmPassword) {
-    //   this.props.showErrorMessage(
-    //     "Passwords don't match! Please re-enter your password"
-    //   );
-    //   return;
-    // }
+    if (this.state.password !== this.state.confirmPassword) {
+      this.props.showErrorMessage(
+        "Passwords don't match! Please re-enter your password"
+      );
+      return;
+    }
+
     const url = process.env.REACT_APP_URL;
     const { firstName, lastName, email, password } = this.state;
     axios
@@ -56,15 +58,15 @@ class UserForm extends React.Component {
         saveToLocalStorage("userId", response.data.userId);
         saveToLocalStorage("userType", "user");
         saveToLocalStorage("user", response.data.user);
-        this.props.setLoggedUser();
-        this.props.history.push("/userIndex");
+
+        const userId = response.data.userId;
+        this.props.setLoggedUser({ userId, userType: "user" });
+        this.props.history.push("/userApp/userIndex");
       })
       .catch(error => {
-        //this.props.showErrorMessage(error.message);
-        this.props.showErrorMessage("This account already exists");
-        console.log(error);
+        this.props.showErrorMessage(error.message);
+        //this.props.showErrorMessage(error.data.msg);
       });
-    console.log("handle user form");
   };
 
   render() {

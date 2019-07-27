@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+
 import "./LandingPage.scss";
 
 class LandingPage extends React.Component {
@@ -24,15 +27,23 @@ class LandingPage extends React.Component {
       <div className="restlandingPage">
         <div className="restlandingContainer">
           <div className="restlandingContainer__content">
+            <div className="logoutIcon">
+              <FontAwesomeIcon
+                onClick={this.props.logout}
+                icon={faSignOutAlt}
+                color="white"
+                size="3x"
+              />
+            </div>
             <h2 className="restlandingContainer__content__h2">
               Welcome, {this.state.userName}
             </h2>
             <div className="restlandingContainer__content__div">
               <p className="restlandingContainer__content__p">
-                would you like to add something new to your menu today?
+                Would you like to add something new to your menu today?
               </p>
               <Link
-                to={`/menu/${this.state.restaurantId}`}
+                to={`/app/menu/${this.state.restaurantId}`}
                 className="restlandingContainer__content__link restlandingContainer__content--btn"
               >
                 take me to my menu
@@ -41,7 +52,7 @@ class LandingPage extends React.Component {
 
             <div className="restlandingContainer__content__div">
               <p className="restlandingContainer__content__p">
-                would you like to update your profile information?
+                Would you like to update your profile information?
               </p>
               <Link
                 to="/profile"

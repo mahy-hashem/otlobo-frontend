@@ -53,7 +53,7 @@ class MenuItemForm extends React.Component {
       })
       .then(response => {
         console.log(response);
-        this.props.history.push(`/menu/${this.state.restaurantId}`);
+        this.props.history.push(`/app/menu/${this.state.restaurantId}`);
       })
       .catch(error => {
         //this.props.showErrorMessage(error.message);

@@ -28,18 +28,20 @@ class RestaurantForm extends React.Component {
       this.state.name === "" ||
       this.state.address === "" ||
       this.state.email === "" ||
-      this.state.password === ""
+      this.state.password === "" ||
+      this.state.confirmPassword === ""
     ) {
       this.props.showErrorMessage("Please enter required fields");
       return;
     }
 
-    // if (this.state.password !== this.state.confirmPassword) {
-    //   this.props.showErrorMessage(
-    //     "Passwords don't match! Please re-enter your password"
-    //   );
-    //   return;
-    // }
+    if (this.state.password !== this.state.confirmPassword) {
+      this.props.showErrorMessage(
+        "Passwords don't match! Please re-enter your password"
+      );
+      return;
+    }
+
     const url = process.env.REACT_APP_URL;
     const { name, address, email, password } = this.state;
     axios
@@ -56,14 +58,14 @@ class RestaurantForm extends React.Component {
         saveToLocalStorage("userId", response.data.userId);
         saveToLocalStorage("userType", "restaurant");
         saveToLocalStorage("restaurant", response.data.restaurant);
-        this.props.setLoggedUser();
-        this.props.history.push("/restaurantIndex");
+
+        const userId = response.data.userId;
+        this.props.setLoggedUser({ userId, userType: "restaurant" });
+        this.props.history.push("/app/restaurantIndex");
       })
       .catch(error => {
         this.props.showErrorMessage("This account already exists");
-        //error.data.msg
       });
-    console.log("handle restaurant form");
   };
 
   render() {
