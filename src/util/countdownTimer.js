@@ -13,18 +13,14 @@ const duration = (createdAt, stringMinutes = "15 minutes") => {
 const timer = (createdAt, stringMinutes, id) => {
   let min = duration(createdAt, stringMinutes);
   let sec;
-  min === 0 ? (sec = 0) : (sec = 59);
+  min === 0 ? (sec = 0) : (sec = 45);
   let countdown = setInterval(function() {
     if (document.getElementById(id)) {
       if (min > 0 && sec === 0) {
         min--;
         sec = 59;
-      } else if (min > 0 && sec > 0) {
+      } else if (min >= 0 && sec > 0) {
         sec--;
-      } else if (min === 0 && sec === 0) {
-        min = 0;
-        sec = 0;
-        clearInterval(countdown);
       } else if (sec < 0 && min < 0) {
         min = 0;
         sec = 0;

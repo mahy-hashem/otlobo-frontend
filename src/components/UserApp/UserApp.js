@@ -12,6 +12,7 @@ import Checkout from "../Checkout/Checkout";
 import GroupOrderSummary from "../GroupOrderSummary/GroupOrderSummary";
 import SingleGroup from "../SingleGroup/SingleGroup";
 import ActiveGroups from "../ActiveGroups/ActiveGroups";
+import UserOrders from "../UserOrders/UserOrders";
 
 class UserApp extends React.Component {
   render() {
@@ -49,6 +50,10 @@ class UserApp extends React.Component {
           <Route
             path={`${this.props.match.url}/restaurant/:restaurantId`}
             component={RestaurantDetailsPage}
+          />
+          <Route
+            path={`${this.props.match.url}/user-orders/:userId`}
+            component={UserOrders}
           />
 
           <Route
