@@ -65,47 +65,51 @@ class ActiveGroups extends React.Component {
         </Container>
         <Container>
           <ul>
-            {this.state.groups.map(group => {
-              const { id, restaurant, orders } = group;
-              return (
-                <li key={id}>
-                  <Row>
-                    <Col>
-                      <Link to={`/userApp/active-groups/${id}`}>
-                        <h3>{restaurant.name}</h3>
-                      </Link>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <ul>
-                      {orders.slice(0, 5).map(order => {
-                        return (
-                          <Col key={id}>
-                            <li>
-                              <img
-                                src={order.user.image}
-                                alt={order.user.firstName}
-                              />
-                              <p>{order.user.firstName}</p>
-                            </li>
-                          </Col>
-                        );
-                      })}
-                    </ul>
-                    <Col>
-                      <p id={group.id}>
-                        {countdownTimer.timer(
-                          group.createdAt,
-                          group.timeframe,
-                          group.id
-                        )}
-                      </p>
-                      <p>minutes</p>
-                    </Col>
-                  </Row>
-                </li>
-              );
-            })}
+            {this.state.groups.length === 0 && (
+              <h1>No Active Groups Right Now</h1>
+            )}
+            {this.state.groups.length > 0 &&
+              this.state.groups.map(group => {
+                const { id, restaurant, orders } = group;
+                return (
+                  <li key={id}>
+                    <Row>
+                      <Col>
+                        <Link to={`/userApp/active-groups/${id}`}>
+                          <h3>{restaurant.name}</h3>
+                        </Link>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <ul>
+                        {orders.slice(0, 5).map(order => {
+                          return (
+                            <Col key={id}>
+                              <li>
+                                <img
+                                  src={order.user.image}
+                                  alt={order.user.firstName}
+                                />
+                                <p>{order.user.firstName}</p>
+                              </li>
+                            </Col>
+                          );
+                        })}
+                      </ul>
+                      <Col>
+                        <p id={group.id}>
+                          {countdownTimer.timer(
+                            group.createdAt,
+                            group.timeframe,
+                            group.id
+                          )}
+                        </p>
+                        <p>minutes</p>
+                      </Col>
+                    </Row>
+                  </li>
+                );
+              })}
           </ul>
         </Container>
       </div>

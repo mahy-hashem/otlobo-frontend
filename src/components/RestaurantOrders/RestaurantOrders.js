@@ -34,7 +34,30 @@ class RestaurantOrders extends React.Component {
       restaurant
     });
   }
-
+  setOrderStatus = e => {
+    const token = getLocalStorageItem("token");
+    const groupId = e.target.id.split(" ")[1];
+    const orderStatus = e.target.value;
+    axios
+      .patch(
+        `http://localhost:8080/updateStatus`,
+        {
+          orderStatus,
+          groupId
+        },
+        {
+          headers: {
+            Authorization: `bearer ${token}`
+          }
+        }
+      )
+      .then(res => {
+        this.fetchGroups();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   fetchGroups = () => {
     const restaurantId = this.state.restaurantId;
     const token = getLocalStorageItem("token");
@@ -115,12 +138,11 @@ class RestaurantOrders extends React.Component {
                     <Col>
                       <select
                         name="orderStatusDropdown"
-                        id="orderStatus"
+                        id={"orderStatus " + group.id}
                         onChange={this.setOrderStatus}
+                        value={group.status}
                       >
-                        <option value="pending" defaultValue>
-                          pending
-                        </option>
+                        <option value="pending">pending</option>
                         <option value="opened">opened</option>
                         <option value="parpering">parpering</option>
                         <option value="closed">closed</option>
