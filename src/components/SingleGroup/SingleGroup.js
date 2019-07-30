@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import Card from "react-bootstrap/Card";
 
 import countdownTimer from "../../util/countdownTimer";
 import "./SingleGroup.scss";
@@ -68,10 +69,13 @@ class SingleGroup extends React.Component {
               </Breadcrumb>
             </Col>
           </Row>
-          <Row>
+          <Row className="activeGroup">
             <Col>
-              <Link to={`/userApp/restaurant/${this.state.group.restaurantId}`}>
-                <h2>
+              <Link
+                to={`/userApp/restaurant/${this.state.group.restaurantId}`}
+                className="activeGroup__a"
+              >
+                <h2 className="activeGroup__h2">
                   {" "}
                   {this.state.group &&
                     this.state.group.restaurant &&
@@ -79,7 +83,7 @@ class SingleGroup extends React.Component {
                 </h2>
               </Link>
             </Col>
-            <Col>
+            <Col className="activeGroup__timer">
               <p id={this.state.group.id}>
                 {countdownTimer.duration(
                   this.state.group.createdAt,
@@ -95,44 +99,76 @@ class SingleGroup extends React.Component {
               <p>minutes</p>
             </Col>
           </Row>
-          <Container>
-            <ul>
+          <Container className="activeGroup__orders">
+            <ul className="activeGroup__orders__ul">
               {this.state.group &&
                 this.state.group.orders &&
                 this.state.group.orders.map(order => {
                   const { id, user, menu_items } = order;
                   return (
-                    <li key={id}>
+                    <li key={id} className="activeGroup__orders__li">
                       <Row>
-                        <Col className="user_li">
+                        <Col className="activeGroup__orders__user">
                           <img
                             src={`http://localhost:8080/${user.image}`}
                             alt={user.firstName}
-                            className="user_img"
+                            className="activeGroup__orders__user__img"
                           />
-                          <h3>{user.firstName}</h3>
+                          <h3 className="activeGroup__orders__user__h3">
+                            {user.firstName}
+                          </h3>
                         </Col>
                       </Row>
                       <Row>
-                        <ul>
+                        <ul className="activeGroup__orders__menu">
                           {menu_items.map(menu_item => {
                             return (
                               <li key={id}>
-                                <Col>
-                                  <img
+                                <Card>
+                                  <Card.Img
                                     src={`http://localhost:8080/${
                                       menu_item.picture
                                     }`}
                                     alt={menu_item.name}
-                                    className="menu_img"
+                                    className="activeGroup__orders__menu__img"
                                   />
-                                  <p>{menu_item.name}</p>
-                                  <p>{menu_item.description}</p>
-                                </Col>
-                                <Col>
-                                  {menu_item.price} x{" "}
-                                  {menu_item.order_item.quantity}
-                                </Col>
+                                  <Card.Body>
+                                    <Card.Title className="activeGroup__orders__menu__name">
+                                      {" "}
+                                      {menu_item.name}{" "}
+                                    </Card.Title>
+                                    <Card.Text className="activeGroup__orders__menu__description">
+                                      {menu_item.description}
+                                    </Card.Text>
+                                  </Card.Body>
+                                  <Card.Footer>
+                                    <p>
+                                      {menu_item.price} x{" "}
+                                      {menu_item.order_item.quantity}
+                                    </p>
+                                  </Card.Footer>
+                                </Card>
+                                {
+                                  //   <Col>
+                                  //   <img
+                                  //     src={`http://localhost:8080/${
+                                  //       menu_item.picture
+                                  //     }`}
+                                  //     alt={menu_item.name}
+                                  //     className="activeGroup__orders__menu__img"
+                                  //   />
+                                  //   <p className="activeGroup__orders__menu__name">
+                                  //     {menu_item.name}
+                                  //   </p>
+                                  //   <p className="activeGroup__orders__menu__description">
+                                  //     {menu_item.description}
+                                  //   </p>
+                                  // </Col>
+                                  // <Col className="activeGroup__orders__menu__price">
+                                  //   {menu_item.price} x{" "}
+                                  //   {menu_item.order_item.quantity}
+                                  // </Col>
+                                }
                               </li>
                             );
                           })}
