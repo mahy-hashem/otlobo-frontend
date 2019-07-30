@@ -38,7 +38,9 @@ class MenuItemForm extends React.Component {
     let data = new FormData();
     data.append("name", name);
     data.append("description", description);
-    data.append("file", image[0]);
+    if (image) {
+      data.append("file", image[0]);
+    }
     console.log(image);
     data.append("price", price);
 

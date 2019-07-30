@@ -72,30 +72,13 @@ class ActiveGroups extends React.Component {
               this.state.groups.map(group => {
                 const { id, restaurant, orders } = group;
                 return (
-                  <li key={id}>
+                  <li key={id} className="activeGroup">
                     <Row>
                       <Col>
                         <Link to={`/userApp/active-groups/${id}`}>
                           <h3>{restaurant.name}</h3>
                         </Link>
                       </Col>
-                    </Row>
-                    <Row>
-                      <ul>
-                        {orders.slice(0, 5).map(order => {
-                          return (
-                            <Col key={id}>
-                              <li>
-                                <img
-                                  src={order.user.image}
-                                  alt={order.user.firstName}
-                                />
-                                <p>{order.user.firstName}</p>
-                              </li>
-                            </Col>
-                          );
-                        })}
-                      </ul>
                       <Col>
                         <p id={group.id}>
                           {countdownTimer.timer(
@@ -106,6 +89,25 @@ class ActiveGroups extends React.Component {
                         </p>
                         <p>minutes</p>
                       </Col>
+                    </Row>
+                    <Row>
+                      <ul className="user_ul">
+                        {orders.slice(0, 5).map(order => {
+                          return (
+                            <li className="user_li">
+                              <Col xs={2} key={id}>
+                                <img
+                                  src={`http://localhost:8080/${
+                                    order.user.image
+                                  }`}
+                                  alt={order.user.firstName}
+                                />
+                                <p>{order.user.firstName}</p>
+                              </Col>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     </Row>
                   </li>
                 );

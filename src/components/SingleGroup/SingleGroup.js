@@ -104,10 +104,11 @@ class SingleGroup extends React.Component {
                   return (
                     <li key={id}>
                       <Row>
-                        <Col>
+                        <Col className="user_li">
                           <img
                             src={`http://localhost:8080/${user.image}`}
                             alt={user.firstName}
+                            className="user_img"
                           />
                           <h3>{user.firstName}</h3>
                         </Col>
@@ -123,15 +124,14 @@ class SingleGroup extends React.Component {
                                       menu_item.picture
                                     }`}
                                     alt={menu_item.name}
+                                    className="menu_img"
                                   />
                                   <p>{menu_item.name}</p>
                                   <p>{menu_item.description}</p>
                                 </Col>
                                 <Col>
-                                  <p>
-                                    {menu_item.price} x{" "}
-                                    {menu_item.order_item.quantity}
-                                  </p>
+                                  {menu_item.price} x{" "}
+                                  {menu_item.order_item.quantity}
                                 </Col>
                               </li>
                             );
