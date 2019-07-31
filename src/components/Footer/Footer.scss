@@ -10,12 +10,11 @@ body {
 }
 
 .footer-container {
-  background: $primary;
-  margin-top: 50px;
+  @include gradientColor(); // background: $primary;
+  margin-top: auto;
   height: 70px;
   text-align: center;
   padding-top: 20px;
-
   span {
     color: $text-on-bg;
   }

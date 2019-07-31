@@ -26,6 +26,9 @@
 
 .app-container {
   background: white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 @keyframes App-logo-spin {

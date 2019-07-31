@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
-import logo from "../../images/logo.jpg";
+import logo from "../../images/logo.png";
 import "./Header.scss";
 
 class Header extends React.Component {

@@ -1,5 +1,37 @@
-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+.background {
+  background: linear-gradient(
+    to right,
+    rgba(137, 255, 253, 0.2),
+    rgba(205, 137, 254, 0.2)
+  );
+  .activeGroup {
+    margin: 20px;
+    padding: 20px 0;
+    list-style: none;
+    .activeGroup__a {
+      text-decoration: none;
+    }
+    .activeGroup__h3 {
+      padding-left: 20px;
+    }
+    .activeGroup__timer {
+      float: right;
+    }
+    .activeGroup__user_ul {
+      display: inline-block;
+
+      .activeGroup__user_li {
+        display: inline-block;
+        .activeGroup__user_img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+        .activeGroup__user_name {
+          text-align: center;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
 }
