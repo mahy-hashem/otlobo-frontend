@@ -106,12 +106,21 @@ class UserOrders extends React.Component {
                       {order.menu_items.map(menu_item => {
                         return (
                           <Row className="userOrders__menu__li">
-                            <Col>
+                            <Col xs={2}>
+                              <img
+                                src={`http://localhost:8080/${
+                                  menu_item.picture
+                                }`}
+                                alt={menu_item.name}
+                                className="userOrders__menu__img"
+                              />
+                            </Col>
+                            <Col xs={5}>
                               <p className="userOrders__menu__name">
                                 {menu_item.name}
                               </p>
                             </Col>
-                            <Col>
+                            <Col xs={5}>
                               <p className="userOrders__menu__price">
                                 {menu_item.price} x{" "}
                                 {menu_item.order_item.quantity}
@@ -127,7 +136,7 @@ class UserOrders extends React.Component {
                           Date of Order: {order.createdAt.split("T")[0]}
                         </p>
                       </Col>
-                      <Col>
+                      <Col xs={5}>
                         <p className="userOrders__orders__total">
                           Total: {order.total}
                         </p>

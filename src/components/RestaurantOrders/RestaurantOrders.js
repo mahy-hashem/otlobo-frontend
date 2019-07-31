@@ -102,27 +102,24 @@ class RestaurantOrders extends React.Component {
           </Row>
           <Row>
             <Col>
-              <h2>
+              <h2 className="restaurantOrders__h2">
                 {`${this.state.restaurant && this.state.restaurant.name}
                 All Orders`}
               </h2>
             </Col>
           </Row>
         </Container>
-        <Container>
-          <ul>
+        <Container className="groups">
+          <ul className="groups__ul">
             {this.state.groups.map(group => {
               return (
-                <li key={group.id}>
+                <li key={group.id} className="groups__li">
                   <Row>
                     <Col>
-                      {
-                        //<Link to={`/app/active-groups/${group.id}`}>
-                      }
-                      <h3>{`#Group ${group.id}`}</h3>
+                      <h3 className="groups__h3">{`#Group ${group.id}`}</h3>
                     </Col>
                     <Col>
-                      <p id={group.id}>
+                      <p id={group.id} className="groups__timer">
                         {countdownTimer.duration(
                           group.createdAt,
                           group.timeframe
@@ -135,8 +132,9 @@ class RestaurantOrders extends React.Component {
                       </p>
                       <p>minutes</p>
                     </Col>
-                    <Col>
+                    <Col className="groups__orderStatus" xs={2}>
                       <select
+                        className="groups__orderStatus__dropdown"
                         name="orderStatusDropdown"
                         id={"orderStatus " + group.id}
                         onChange={this.setOrderStatus}
@@ -150,43 +148,52 @@ class RestaurantOrders extends React.Component {
                     </Col>
                   </Row>
                   <Row>
-                    <ul>
+                    <div className="groups__orders__ul">
                       {group.orders.map(order => {
                         return (
-                          <li key={order.id}>
-                            <Row>
+                          <div key={order.id} className="groups__orders__li">
+                            <Row className="groups__orders__user">
                               <img
-                                src={order.user.image}
+                                src={`http://localhost:8080/${
+                                  order.user.image
+                                }`}
                                 alt={order.user.firstName}
+                                className="groups__orders__userImg"
                               />
-                              <p>{order.user.firstName}</p>
+                              <p className="groups__orders__userName">
+                                {order.user.firstName}
+                              </p>
                             </Row>
-                            <Row>
-                              <ul>
-                                {order.menu_items.map(menu_item => {
-                                  return (
-                                    <li key={menu_item.id}>
-                                      <Col>
-                                        <img
-                                          src={`http://localhost:8080/${
-                                            menu_item.picture
-                                          }`}
-                                          alt={menu_item.name}
-                                        />
-                                        <p>
-                                          {menu_item.name} x{" "}
-                                          {menu_item.order_item.quantity}
-                                        </p>
-                                      </Col>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            </Row>
-                          </li>
+                            <div className="orders__menu__ul">
+                              {order.menu_items.map(menu_item => {
+                                return (
+                                  <Row
+                                    key={menu_item.id}
+                                    className="orders__menu__li"
+                                  >
+                                    <Col xs={4}>
+                                      <img
+                                        src={`http://localhost:8080/${
+                                          menu_item.picture
+                                        }`}
+                                        alt={menu_item.name}
+                                        className="orders__menu__img"
+                                      />
+                                    </Col>
+                                    <Col>
+                                      <p className="orders__menu__itemQ">
+                                        {menu_item.name} x{" "}
+                                        {menu_item.order_item.quantity}
+                                      </p>
+                                    </Col>
+                                  </Row>
+                                );
+                              })}
+                            </div>
+                          </div>
                         );
                       })}
-                    </ul>
+                    </div>
                   </Row>
                 </li>
               );
