@@ -162,7 +162,7 @@ class Restaurants extends React.Component {
                           id={id}
                           name={name}
                           address={address}
-                          image={image}
+                          image={`${process.env.REACT_APP_URL}/${image}`}
                         />
                       </Col>
                     );
