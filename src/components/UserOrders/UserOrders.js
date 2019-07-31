@@ -77,59 +77,61 @@ class UserOrders extends React.Component {
           </Row>
           <Row>
             <Col>
-              <h2>
+              <h2 className="userOrders__h2">
                 {`${this.state.user && this.state.user.firstName}
                 All Orders`}
               </h2>
             </Col>
           </Row>
         </Container>
-        <Container>
-          <ul>
+        <Container className="userOrders__orders">
+          <ul className="userOrders__orders__ul">
             {this.state.orders &&
               this.state.orders.map(order => {
                 return (
-                  <li key={order.id}>
+                  <li key={order.id} className="userOrders__orders__li">
                     <Row>
-                      <Col>
-                        <h3>{`#Order ${order.id}`}</h3>
+                      <Col xs={10}>
+                        <h3 className="userOrders__orders__h3">{`#Order ${
+                          order.id
+                        }`}</h3>
                       </Col>
-                      <Col>
-                        <p>{order.group && order.group.status}</p>
+                      <Col xs={2}>
+                        <p className="userOrders__orders__status">
+                          {order.group && order.group.status}
+                        </p>
                       </Col>
                     </Row>
-                    <Row>
-                      <Row>
-                        <ul>
-                          {order.menu_items.map(menu_item => {
-                            return (
-                              <li key={menu_item.id}>
-                                <Col>
-                                  <img
-                                    src={`http://localhost:8080/${
-                                      menu_item.picture
-                                    }`}
-                                    alt={menu_item.name}
-                                  />
-                                  <p>{menu_item.name}</p>
-                                  <p>
-                                    {menu_item.price} x{" "}
-                                    {menu_item.order_item.quantity}
-                                  </p>
-                                </Col>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </Row>
-                      <Row>
-                        <Col>
-                          <p>Total: {order.total}</p>
-                        </Col>
-                        <Col>
-                          <p>Date of Order: {order.createdAt.split("T")[0]}</p>
-                        </Col>
-                      </Row>
+                    <div className="userOrders__menu__ul">
+                      {order.menu_items.map(menu_item => {
+                        return (
+                          <Row className="userOrders__menu__li">
+                            <Col>
+                              <p className="userOrders__menu__name">
+                                {menu_item.name}
+                              </p>
+                            </Col>
+                            <Col>
+                              <p className="userOrders__menu__price">
+                                {menu_item.price} x{" "}
+                                {menu_item.order_item.quantity}
+                              </p>
+                            </Col>
+                          </Row>
+                        );
+                      })}
+                    </div>
+                    <Row className="userOrders__orders__totaldate">
+                      <Col>
+                        <p className="userOrders__orders__date">
+                          Date of Order: {order.createdAt.split("T")[0]}
+                        </p>
+                      </Col>
+                      <Col>
+                        <p className="userOrders__orders__total">
+                          Total: {order.total}
+                        </p>
+                      </Col>
                     </Row>
                   </li>
                 );
