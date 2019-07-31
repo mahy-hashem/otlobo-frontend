@@ -7,6 +7,7 @@ import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import CardDeck from "react-bootstrap/CardDeck";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import RestaurantInfoHeader from "./RestaurantInfoHeader";
 import MenuItem from "./MenuItem";
@@ -204,27 +205,23 @@ class RestaurantDetailsPage extends React.Component {
             )}
             <Row>
               <Col>
-                <Container className="restaurant-container">
+                <div className="menuitems__container">
                   {restaurant.menu_items.map(item => {
                     const { name, id, picture, description, price } = item;
                     return (
-                      <Row key={id}>
-                        <Col>
-                          <MenuItem
-                            name={name}
-                            key={id}
-                            id={id}
-                            picture={`http://localhost:8080/${picture}`}
-                            description={description}
-                            price={price}
-                            item={item}
-                            addMenuItem={this.addMenuItem}
-                          />
-                        </Col>
-                      </Row>
+                      <MenuItem
+                        name={name}
+                        key={id}
+                        id={id}
+                        picture={`http://localhost:8080/${picture}`}
+                        description={description}
+                        price={price}
+                        item={item}
+                        addMenuItem={this.addMenuItem}
+                      />
                     );
                   })}
-                </Container>
+                </div>
               </Col>
               {userType === "user" && (
                 <Col lg={3}>
