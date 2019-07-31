@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import DivWithErrorHandling from "../ErrorMessage/ErrorMessage";
 import { saveToLocalStorage } from "../../util/localStorage";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 class Login extends React.Component {
   state = {
@@ -86,53 +88,58 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
-        <DivWithErrorHandling
-          showError={this.state.showError}
-          errorMessage={this.state.errorMessage}
-        >
-          <Form>
-            <fieldset>
-              <legend>Login</legend>
-              <Form.Group controlId="formGroupEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  name="email"
-                  type="email"
-                  placeholder="Enter email"
-                  onChange={this.handleInputChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="formGroupPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  onChange={this.handleInputChange}
-                />
-              </Form.Group>
-              <Button
-                className="customColor center"
-                type="submit"
-                onClick={this.userLogin}
-              >
-                Login as a user
-              </Button>
-              <Button
-                className="customColor center"
-                type="submit"
-                onClick={this.restaurantLogin}
-              >
-                Login as a restaurant
-              </Button>
-            </fieldset>
-          </Form>
-          <p>
-            Don't have an account? <Link to="/signup">Create an account</Link>
-          </p>
-        </DivWithErrorHandling>
-      </div>
+      <React.Fragment>
+        <Header />
+
+        <div className="form-container">
+          <DivWithErrorHandling
+            showError={this.state.showError}
+            errorMessage={this.state.errorMessage}
+          >
+            <Form>
+              <fieldset>
+                <legend>Login</legend>
+                <Form.Group controlId="formGroupEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control
+                    name="email"
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={this.handleInputChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="formGroupPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={this.handleInputChange}
+                  />
+                </Form.Group>
+                <Button
+                  className="customColor center"
+                  type="submit"
+                  onClick={this.userLogin}
+                >
+                  Login as a user
+                </Button>
+                <Button
+                  className="customColor center"
+                  type="submit"
+                  onClick={this.restaurantLogin}
+                >
+                  Login as a restaurant
+                </Button>
+              </fieldset>
+            </Form>
+            <p>
+              Don't have an account? <Link to="/signup">Create an account</Link>
+            </p>
+          </DivWithErrorHandling>
+        </div>
+        <Footer />
+      </React.Fragment>
     );
   }
 }

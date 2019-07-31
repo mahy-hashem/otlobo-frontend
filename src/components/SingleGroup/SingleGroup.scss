@@ -28,15 +28,20 @@
     .activeGroup__orders__menu {
       list-style: none;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
       .activeGroup__orders__menu__img {
         width: 208px;
         height: 160px;
       }
       .activeGroup__orders__menu__name {
+        font-weight: bold;
       }
       .activeGroup__orders__menu__description {
+        text-align: left;
       }
       .activeGroup__orders__menu__price {
+        font-weight: 600;
       }
     }
   }

@@ -26,7 +26,7 @@ function LandingPage(props) {
           </h2>
           <div className="restlandingContainer__content__div">
             <p className="restlandingContainer__content__p">
-              what would you like to eat today with your group?
+              what would you like to eat today?
             </p>
             <Link
               to="/userApp/restaurants"
@@ -38,13 +38,13 @@ function LandingPage(props) {
 
           <div className="restlandingContainer__content__div">
             <p className="restlandingContainer__content__p">
-              would you like to update your profile information?
+              would you like to see your orders?
             </p>
             <Link
-              to="/signup"
+              to={`/userApp/user-orders/${user.id}`}
               className="restlandingContainer__content__link restlandingContainer__content--btn"
             >
-              take me to my profile
+              take me to my orders
             </Link>
           </div>
         </div>

@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Card from "react-bootstrap/Card";
+import CardDeck from "react-bootstrap/CardDeck";
 
 import countdownTimer from "../../util/countdownTimer";
 import "./SingleGroup.scss";
@@ -123,7 +124,10 @@ class SingleGroup extends React.Component {
                         <ul className="activeGroup__orders__menu">
                           {menu_items.map(menu_item => {
                             return (
-                              <li key={id}>
+                              <li
+                                key={id}
+                                className="activeGroup__orders__menu__li"
+                              >
                                 <Card>
                                   <Card.Img
                                     src={`http://localhost:8080/${
@@ -142,33 +146,12 @@ class SingleGroup extends React.Component {
                                     </Card.Text>
                                   </Card.Body>
                                   <Card.Footer>
-                                    <p>
+                                    <p className="activeGroup__orders__menu__price">
                                       {menu_item.price} x{" "}
                                       {menu_item.order_item.quantity}
                                     </p>
                                   </Card.Footer>
                                 </Card>
-                                {
-                                  //   <Col>
-                                  //   <img
-                                  //     src={`http://localhost:8080/${
-                                  //       menu_item.picture
-                                  //     }`}
-                                  //     alt={menu_item.name}
-                                  //     className="activeGroup__orders__menu__img"
-                                  //   />
-                                  //   <p className="activeGroup__orders__menu__name">
-                                  //     {menu_item.name}
-                                  //   </p>
-                                  //   <p className="activeGroup__orders__menu__description">
-                                  //     {menu_item.description}
-                                  //   </p>
-                                  // </Col>
-                                  // <Col className="activeGroup__orders__menu__price">
-                                  //   {menu_item.price} x{" "}
-                                  //   {menu_item.order_item.quantity}
-                                  // </Col>
-                                }
                               </li>
                             );
                           })}
