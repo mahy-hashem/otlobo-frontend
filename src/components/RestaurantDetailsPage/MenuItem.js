@@ -7,8 +7,16 @@ import Col from "react-bootstrap/Col";
 import GenericButton from "../GenericButton/GenericButton";
 import Card from "react-bootstrap/Card";
 import CardDeck from "react-bootstrap/CardDeck";
-
+//import Button from "react-bootstrap/Button";
 import "./MenuItem.scss";
+import Button from "react-bootstrap/Button";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPencilAlt,
+  faTimes,
+  faPlus
+} from "@fortawesome/free-solid-svg-icons";
 
 class MenuItem extends React.Component {
   state = {
@@ -40,6 +48,26 @@ class MenuItem extends React.Component {
               <p>Price: {this.props.price}$</p>
             </Card.Text>
           </Card.Body>
+          <Col
+            className="actions"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              paddingBottom: "15px"
+            }}
+          >
+            {this.state.userType === "user" ? (
+              <Button onClick={() => this.props.addMenuItem(this.props.item)}>
+                Add to Cart
+              </Button>
+            ) : (
+              <React.Fragment>
+                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="grey" />
+                <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
+              </React.Fragment>
+            )}
+          </Col>
         </Card>
       </React.Fragment>
     );
