@@ -13,6 +13,7 @@ class StripeBtn extends React.Component {
     const userId = localStorage.getItem("userId");
     const timeframe = this.props.timeframe;
     const orderItems = this.props.orderItems;
+    console.log(orderItems);
     const body = {
       amount: this.props.orderTotal,
       token: token,
@@ -39,8 +40,11 @@ class StripeBtn extends React.Component {
       .catch(error => {
         console.log("Payment Error: ", error.response);
         if (
+          !error ||
+          error.response === undefined ||
           error.response.data.completed === false ||
-          !error.response.data.completed
+          !error.response.data.completed ||
+          !error.response
         ) {
           this.setState({
             redirect: false,
@@ -58,17 +62,22 @@ class StripeBtn extends React.Component {
       );
     }
     return (
-      <StripeCheckout
-        label="Pay for your order" //Component button text
-        name="Otlobo" //Modal Header
-        description="Order food today."
-        panelLabel="Complete payment" //Submit button in modal
-        amount={this.props.orderTotal} //Amount in cents $9.99
-        token={this.onToken}
-        stripeKey={process.env.REACT_APP_STRIPE_KEY}
-        image="" //Pop-in header image
-        billingAddress={false}
-      />
+      <div>
+        {this.state.paymentVerified === false && (
+          <h1>Something went wrong, please try again!</h1>
+        )}
+        <StripeCheckout
+          label="Pay for your order" //Component button text
+          name="Otlobo" //Modal Header
+          description="Order food today."
+          panelLabel="Complete payment" //Submit button in modal
+          amount={this.props.orderTotal} //Amount in cents $9.99
+          token={this.onToken}
+          stripeKey={process.env.REACT_APP_STRIPE_KEY}
+          image="" //Pop-in header image
+          billingAddress={false}
+        />
+      </div>
     );
   }
 }
