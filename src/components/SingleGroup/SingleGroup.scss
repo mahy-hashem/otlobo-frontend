@@ -1,6 +1,13 @@
 .activeGroup {
   .activeGroup__a {
     text-decoration: none;
+    .activeGroup__h2 {
+      margin-left: 70px;
+      padding-top: 20px;
+    }
+  }
+  .activeGroup__timer {
+    padding-top: 10px;
   }
 }
 .activeGroup__orders {
