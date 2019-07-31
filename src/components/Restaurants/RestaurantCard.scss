@@ -1,24 +1,10 @@
 @import "../../mixins.scss";
 
-* {
-  box-sizing: border-box;
+.restaurant-card {
+  margin: 5px;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.cardContainer {
-  border: 2px solid grey;
-  margin: 20px;
-  padding: 20px;
-
-  h1 {
-    text-transform: uppercase;
-  }
-
-  p {
-    text-align: left;
-  }
+.card-title h5 {
+  text-decoration: none;
+  color: black;
 }

@@ -1,24 +1,12 @@
-//@import "../../mixins.scss";
+@import "../../mixins.scss";
 
-// .restaurants {
-//   border: 1px solid red;
-// }
+.restaurants-list-container {
+  padding: 10px;
 
-// .restaurants-page-container {
-//   display: grid;
-//   grid-template-rows: 60px 40px 1fr 1fr;
-//   grid-template-columns: 1fr;
-//   .restaurants-header-container {
-//     width: 100%;
-//     height: 40px;
-//     padding: 5px;
-//     border-bottom: 1px solid #e0e0e0;
-
-//     h2 {
-//       font-size: 20px;
-//       @include responsive-max($xs) {
-//         display: none;
-//       }
-//     }
-//   }
-// }
+  h2 {
+    font-size: 20px;
+    @include responsive-max($xs) {
+      display: none;
+    }
+  }
+}

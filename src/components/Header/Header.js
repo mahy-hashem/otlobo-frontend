@@ -10,7 +10,7 @@ class Header extends React.Component {
       <header className="page-header">
         <div>
           <a href="/">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" className="logo-header" />
 
             <h1>tlobo</h1>
           </a>

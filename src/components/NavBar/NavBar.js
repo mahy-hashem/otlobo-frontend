@@ -22,20 +22,20 @@ class NavBar extends React.Component {
   render() {
     return (
       <Navbar expand="lg">
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse
-          id="responsive-navbar-nav"
-          className="justify-content-end"
-        >
-          <Nav className="justify-content-end">
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          className="ml-auto"
+        />
+        <Navbar.Collapse id="responsive-navbar-nav" className="ml-auto">
+          <Nav className="ml-auto">
             {this.props.user && this.props.user.userType === "user" && (
               <React.Fragment>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link className="custom-link" href="/userApp/restaurants">
                     All Restaurants
                   </Nav.Link>
                 </li>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link
                     className="custom-link"
                     href="/userApp/active-groups"
@@ -43,7 +43,7 @@ class NavBar extends React.Component {
                     Active Groups
                   </Nav.Link>
                 </li>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link
                     className="custom-link"
                     href={`/userApp/user-orders/${this.props.user.userId}`}
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                     My Orders
                   </Nav.Link>
                 </li>
-                <li className="logOut">
+                <li className="logOut ml-auto">
                   <FontAwesomeIcon
                     onClick={this.props.logout}
                     icon={faSignOutAlt}
@@ -65,7 +65,7 @@ class NavBar extends React.Component {
             )}
             {this.props.user && this.props.user.userType === "restaurant" && (
               <React.Fragment>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link
                     className="custom-link"
                     href={`/app/menu/${this.props.user.userId}`}
@@ -73,7 +73,7 @@ class NavBar extends React.Component {
                     My Menu
                   </Nav.Link>
                 </li>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link
                     className="custom-link"
                     href={`/app/restaurant-orders/${this.props.user.userId}`}
@@ -81,12 +81,12 @@ class NavBar extends React.Component {
                     My Orders
                   </Nav.Link>
                 </li>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link className="custom-link" href="/profile">
                     My Profile
                   </Nav.Link>
                 </li>
-                <li className="logOut">
+                <li className="logOut ml-auto">
                   <FontAwesomeIcon
                     onClick={this.props.logout}
                     icon={faSignOutAlt}
@@ -100,12 +100,12 @@ class NavBar extends React.Component {
             )}
             {!this.props.user && (
               <React.Fragment>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link className="custom-link" href="signup">
                     Sign Up
                   </Nav.Link>
                 </li>
-                <li>
+                <li className="ml-auto">
                   <Nav.Link className="custom-link" href="login">
                     Login
                   </Nav.Link>
