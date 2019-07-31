@@ -55,8 +55,15 @@
 
 .custom-link {
   color: white !important;
+  @include responsive-max($sm) {
+    color: grey !important;
+  }
 }
 
 .logOut {
   padding-top: 10px;
+}
+
+#responsive-navbar-nav {
+  z-index: 0;
 }

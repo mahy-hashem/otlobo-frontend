@@ -1,11 +1,12 @@
 @import "../../../mixins.scss";
 $textColor: white;
-$btnHoverColor: #48c41a;
-$textHoverColor: yellow;
+$btnHoverColor: rgba(137, 255, 253, 1);
+$textHoverColor: rgba(205, 137, 254, 1);
 
 .userlandingPage {
   @include fullScreen();
-  background: url("../../../images/user.jpg") no-repeat center center fixed;
+  background: url("../../../images/user-index.jpg") no-repeat center center
+    fixed;
   background-size: cover;
   position: absolute;
   top: 0;
@@ -25,6 +26,7 @@ $textHoverColor: yellow;
         text-align: right;
         padding-right: 20px;
         padding-top: 20px;
+        font-size: 12px;
       }
 
       .restlandingContainer__content__h2 {

@@ -1,12 +1,12 @@
 @import "../../../mixins.scss";
 $textColor: white;
-$btnHoverColor: #48c41a;
-$textHoverColor: yellow;
+$btnHoverColor: rgba(137, 255, 253, 1);
+$textHoverColor: rgba(205, 137, 254, 1);
 
 .restlandingPage {
   @include fullScreen();
-  background: url("../../../images/restaurant.jpg") no-repeat center center
-    fixed;
+  background: url("../../../images/restaurant-index.jpg") no-repeat center
+    center fixed;
   background-size: cover;
   position: absolute;
   top: 0;
