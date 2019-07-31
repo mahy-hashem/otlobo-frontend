@@ -141,7 +141,7 @@ class RestaurantOrders extends React.Component {
                       >
                         <option value="pending">pending</option>
                         <option value="opened">opened</option>
-                        <option value="parpering">parpering</option>
+                        <option value="parpering">preparing</option>
                         <option value="closed">closed</option>
                       </select>
                     </Col>
