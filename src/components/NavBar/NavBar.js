@@ -46,9 +46,9 @@ class NavBar extends React.Component {
                 <li className="ml-auto">
                   <Nav.Link
                     className="custom-link"
-                    href={`/users/${this.props.userId}`}
+                    href={`/userApp/user-orders/${this.props.user.userId}`}
                   >
-                    My Account
+                    My Orders
                   </Nav.Link>
                 </li>
                 <li className="logOut ml-auto">

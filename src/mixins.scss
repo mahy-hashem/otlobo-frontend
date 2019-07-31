@@ -4,8 +4,8 @@ $med: 40em;
 $sm: 28em;
 $xs: 414px;
 
-$otlobo-yellow: #ffd500;
-$otlobo-purple: #632a7b;
+$otlobo-skyblue: rgba(137, 255, 253, 1);
+$otlobo-purple: rgba(205, 137, 254, 1);
 $otlobo-red: #b8483c;
 $primary: #00ccbc;
 $text-on-bg: white;
@@ -29,4 +29,18 @@ $text-on-bg: white;
   min-width: 100% !important;
   width: 100% !important;
   height: 100% !important;
+}
+
+@mixin gradientColor {
+  background: rgba(205, 137, 254, 1); /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(137, 255, 253, 1),
+    rgba(205, 137, 254, 1)
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    rgba(137, 255, 253, 1),
+    rgba(205, 137, 254, 1)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }

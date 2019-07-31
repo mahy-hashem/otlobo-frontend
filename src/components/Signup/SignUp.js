@@ -7,6 +7,8 @@ import Tab from "react-bootstrap/Tab";
 import UserForm from "./UserForm";
 import RestaurantForm from "./RestaurantForm";
 import DivWithErrorHandling from "../../components/ErrorMessage/ErrorMessage";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 class SignUp extends React.Component {
   state = {
@@ -30,30 +32,34 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="form-container">
-        <DivWithErrorHandling
-          showError={this.state.showError}
-          errorMessage={this.state.errorMessage}
-        >
-          <Tabs defaultActiveKey="user" id="uncontrolled-tab-example">
-            <Tab eventKey="user" title="User">
-              <UserForm
-                {...this.props}
-                showErrorMessage={this.showErrorMessage}
-              />
-            </Tab>
-            <Tab eventKey="restaurant" title="Restaurant">
-              <RestaurantForm
-                {...this.props}
-                showErrorMessage={this.showErrorMessage}
-              />
-            </Tab>
-          </Tabs>
-          <p>
-            Already have an account? <Link to="/login">login</Link>
-          </p>
-        </DivWithErrorHandling>
-      </div>
+      <React.Fragment>
+        <Header />
+        <div className="form-container">
+          <DivWithErrorHandling
+            showError={this.state.showError}
+            errorMessage={this.state.errorMessage}
+          >
+            <Tabs defaultActiveKey="user" id="uncontrolled-tab-example">
+              <Tab eventKey="user" title="User">
+                <UserForm
+                  {...this.props}
+                  showErrorMessage={this.showErrorMessage}
+                />
+              </Tab>
+              <Tab eventKey="restaurant" title="Restaurant">
+                <RestaurantForm
+                  {...this.props}
+                  showErrorMessage={this.showErrorMessage}
+                />
+              </Tab>
+            </Tabs>
+            <p>
+              Already have an account? <Link to="/login">login</Link>
+            </p>
+          </DivWithErrorHandling>
+        </div>
+        <Footer />
+      </React.Fragment>
     );
   }
 }

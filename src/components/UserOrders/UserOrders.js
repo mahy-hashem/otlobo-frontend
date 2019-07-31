@@ -86,53 +86,54 @@ class UserOrders extends React.Component {
         </Container>
         <Container>
           <ul>
-            {this.state.orders.map(order => {
-              return (
-                <li key={order.id}>
-                  <Row>
-                    <Col>
-                      <h3>{`#Order ${order.id}`}</h3>
-                    </Col>
-                    <Col>
-                      <p>{order.status}</p>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Row>
-                      <ul>
-                        {order.menu_items.map(menu_item => {
-                          return (
-                            <li key={menu_item.id}>
-                              <Col>
-                                <img
-                                  src={`http://localhost:8080/${
-                                    menu_item.picture
-                                  }`}
-                                  alt={menu_item.name}
-                                />
-                                <p>{menu_item.name}</p>
-                                <p>
-                                  {menu_item.price} x{" "}
-                                  {menu_item.order_item.quantity}
-                                </p>
-                              </Col>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </Row>
+            {this.state.orders &&
+              this.state.orders.map(order => {
+                return (
+                  <li key={order.id}>
                     <Row>
                       <Col>
-                        <p>Total: {order.total}</p>
+                        <h3>{`#Order ${order.id}`}</h3>
                       </Col>
                       <Col>
-                        <p>Date of Order: {order.createdAt.split("T")[0]}</p>
+                        <p>{order.group && order.group.status}</p>
                       </Col>
                     </Row>
-                  </Row>
-                </li>
-              );
-            })}
+                    <Row>
+                      <Row>
+                        <ul>
+                          {order.menu_items.map(menu_item => {
+                            return (
+                              <li key={menu_item.id}>
+                                <Col>
+                                  <img
+                                    src={`http://localhost:8080/${
+                                      menu_item.picture
+                                    }`}
+                                    alt={menu_item.name}
+                                  />
+                                  <p>{menu_item.name}</p>
+                                  <p>
+                                    {menu_item.price} x{" "}
+                                    {menu_item.order_item.quantity}
+                                  </p>
+                                </Col>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </Row>
+                      <Row>
+                        <Col>
+                          <p>Total: {order.total}</p>
+                        </Col>
+                        <Col>
+                          <p>Date of Order: {order.createdAt.split("T")[0]}</p>
+                        </Col>
+                      </Row>
+                    </Row>
+                  </li>
+                );
+              })}
           </ul>
         </Container>
       </div>

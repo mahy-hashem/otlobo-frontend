@@ -11,6 +11,9 @@ import SignUp from "./components/Signup/SignUp";
 import Login from "./components/Login/Login";
 import UserApp from "./components/UserApp/UserApp";
 import RestApp from "./components/RestApp/RestApp";
+import Footer from "./components/Footer/Footer";
+
+import "./App.css";
 
 class App extends React.Component {
   state = {
@@ -154,14 +157,6 @@ class App extends React.Component {
     console.log(this.props.location.pathname);
     return (
       <Switch>
-        {/* <PrivateRoute
-          path={`${this.props.match.url}app`}
-          user={this.state.user}
-          pageType="user"
-          component={UserApp}
-          logout={this.logout}
-        /> */}
-
         <Route exact path="/" component={LandingPage} />
         <PrivateRoute
           path={`${this.props.match.url}app`}
@@ -170,26 +165,7 @@ class App extends React.Component {
           component={RestApp}
           logout={this.logout}
         />
-        {/* <PrivateRoute
-          path="/userIndex"
-          user={this.state.user}
-          pageType="user"
-          component={UserLandingPage}
-          logout={this.logout}
-        />
-        <PrivateRoute
-          path="/restaurantIndex"
-          user={this.state.user}
-          pageType="restaurant"
-          component={RestLandingPage}
-          logout={this.logout}
-        /> */}
-        {/* <PrivateRoute
-          path="/menu/:restaurantId"
-          user={this.state.user}
-          pageType="restaurant"
-          component={RestaurantDetailsPage}
-        /> */}
+
         <Route
           path="/signup"
           render={props => (
