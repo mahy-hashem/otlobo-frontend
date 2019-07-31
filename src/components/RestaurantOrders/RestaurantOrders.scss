@@ -19,7 +19,8 @@
           rgba(205, 137, 254, 0.7)
         );
         width: 120px;
-        height: 35px;
+        border-radius: 5px;
+        padding: 10px;
       }
     }
     .groups__orders__ul {
@@ -28,8 +29,12 @@
       display: flex;
       flex-wrap: wrap;
       .groups__orders__li {
-        padding: 20px;
-        border: solid 1px grey;
+        background: linear-gradient(
+          to right,
+          rgba(137, 255, 253, 0.7),
+          rgba(205, 137, 254, 0.7)
+        );
+        padding: 10px 20px;
         margin: 10px;
         .groups__orders__user {
           margin-bottom: 5px;

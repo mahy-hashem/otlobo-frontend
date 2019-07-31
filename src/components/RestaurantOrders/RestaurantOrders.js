@@ -117,9 +117,7 @@ class RestaurantOrders extends React.Component {
                   <Row>
                     <Col>
                       <h3 className="groups__h3">{`#Group ${group.id}`}</h3>
-                    </Col>
-                    <Col>
-                      <p id={group.id} className="groups__timer">
+                      <span id={group.id} className="groups__timer">
                         {countdownTimer.duration(
                           group.createdAt,
                           group.timeframe
@@ -129,9 +127,10 @@ class RestaurantOrders extends React.Component {
                           group.timeframe,
                           group.id
                         )}
-                      </p>
-                      <p>minutes</p>
+                      </span>
+                      <span> Minutes</span>
                     </Col>
+
                     <Col className="groups__orderStatus" xs={2}>
                       <select
                         className="groups__orderStatus__dropdown"
