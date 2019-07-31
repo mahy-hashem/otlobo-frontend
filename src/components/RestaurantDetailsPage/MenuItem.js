@@ -6,16 +6,10 @@ import Col from "react-bootstrap/Col";
 
 import GenericButton from "../GenericButton/GenericButton";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faPencilAlt,
-  faTimes,
-  faPlus
-} from "@fortawesome/free-solid-svg-icons";
+import CardDeck from "react-bootstrap/CardDeck";
 
 import "./MenuItem.scss";
+
 class MenuItem extends React.Component {
   state = {
     userType: ""
@@ -31,58 +25,22 @@ class MenuItem extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Container>
-          <Card style={{ width: "70%", marginTop: "20px" }}>
-            <Row>
-              <Col>
-                <Card.Img
-                  variant="top"
-                  src={this.props.picture}
-                  className="menuItemImg"
-                />
-              </Col>
-              <Col>
-                <Card.Body>
-                  <Card.Title>{this.props.name}</Card.Title>
-                  <Card.Text className="text">
-                    <p>{this.props.description}</p>
-                    <p>Price: {this.props.price}$</p>
-                  </Card.Text>
-                </Card.Body>
-              </Col>
-              <Col className="actions">
-                {this.state.userType === "user" ? (
-                  <FontAwesomeIcon
-                    icon={faPlus}
-                    size="2x"
-                    color="grey"
-                    onClick={() => this.props.addMenuItem(this.props.item)}
-                  />
-                ) : (
-                  <React.Fragment>
-                    <FontAwesomeIcon
-                      icon={faPencilAlt}
-                      size="lg"
-                      color="grey"
-                    />
-                    <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
-                  </React.Fragment>
-                )}
-              </Col>
-            </Row>
-          </Card>
-        </Container>
-        {/*this.state.userType === "user" && (
-          <React.Fragment>
-            <Col>
-              <GenericButton
-                className="add-order-btn"
-                onClick={() => this.props.addMenuItem(this.props.item)}
-                content="+"
-              />
-            </Col>
-          </React.Fragment>
-        )*/}
+        <Card style={{ width: "15rem" }} className="menuitems__card">
+          <Card.Img
+            variant="top"
+            src={this.props.picture}
+            className="menuItemImg"
+          />
+          <Card.Body>
+            <Card.Title style={{ textAlign: "center" }}>
+              {this.props.name}
+            </Card.Title>
+            <Card.Text className="text">
+              <p>{this.props.description}</p>
+              <p>Price: {this.props.price}$</p>
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </React.Fragment>
     );
   }
