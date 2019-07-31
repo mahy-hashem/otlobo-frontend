@@ -149,13 +149,13 @@ class Restaurants extends React.Component {
               />
             </Col>
           </Row>
-          <div className="restaurants-list-container">
-            <Switch>
-              <Route path="/userApp/restaurants">
-                {this.state.restaurants.map(restaurant => {
-                  const { id, name, address } = restaurant;
-                  return (
-                    <Row key={id}>
+          <div className="restaurants-list-container mx-auto">
+            <Row>
+              <Switch>
+                <Route path="/userApp/restaurants">
+                  {this.state.restaurants.map(restaurant => {
+                    const { id, name, address } = restaurant;
+                    return (
                       <Col>
                         <RestaurantCard
                           key={id}
@@ -164,11 +164,11 @@ class Restaurants extends React.Component {
                           address={address}
                         />
                       </Col>
-                    </Row>
-                  );
-                })}
-              </Route>
-            </Switch>
+                    );
+                  })}
+                </Route>
+              </Switch>
+            </Row>
           </div>
           <div className="filter-container" />
           {/* <GenericPagination /> */}

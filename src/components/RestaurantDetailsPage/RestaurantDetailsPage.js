@@ -7,16 +7,10 @@ import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Nav from "react-bootstrap/Nav";
-
-import Header from "../Header/Header";
-import NavBar from "../NavBar/NavBar";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import RestaurantInfoHeader from "./RestaurantInfoHeader";
-import Filter from "../Filter/Filter";
 import MenuItem from "./MenuItem";
 import SideCart from "./SideCart";
-import Footer from "../Footer/Footer";
 
 import "./RestaurantDetailsPage.scss";
 

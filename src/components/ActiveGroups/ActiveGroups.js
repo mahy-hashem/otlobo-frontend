@@ -87,6 +87,7 @@ class ActiveGroups extends React.Component {
                             <Col key={id}>
                               <li>
                                 <img
+                                  className="group-icon"
                                   src={order.user.image}
                                   alt={order.user.firstName}
                                 />
