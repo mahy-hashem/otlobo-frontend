@@ -78,8 +78,7 @@ class UserOrders extends React.Component {
           <Row>
             <Col>
               <h2 className="userOrders__h2">
-                {`${this.state.user && this.state.user.firstName}
-                All Orders`}
+                {`${this.state.user && this.state.user.firstName}'s Orders`}
               </h2>
             </Col>
           </Row>
@@ -94,6 +93,11 @@ class UserOrders extends React.Component {
                       <Col xs={10}>
                         <h3 className="userOrders__orders__h3">{`#Order ${
                           order.id
+                        }`}</h3>
+                      </Col>
+                      <Col xs={10}>
+                        <h3 className="userOrders__orders__h4">{`${
+                          order.group.restaurant.name
                         }`}</h3>
                       </Col>
                       <Col xs={2}>

@@ -3,7 +3,8 @@ import React from "react";
 import Accordion from "react-bootstrap/Accordion";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import GenericButton from "../GenericButton/GenericButton";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
 import ListGroup from "react-bootstrap/ListGroup";
 import Nav from "react-bootstrap/Nav";
 
@@ -13,7 +14,7 @@ class Filter extends React.Component {
       <Accordion>
         <Card>
           <Card.Header>
-            <Nav defaultActiveKey="#first">
+            <Nav>
               <Nav.Item>
                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
                   <Nav.Link href="#first">Filters</Nav.Link>
@@ -21,11 +22,6 @@ class Filter extends React.Component {
               </Nav.Item>
               <Nav.Item>
                 <Accordion.Toggle as={Button} variant="link" eventKey="1">
-                  <Nav.Link href="#first">Cuisines</Nav.Link>
-                </Accordion.Toggle>
-              </Nav.Item>
-              <Nav.Item>
-                <Accordion.Toggle as={Button} variant="link" eventKey="2">
                   <Nav.Link href="#first">Search</Nav.Link>
                 </Accordion.Toggle>
               </Nav.Item>
@@ -50,10 +46,15 @@ class Filter extends React.Component {
             </ListGroup>
           </Accordion.Collapse>
           <Accordion.Collapse eventKey="1">
-            <Card.Body>Hello! I'm the bodysss</Card.Body>
-          </Accordion.Collapse>
-          <Accordion.Collapse eventKey="2">
-            <Card.Body>Aaaaah</Card.Body>
+            <Card.Body>
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  className="mr-sm-2"
+                />
+              </Form>
+            </Card.Body>
           </Accordion.Collapse>
         </Card>
       </Accordion>

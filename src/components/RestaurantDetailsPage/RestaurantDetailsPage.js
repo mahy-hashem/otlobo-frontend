@@ -204,7 +204,7 @@ class RestaurantDetailsPage extends React.Component {
             )}
             <Row>
               <Col>
-                <Container>
+                <Container className="restaurant-container">
                   {restaurant.menu_items.map(item => {
                     const { name, id, picture, description, price } = item;
                     return (

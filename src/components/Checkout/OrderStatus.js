@@ -2,6 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import countdownTimer from "../../util/countdownTimer";
 
 class OrderStatus extends React.Component {
@@ -23,7 +24,8 @@ class OrderStatus extends React.Component {
             <Container>
               <Row>
                 <Col>
-                  <h3>Time left:</h3>
+                  <h3>Order Status:</h3>
+                  <ProgressBar animated now={45} />
                 </Col>
               </Row>
             </Container>

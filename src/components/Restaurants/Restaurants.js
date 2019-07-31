@@ -154,7 +154,7 @@ class Restaurants extends React.Component {
               <Switch>
                 <Route path="/userApp/restaurants">
                   {this.state.restaurants.map(restaurant => {
-                    const { id, name, address } = restaurant;
+                    const { id, name, address, image } = restaurant;
                     return (
                       <Col>
                         <RestaurantCard
@@ -162,6 +162,7 @@ class Restaurants extends React.Component {
                           id={id}
                           name={name}
                           address={address}
+                          image={image}
                         />
                       </Col>
                     );
