@@ -1,0 +1,41 @@
+.userOrders__h2 {
+  text-transform: capitalize;
+}
+.userOrders__orders {
+  .userOrders__orders__ul {
+    list-style: none;
+  }
+
+  .userOrders__orders__li {
+    margin: 20px;
+    padding: 20px 20px 10px 20px;
+    background: linear-gradient(
+      to right,
+      rgba(137, 255, 253, 0.2),
+      rgba(205, 137, 254, 0.2)
+    );
+    .userOrders__orders__status {
+      background: linear-gradient(
+        to right,
+        rgba(137, 255, 253, 0.7),
+        rgba(205, 137, 254, 0.7)
+      );
+      padding: 5px;
+      margin: 10px;
+      font-weight: bold;
+      border-radius: 35%;
+    }
+    .userOrders__menu__ul {
+      border-bottom: solid 2px grey;
+      .userOrders__menu__img {
+        width: 45px;
+      }
+    }
+    .userOrders__orders__totaldate {
+      margin-top: 20px;
+      .userOrders__orders__date {
+        text-align: left;
+      }
+    }
+  }
+}

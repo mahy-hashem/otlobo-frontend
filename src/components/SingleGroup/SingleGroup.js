@@ -71,7 +71,7 @@ class SingleGroup extends React.Component {
             </Col>
           </Row>
           <Row className="activeGroup">
-            <Col>
+            <Col xs={10}>
               <Link
                 to={`/userApp/restaurant/${this.state.group.restaurantId}`}
                 className="activeGroup__a"
@@ -84,7 +84,7 @@ class SingleGroup extends React.Component {
                 </h2>
               </Link>
             </Col>
-            <Col className="activeGroup__timer">
+            <Col xs={2} className="activeGroup__timer">
               <p id={this.state.group.id}>
                 {countdownTimer.duration(
                   this.state.group.createdAt,
