@@ -7,8 +7,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import BreadCrumb from "react-bootstrap/Breadcrumb";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import Card from "react-bootstrap/Card";
-import CardDeck from "react-bootstrap/CardDeck";
 
 import countdownTimer from "../../util/countdownTimer";
 import "./SingleGroup.scss";
@@ -86,17 +84,12 @@ class SingleGroup extends React.Component {
             </Col>
             <Col xs={2} className="activeGroup__timer">
               <p id={this.state.group.id}>
-                {countdownTimer.duration(
-                  this.state.group.createdAt,
-                  this.state.group.timeframe
-                )}
                 {countdownTimer.timer(
                   this.state.group.createdAt,
                   this.state.group.timeframe,
                   this.state.group.id
                 )}
               </p>
-
               <p>minutes</p>
             </Col>
           </Row>
@@ -120,42 +113,49 @@ class SingleGroup extends React.Component {
                           </h3>
                         </Col>
                       </Row>
-                      <Row>
-                        <ul className="activeGroup__orders__menu">
-                          {menu_items.map(menu_item => {
-                            return (
-                              <li
-                                key={id}
-                                className="activeGroup__orders__menu__li"
-                              >
-                                <Card>
-                                  <Card.Img
-                                    src={`http://localhost:8080/${
-                                      menu_item.picture
-                                    }`}
-                                    alt={menu_item.name}
-                                    className="activeGroup__orders__menu__img"
-                                  />
-                                  <Card.Body>
-                                    <Card.Title className="activeGroup__orders__menu__name">
-                                      {" "}
-                                      {menu_item.name}{" "}
-                                    </Card.Title>
-                                    <Card.Text className="activeGroup__orders__menu__description">
-                                      {menu_item.description}
-                                    </Card.Text>
-                                  </Card.Body>
-                                  <Card.Footer>
-                                    <p className="activeGroup__orders__menu__price">
-                                      {menu_item.price} x{" "}
-                                      {menu_item.order_item.quantity}
-                                    </p>
-                                  </Card.Footer>
-                                </Card>
-                              </li>
-                            );
-                          })}
-                        </ul>
+                      <Row className="activeGroup__orders__menu">
+                        {menu_items.map(menu_item => {
+                          return (
+                            <Row
+                              key={id}
+                              className="activeGroup__orders__menu__li"
+                              style={{ width: "100%" }}
+                            >
+                              <Col xs={2}>
+                                <img
+                                  src={`http://localhost:8080/${
+                                    menu_item.picture
+                                  }`}
+                                  alt={menu_item.name}
+                                  className="activeGroup__orders__menu__img"
+                                  style={{
+                                    width: "100px",
+                                    height: "100px",
+                                    margin: "5px"
+                                  }}
+                                />
+                              </Col>
+                              <Col xs={6}>
+                                <h4 className="activeGroup__orders__menu__name">
+                                  {" "}
+                                  {menu_item.name}{" "}
+                                </h4>
+                                <p
+                                  className="activeGroup__orders__menu__description"
+                                  style={{ textAlign: "left" }}
+                                >
+                                  {menu_item.description}{" "}
+                                </p>
+                              </Col>
+                              <Col>
+                                <p className="activeGroup__orders__menu__price">
+                                  {menu_item.price} x{" "}
+                                  {menu_item.order_item.quantity}
+                                </p>
+                              </Col>
+                            </Row>
+                          );
+                        })}
                       </Row>
                     </li>
                   );
@@ -169,3 +169,49 @@ class SingleGroup extends React.Component {
 }
 
 export default SingleGroup;
+
+{
+  // <li
+  //   key={id}
+  //   className="activeGroup__orders__menu__li"
+  // ></li>
+  // <Card
+  //   style={{
+  //     width: "100%",
+  //     margin: "10px"
+  //   }}
+  // >
+  //   <Card.Img
+  //     variant="top"
+  //     src={`http://localhost:8080/${
+  //       menu_item.picture
+  //       }`}
+  //     alt={menu_item.name}
+  //     className="activeGroup__orders__menu__img"
+  //     style={{
+  //       maxHeight: "30%",
+  //       minHeight: "50%"
+  //     }}
+  //   />
+  //   <Card.Body>
+  //     <Card.Title className="activeGroup__orders__menu__name">
+  //       {" "}
+  //       {menu_item.name}{" "}
+  //     </Card.Title>
+  //     <Card.Text
+  //       className="activeGroup__orders__menu__description"
+  //       style={{
+  //         textAlign: "left"
+  //       }}
+  //     >
+  //       {menu_item.description}
+  //     </Card.Text>
+  //   </Card.Body>
+  //   <Card.Footer>
+  //     <p className="activeGroup__orders__menu__price">
+  //       {menu_item.price} x{" "}
+  //       {menu_item.order_item.quantity}
+  //     </p>
+  //   </Card.Footer>
+  // </Card>
+}

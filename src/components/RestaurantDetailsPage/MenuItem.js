@@ -47,27 +47,32 @@ class MenuItem extends React.Component {
               <p>{this.props.description}</p>
               <p>Price: {this.props.price}$</p>
             </Card.Text>
+            <Col
+              className="actions"
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center"
+              }}
+            >
+              {this.state.userType === "user" ? (
+                <Button
+                  onClick={() => this.props.addMenuItem(this.props.item)}
+                  style={{
+                    backgroundColor: "rgba(205, 137, 254, 1)",
+                    border: "none"
+                  }}
+                >
+                  Add to Cart
+                </Button>
+              ) : (
+                <React.Fragment>
+                  <FontAwesomeIcon icon={faPencilAlt} size="lg" color="grey" />
+                  <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
+                </React.Fragment>
+              )}
+            </Col>
           </Card.Body>
-          <Col
-            className="actions"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              paddingBottom: "15px"
-            }}
-          >
-            {this.state.userType === "user" ? (
-              <Button onClick={() => this.props.addMenuItem(this.props.item)}>
-                Add to Cart
-              </Button>
-            ) : (
-              <React.Fragment>
-                <FontAwesomeIcon icon={faPencilAlt} size="lg" color="grey" />
-                <FontAwesomeIcon icon={faTimes} size="lg" color="grey" />
-              </React.Fragment>
-            )}
-          </Col>
         </Card>
       </React.Fragment>
     );

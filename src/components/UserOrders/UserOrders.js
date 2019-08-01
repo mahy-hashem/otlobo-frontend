@@ -95,11 +95,7 @@ class UserOrders extends React.Component {
                           order.id
                         }`}</h3>
                       </Col>
-                      <Col xs={10}>
-                        <h3 className="userOrders__orders__h4">{`${
-                          order.group.restaurant.name
-                        }`}</h3>
-                      </Col>
+
                       <Col xs={2}>
                         <p className="userOrders__orders__status">
                           {order.group && order.group.status}
