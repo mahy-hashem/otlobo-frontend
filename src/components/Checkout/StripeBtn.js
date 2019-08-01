@@ -73,7 +73,7 @@ class StripeBtn extends React.Component {
           panelLabel="Complete payment" //Submit button in modal
           amount={this.props.orderTotal} //Amount in cents $9.99
           token={this.onToken}
-          stripeKey={process.env.REACT_APP_STRIPE_KEY}
+          stripeKey="pk_test_jp9hxuGe4ft6RNv2zEjucWNx00gixkS68d" //{process.env.REACT_APP_STRIPE_KEY}
           image="" //Pop-in header image
           billingAddress={false}
         />
